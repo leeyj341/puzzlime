@@ -96,7 +96,7 @@ int main(void)
 	if (idx == -1)
 		printf("탐색 실패 \n\n");
 	else
-		printf("타겟 저장 인덱스 my girlfirend is cute : %d \n", idx);
+		printf("타겟 저장 인덱스 hahahahahhahahahahahahah : %d \n", idx);
 
 
 	//사실여친이 더귀여워
