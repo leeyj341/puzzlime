@@ -96,16 +96,8 @@ int main(void)
 	if (idx == -1)
 		printf("탐색 실패 \n\n");
 	else
-		printf("타겟 저장 인덱스 hahahahahhahahahahahahah : %d \n", idx);
+		printf("타겟 저장 인덱스 mongsil : %d \n", idx);
 
-
-	//사실여친이 더귀여워
-	//너무귀여웡
-	//너무너무귀여웡
-	
-	// 태완이 이마 보이니까 잘생겼네
-	// 역시 태완이가 최고 미남 ㅎㅎㅎ
-	// 저녁 뭐 먹을래? 
 
 	return 0;
 }
