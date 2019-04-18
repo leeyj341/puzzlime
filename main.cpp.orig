@@ -96,7 +96,11 @@ int main(void)
 	if (idx == -1)
 		printf("Å½»ö ½ÇÆÐ \n\n");
 	else
+<<<<<<< HEAD
+		printf("Å¸°Ù ÀúÀå ÀÎµ¦½º mongsil : %d \n", idx);
+=======
 		printf("Å¸°Ù ÀúÀå ÀÎµ¦½º what do you want to eat for dinner? : %d \n", idx);
+>>>>>>> 27b463b1c4f253cedf47596a75bdd7e3cc4da54c
 
 
 	return 0;
