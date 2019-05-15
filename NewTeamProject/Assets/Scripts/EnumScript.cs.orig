@@ -2,7 +2,19 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class EnumScripts : MonoBehaviour
+{
+    public static List<string> CharacterList = new List<string>();
 
+    public static void CreateCharacterList()
+    {
+        CharacterList.Add("CowBoy");
+        CharacterList.Add("CowGirl");
+    }
+}
+
+<<<<<<< HEAD
+=======
 public enum ITEM_CATEGORI
 {
     WEAPON,
@@ -32,3 +44,4 @@ public enum BUFF_CATEGORI
     ATTACK,
     BULLET
 }
+>>>>>>> a12e6133e7131a4a0feb355d923f0f5229ead9ab
