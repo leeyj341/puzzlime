@@ -1,29 +1,49 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameObject m_gPlayer;
+    private GameObject m_gPlayer;
     PlayerState m_gPlayerState;
+
+    private string m_strPlayerTag;
+    
     // Start is called before the first frame update
     private void Awake()
     {
         if (!GameManager.Instance)
             Instance = this;
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        m_gPlayerState = m_gPlayer.GetComponent<PlayerState>();
+    }
+    
+
+    public void SetTag(string tag)
+    {
+        m_strPlayerTag = tag;
+    }
+    
+    public string GetTag()
+    {
+        return m_strPlayerTag;
     }
 
-    public GameObject getPlayer()
+    public void SetPlayer(GameObject player)
+    {
+        m_gPlayer = player;
+    }
+
+    public GameObject GetPlayer()
     {
         return m_gPlayer;
     }
-    public PlayerState getPlayerState()
+    public PlayerState GetPlayerState()
     {
         return m_gPlayerState;
     }

@@ -3,6 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
+public enum CURRUNT_SCENE
+{
+    SCENE_MAIN,
+    SCENE_SELECT,
+    SCENE_GAME
+}
+
 public enum ITEM_CATEGORI
 {
     WEAPON,

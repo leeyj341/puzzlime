@@ -13,10 +13,9 @@ public class SelectCharacter : MonoBehaviour, IPointerClickHandler
 
     private void Select()
     {
-        if (EnumScripts.CharacterList.Contains(tag))
-        {
-            //캐릭터 선택 정보 전달, scene 전환
-            SceneManager.LoadScene("GameScene");
-        }
-    }
+        //캐릭터 선택 정보 전달, scene 전환
+        GameManager.Instance.SetTag(tag);
+        SceneManager.LoadScene("GameScene");
+       
+    } 
 }
