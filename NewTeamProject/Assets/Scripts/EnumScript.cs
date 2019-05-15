@@ -2,8 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum PlayerCharacter
+public class EnumScripts : MonoBehaviour
 {
-    CowBoy,
-    CowGirl
+    public static List<string> CharacterList = new List<string>();
+
+    public static void CreateCharacterList()
+    {
+        CharacterList.Add("CowBoy");
+        CharacterList.Add("CowGirl");
+    }
 }
+

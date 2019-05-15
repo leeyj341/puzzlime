@@ -62,8 +62,11 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\NodeSpread.cs" />
+    <Compile Include="Assets\Scripts\Player\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
+    <Compile Include="Assets\Scripts\SelectSceneScripts\Create.cs" />
+    <Compile Include="Assets\Scripts\SelectSceneScripts\SelectCharacter.cs" />
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/User/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
