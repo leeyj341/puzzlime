@@ -7,7 +7,7 @@ public class CameraCtrl : MonoBehaviour
     public float dist = 10.0f;
     public float height = 10.0f;
 
-    public Transform PlayerTr;
+    private Transform targetTr;
 
     // Start is called before the first frame update
     void Start()
@@ -23,12 +23,12 @@ public class CameraCtrl : MonoBehaviour
 
     public void SetCamTarget()
     {
-        PlayerTr = GameManager.Instance.GetPlayer().transform;
+        targetTr = GameManager.Instance.GetPlayer().transform;
     }
 
     private void FollowPlayer()
     {
-        transform.position = PlayerTr.position - (Vector3.forward * dist) + (Vector3.up * height);
-        transform.LookAt(PlayerTr);
+        transform.position = targetTr.position - (Vector3.forward * dist) + (Vector3.up * height);
+        transform.LookAt(targetTr);
     }
 }

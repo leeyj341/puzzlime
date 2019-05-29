@@ -9,7 +9,7 @@ public class GameManager : MonoBehaviour
     private GameObject m_gPlayer;
     PlayerState m_gPlayerState;
 
-    private string m_strPlayerTag;
+    private string m_strPlayerTag = "CowBoy";
     
     // Start is called before the first frame update
     private void Awake()

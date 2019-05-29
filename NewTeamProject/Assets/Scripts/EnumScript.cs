@@ -19,8 +19,8 @@ public enum ITEM_CATEGORI
 public enum ATK_CATEGORI
 {
     HACK,
-    STEP,
     HIT,
+    STAB,
     SHOT,
     NONE
 }
@@ -38,4 +38,11 @@ public enum BUFF_CATEGORI
     SPEED,
     ATTACK,
     BULLET
+}
+
+public enum ANIM_BEHAVIOR
+{
+    ATTACK,
+    SHOOT,
+    NONE
 }

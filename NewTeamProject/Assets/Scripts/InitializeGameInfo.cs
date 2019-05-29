@@ -34,7 +34,7 @@ public class InitializeGameInfo : MonoBehaviour
     private void CreateCharacter()
     {
         if (GameManager.Instance.GetPlayer()) return;
-        GameManager.Instance.SetPlayer((GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + "CowBoy"), new Vector3(0, 1, 0), Quaternion.identity));
+        GameManager.Instance.SetPlayer((GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + GameManager.Instance.GetTag()), new Vector3(0, 2, 0), Quaternion.identity));
         DontDestroyOnLoad(GameManager.Instance.GetPlayer());
     }
 }
