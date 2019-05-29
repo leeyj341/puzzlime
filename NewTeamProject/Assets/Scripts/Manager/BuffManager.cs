@@ -11,7 +11,7 @@ public class Buff
     public bool Update()
     {
         if (BuffTime <= 0)
-            return false;
+            return false; 
         //플레이어 버프 증가수치 계산부분
         BuffTime -= Time.deltaTime;
         return true;
