@@ -62,20 +62,19 @@
   <ItemGroup>
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\InitializeGameInfo.cs" />
-    <Compile Include="Assets\Scripts\Item\ItemSpread.cs" />
+    <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\ItemStatus.cs" />
     <Compile Include="Assets\Scripts\Item\UseScript.cs" />
-    <Compile Include="Assets\Scripts\Item\WeaponList.cs" />
     <Compile Include="Assets\Scripts\Item\WeaponScript.cs" />
     <Compile Include="Assets\Scripts\Manager\BuffManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
-    <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerState.cs" />
     <Compile Include="Assets\Scripts\SelectSceneScripts\SelectCharacter.cs" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/User/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/KimTaeWan/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
