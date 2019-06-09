@@ -16,6 +16,9 @@ public class Buff
         BuffTime -= Time.deltaTime;
         return true;
     }
+
+    public Buff() { }
+    ~Buff() { }
 }
 
 public class BuffManager : MonoBehaviour
@@ -40,13 +43,10 @@ public class BuffManager : MonoBehaviour
         //버프 지속시간이 종료될 때 버프로 인해 증가된 수치가 삭제되도록 조치해야함
         if (ListBuff.Count == 0) return;
 
-        for(int i = 0; i < ListBuff.Count; i++)
+        foreach(Buff i in ListBuff)
         {
-            if(!ListBuff[i].Update())
-            {
-                //플레이어 버프 증가수치 삭제코드 삽입부분
-                ListBuff.Remove(ListBuff[i]);
-            }
+            if (!i.Update())
+                DelBuff(i);
         }
     }
     //List에 Buff를 삽입하는 함수, 삽입될 때 플레이어에게 증가수치를 전달해줘야함
@@ -59,5 +59,12 @@ public class BuffManager : MonoBehaviour
         };
 
         ListBuff.Add(buff);
+    }
+
+    public void DelBuff(Buff buff)
+    {
+        
+
+        ListBuff.Remove(buff);
     }
 }

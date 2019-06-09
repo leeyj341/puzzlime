@@ -36,8 +36,7 @@ public enum USE_CATEGORI
 public enum BUFF_CATEGORI
 {
     SPEED,
-    ATTACK,
-    BULLET
+    ATTACK
 }
 
 public enum ANIM_BEHAVIOR
@@ -45,4 +44,10 @@ public enum ANIM_BEHAVIOR
     ATTACK,
     SHOOT,
     NONE
+}
+
+public enum INVEN_MODE
+{
+    WEAPON,
+    USE
 }
