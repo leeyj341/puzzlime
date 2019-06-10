@@ -21,39 +21,45 @@ public class UseScript : MonoBehaviour
     //ItemStatus에 입력한 아이템 넘버를 기반으로 91~94번까지의 번호를 받아 작동함
     void SetItemObtion()
     {
-        int num = gameObject.GetComponent<ItemStatus>().m_nItemNumber;
+        int num = gameObject.GetComponent<ItemStatus>().ItemNumber;
         switch(num)
         {
             case 91:
-                gameObject.GetComponent<ItemStatus>().SetName("체력회복물약");
+                gameObject.GetComponent<ItemStatus>().ItemName = "체력회복물약";
                 m_eUseCtg = USE_CATEGORI.HEALTHPOTION;
                 m_fDbl = 0;
                 break;
             case 92:
-                gameObject.GetComponent<ItemStatus>().SetName("속도향상물약");
+                gameObject.GetComponent<ItemStatus>().ItemName = "속도향상물약";
                 m_eUseCtg = USE_CATEGORI.SPEEDPOTION;
                 m_fDbl = 10;
                 break;
             case 93:
-                gameObject.GetComponent<ItemStatus>().SetName("공격향상물약");
+                gameObject.GetComponent<ItemStatus>().ItemName = "공격향상물약";
                 m_eUseCtg = USE_CATEGORI.POWERPOTION;
                 m_fDbl = 15;
                 break;
             case 94:
-                gameObject.GetComponent<ItemStatus>().SetName("만능총알");
+                gameObject.GetComponent<ItemStatus>().ItemName = "만능총알";
                 m_eUseCtg = USE_CATEGORI.BULLET;
-                m_fDbl = 20;
+                m_fDbl = 0;
                 break;
         }
     }
     //아이템 사용시의 효과를 적용하는 함수
     //BuffManager에 버프를 전달해서 적용함
-    public void ActiveItem()
+    public bool ActiveItem(ItemStatus SubWeapon)
     {
+        bool Work = true;
         switch(m_eUseCtg)
         {
             case USE_CATEGORI.BULLET:
-                BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORI.BULLET);
+                if (!SubWeapon)
+                {
+                    Work = false;
+                    break;
+                }
+                SubWeapon.WS.Dbl = SubWeapon.WS.Dbl + SubWeapon.WS.MaxDbl / 3;
                 break;
             case USE_CATEGORI.HEALTHPOTION:
                 //플레이어 체력 회복 코드 삽입부분
@@ -65,5 +71,7 @@ public class UseScript : MonoBehaviour
                 BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORI.SPEED);
                 break;
         }
+
+        return Work;
     }
 }
