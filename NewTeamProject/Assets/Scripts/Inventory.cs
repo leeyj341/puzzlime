@@ -8,16 +8,17 @@ public class Inventory : MonoBehaviour
     int m_nCurUse = 0;
     int m_nCurEquip = 0;
     INVEN_MODE m_eMode;
-    ATK_CATEGORI m_eCurWATK = ATK_CATEGORI.HACK;
+    ATK_CATEGORY m_eCurWATK = ATK_CATEGORY.HACK;
 
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
     List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
 
     ItemStatus m_sSubWeapon = null;
+
+    public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
     // Start is called before the first frame update
     void Start()
     {
-        
     }
 
     // Update is called once per frame
@@ -93,6 +94,8 @@ public class Inventory : MonoBehaviour
 
 
         m_nCurEquip = m_nCurWeapon;
+
+        ChangeWeapon();
     }
 
     void KeyAction_WEAPON_MODE()
@@ -157,6 +160,32 @@ public class Inventory : MonoBehaviour
         {
             m_listUseItem[m_nCurUse].US.ActiveItem(m_sSubWeapon);
             m_nCurUse--;
+        }
+    }
+
+    public void ChangeWeapon()
+    {
+        WeaponList[] temp = GetComponentsInChildren<WeaponList>();
+        foreach (WeaponList t in temp)
+        {
+            if (t.transform.Find("피스톨"))
+                t.InactiveWeapon("피스톨");
+
+            if (t.transform.Find("질 낮은 칼"))
+                t.ActiveWeapon("질 낮은 칼");
+        }
+    }
+
+    public void ChangeSubWeapon()
+    {
+        WeaponList[] temp = GetComponentsInChildren<WeaponList>();
+        foreach (WeaponList t in temp)
+        {
+            if (t.transform.Find("질 낮은 칼"))
+                t.InactiveWeapon("질 낮은 칼");
+
+            if (t.transform.Find("피스톨"))
+                t.ActiveWeapon("피스톨");
         }
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine;
 public class Buff
 {
     public float BuffForce;
-    public BUFF_CATEGORI BuffCtg;
+    public BUFF_CATEGORY BuffCtg;
     public float BuffTime;
 
     public bool Update()
@@ -50,7 +50,7 @@ public class BuffManager : MonoBehaviour
         }
     }
     //List에 Buff를 삽입하는 함수, 삽입될 때 플레이어에게 증가수치를 전달해줘야함
-    public void AddBuff(float BTime, BUFF_CATEGORI BCtg)
+    public void AddBuff(float BTime, BUFF_CATEGORY BCtg)
     {
         Buff buff = new Buff
         {

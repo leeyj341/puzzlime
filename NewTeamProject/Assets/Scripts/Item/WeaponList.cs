@@ -20,4 +20,8 @@ public class WeaponList : MonoBehaviour
     {
         transform.Find(WeaponName).gameObject.SetActive(true);
     }
+    public void InactiveWeapon(string WeaponName)
+    {
+        transform.Find(WeaponName).gameObject.SetActive(false);
+    }
 }

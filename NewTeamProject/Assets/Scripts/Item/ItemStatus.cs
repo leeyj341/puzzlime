@@ -10,15 +10,15 @@ public class ItemStatus : MonoBehaviour
     private WeaponScript m_cWS = null;
     private UseScript m_cUS = null;
     private bool m_bisWeapon = true;
-    private short m_nItemNumber;
-    private ITEM_CATEGORI m_eItemCtg;
+    public short m_nItemNumber;
+    private ITEM_CATEGORY m_eItemCtg;
     private string m_sName;
 
     public WeaponScript WS { get => m_cWS; set => m_cWS = value; } 
     public UseScript US { get => m_cUS; set => m_cUS = value; }
     public bool IsWeapon { get => m_bisWeapon; set => m_bisWeapon = value; }
-    public short ItemNumber { get => m_nItemNumber; set => m_nItemNumber = value; }
-    public ITEM_CATEGORI ItemCtg { get => m_eItemCtg; set => m_eItemCtg = value; }
+    
+    public ITEM_CATEGORY ItemCtg { get => m_eItemCtg; set => m_eItemCtg = value; }
     public string ItemName { get => m_sName; set => m_sName = value; }
 
     // Start is called before the first frame update
@@ -27,11 +27,11 @@ public class ItemStatus : MonoBehaviour
         m_cRb = GetComponent<Rigidbody>();
         m_cPos = GetComponent<Transform>();
         //아이템 스크립트 적용부분
-        if (m_eItemCtg == ITEM_CATEGORI.WEAPON)
+        if (m_eItemCtg == ITEM_CATEGORY.WEAPON)
         {
             m_cWS = gameObject.AddComponent<WeaponScript>();
         }
-        else if (m_eItemCtg == ITEM_CATEGORI.USE)
+        else if (m_eItemCtg == ITEM_CATEGORY.USE)
         {
             m_cUS = gameObject.AddComponent<UseScript>();
             m_bisWeapon = false;

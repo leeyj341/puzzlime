@@ -4,13 +4,13 @@ using UnityEngine;
 
 public class WeaponScript : MonoBehaviour
 {
-    ATK_CATEGORI m_eAtkCtg;
+    ATK_CATEGORY m_eAtkCtg;
     float m_fItemAtk;
     float m_fItemSpd;
     int m_nMaxDbl;
     int m_nDbl; //내구도
     
-    public ATK_CATEGORI AtkCtg { get => m_eAtkCtg; }
+    public ATK_CATEGORY AtkCtg { get => m_eAtkCtg; }
     public float Atk { get => m_fItemAtk; }
     public float Spd { get => m_fItemSpd; }
     public int MaxDbl { get => m_nMaxDbl; }
@@ -38,7 +38,7 @@ public class WeaponScript : MonoBehaviour
     //11~14 : 베기, 21~24 : 찌르기, 31~34 : 때리기, 41~44 사격
     void SetItemObtion()
     {
-        int Num = gameObject.GetComponent<ItemStatus>().ItemNumber;
+        int Num = gameObject.GetComponent<ItemStatus>().m_nItemNumber;
 
         switch (Num / 10)
         {
@@ -63,28 +63,28 @@ public class WeaponScript : MonoBehaviour
         {
             case 11:
                 gameObject.GetComponent<ItemStatus>().ItemName = "질 낮은 칼";
-                m_eAtkCtg = ATK_CATEGORI.HACK;
+                m_eAtkCtg = ATK_CATEGORY.HACK;
                 m_fItemAtk = 8;
                 m_fItemSpd = 1;
                 m_nDbl = -1;
                 break;
             case 12:
                 gameObject.GetComponent<ItemStatus>().ItemName = "일본도";
-                m_eAtkCtg = ATK_CATEGORI.HACK;
+                m_eAtkCtg = ATK_CATEGORY.HACK;
                 m_fItemAtk = 10;
                 m_fItemSpd = 0.8f;
                 m_nDbl = 50;
                 break;
             case 13:
                 gameObject.GetComponent<ItemStatus>().ItemName = "수정검";
-                m_eAtkCtg = ATK_CATEGORI.HACK;
+                m_eAtkCtg = ATK_CATEGORY.HACK;
                 m_fItemAtk = 13;
                 m_fItemSpd = 1;
                 m_nDbl = 25;
                 break;
             case 14:
                 gameObject.GetComponent<ItemStatus>().ItemName = "수정대검";
-                m_eAtkCtg = ATK_CATEGORI.HACK;
+                m_eAtkCtg = ATK_CATEGORY.HACK;
                 m_fItemAtk = 20;
                 m_fItemSpd = 2;
                 m_nDbl = 10;
@@ -98,28 +98,28 @@ public class WeaponScript : MonoBehaviour
         {
             case 21:
                 gameObject.GetComponent<ItemStatus>().ItemName = "이 나간 검";
-                m_eAtkCtg = ATK_CATEGORI.STAB;
+                m_eAtkCtg = ATK_CATEGORY.STAB;
                 m_fItemAtk = 8;
                 m_fItemSpd = 1;
                 m_nDbl = -1;
                 break;
             case 22:
                 gameObject.GetComponent<ItemStatus>().ItemName = "차";
-                m_eAtkCtg = ATK_CATEGORI.STAB;
+                m_eAtkCtg = ATK_CATEGORY.STAB;
                 m_fItemAtk = 5;
                 m_fItemSpd = 0.4f;
                 m_nDbl = 50;
                 break;
             case 23:
                 gameObject.GetComponent<ItemStatus>().ItemName = "치도";
-                m_eAtkCtg = ATK_CATEGORI.STAB;
+                m_eAtkCtg = ATK_CATEGORY.STAB;
                 m_fItemAtk = 15;
                 m_fItemSpd = 1.5f;
                 m_nDbl = 25;
                 break;
             case 24:
                 gameObject.GetComponent<ItemStatus>().ItemName = "수정장창";
-                m_eAtkCtg = ATK_CATEGORI.STAB;
+                m_eAtkCtg = ATK_CATEGORY.STAB;
                 m_fItemAtk = 20;
                 m_fItemSpd = 2;
                 m_nDbl = 10;
@@ -133,28 +133,28 @@ public class WeaponScript : MonoBehaviour
         {
             case 31:
                 gameObject.GetComponent<ItemStatus>().ItemName = "빗자루";
-                m_eAtkCtg = ATK_CATEGORI.HIT;
+                m_eAtkCtg = ATK_CATEGORY.HIT;
                 m_fItemAtk = 8;
                 m_fItemSpd = 1;
                 m_nDbl = -1;
                 break;
             case 32:
                 gameObject.GetComponent<ItemStatus>().ItemName = "곤봉";
-                m_eAtkCtg = ATK_CATEGORI.HIT;
+                m_eAtkCtg = ATK_CATEGORY.HIT;
                 m_fItemAtk = 12;
                 m_fItemSpd = 1.3f;
                 m_nDbl = 50;
                 break;
             case 33:
                 gameObject.GetComponent<ItemStatus>().ItemName = "신기한 막대";
-                m_eAtkCtg = ATK_CATEGORI.HIT;
+                m_eAtkCtg = ATK_CATEGORY.HIT;
                 m_fItemAtk = 15;
                 m_fItemSpd = 1.2f;
                 m_nDbl = 20;
                 break;
             case 34:
                 gameObject.GetComponent<ItemStatus>().ItemName = "대두";
-                m_eAtkCtg = ATK_CATEGORI.HIT;
+                m_eAtkCtg = ATK_CATEGORY.HIT;
                 m_fItemAtk = 22;
                 m_fItemSpd = 2.5f;
                 m_nDbl = 10;
@@ -168,14 +168,14 @@ public class WeaponScript : MonoBehaviour
         {
             case 41:
                 gameObject.GetComponent<ItemStatus>().ItemName = "피스톨";
-                m_eAtkCtg = ATK_CATEGORI.SHOT;
+                m_eAtkCtg = ATK_CATEGORY.SHOT;
                 m_fItemAtk = 5;
                 m_fItemSpd = 0.8f;
                 m_nDbl = 50;
                 break;
             case 42:
                 gameObject.GetComponent<ItemStatus>().ItemName = "리볼버";
-                m_eAtkCtg = ATK_CATEGORI.SHOT;
+                m_eAtkCtg = ATK_CATEGORY.SHOT;
                 m_fItemAtk = 12;
                 m_fItemSpd = 1;
                 m_nDbl = 6;

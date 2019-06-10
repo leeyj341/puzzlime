@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class UseScript : MonoBehaviour
 {
-    USE_CATEGORI m_eUseCtg; // 사용 아이템 종류
+    USE_CATEGORY m_eUseCtg; // 사용 아이템 종류
     float m_fDbl; // 내구도, 지속시간을 뜻함
 
     // Start is called before the first frame update
@@ -21,27 +21,27 @@ public class UseScript : MonoBehaviour
     //ItemStatus에 입력한 아이템 넘버를 기반으로 91~94번까지의 번호를 받아 작동함
     void SetItemObtion()
     {
-        int num = gameObject.GetComponent<ItemStatus>().ItemNumber;
+        int num = gameObject.GetComponent<ItemStatus>().m_nItemNumber;
         switch(num)
         {
             case 91:
                 gameObject.GetComponent<ItemStatus>().ItemName = "체력회복물약";
-                m_eUseCtg = USE_CATEGORI.HEALTHPOTION;
+                m_eUseCtg = USE_CATEGORY.HEALTHPOTION;
                 m_fDbl = 0;
                 break;
             case 92:
                 gameObject.GetComponent<ItemStatus>().ItemName = "속도향상물약";
-                m_eUseCtg = USE_CATEGORI.SPEEDPOTION;
+                m_eUseCtg = USE_CATEGORY.SPEEDPOTION;
                 m_fDbl = 10;
                 break;
             case 93:
                 gameObject.GetComponent<ItemStatus>().ItemName = "공격향상물약";
-                m_eUseCtg = USE_CATEGORI.POWERPOTION;
+                m_eUseCtg = USE_CATEGORY.POWERPOTION;
                 m_fDbl = 15;
                 break;
             case 94:
                 gameObject.GetComponent<ItemStatus>().ItemName = "만능총알";
-                m_eUseCtg = USE_CATEGORI.BULLET;
+                m_eUseCtg = USE_CATEGORY.BULLET;
                 m_fDbl = 0;
                 break;
         }
@@ -53,7 +53,7 @@ public class UseScript : MonoBehaviour
         bool Work = true;
         switch(m_eUseCtg)
         {
-            case USE_CATEGORI.BULLET:
+            case USE_CATEGORY.BULLET:
                 if (!SubWeapon)
                 {
                     Work = false;
@@ -61,14 +61,14 @@ public class UseScript : MonoBehaviour
                 }
                 SubWeapon.WS.Dbl = SubWeapon.WS.Dbl + SubWeapon.WS.MaxDbl / 3;
                 break;
-            case USE_CATEGORI.HEALTHPOTION:
+            case USE_CATEGORY.HEALTHPOTION:
                 //플레이어 체력 회복 코드 삽입부분
                 break;
-            case USE_CATEGORI.POWERPOTION:
-                BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORI.ATTACK);
+            case USE_CATEGORY.POWERPOTION:
+                BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORY.ATTACK);
                 break;
-            case USE_CATEGORI.SPEEDPOTION:
-                BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORI.SPEED);
+            case USE_CATEGORY.SPEEDPOTION:
+                BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORY.SPEED);
                 break;
         }
 

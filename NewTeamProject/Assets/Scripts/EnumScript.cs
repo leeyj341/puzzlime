@@ -10,13 +10,13 @@ public enum CURRUNT_SCENE
     SCENE_GAME
 }
 
-public enum ITEM_CATEGORI
+public enum ITEM_CATEGORY
 {
     WEAPON,
     USE
 }
 
-public enum ATK_CATEGORI
+public enum ATK_CATEGORY
 {
     HACK,
     HIT,
@@ -25,7 +25,7 @@ public enum ATK_CATEGORI
     NONE
 }
 
-public enum USE_CATEGORI
+public enum USE_CATEGORY
 {
     HEALTHPOTION,
     SPEEDPOTION,
@@ -33,7 +33,7 @@ public enum USE_CATEGORI
     BULLET
 }
 
-public enum BUFF_CATEGORI
+public enum BUFF_CATEGORY
 {
     SPEED,
     ATTACK
@@ -43,7 +43,7 @@ public enum ANIM_SORT
 {
     ATTACK,
     SHOOT,
-    NONE
+    BASIC
 }
 
 public enum INVEN_MODE

@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerState State;
     private CharacterController Controller;
-    //private Inventory Iven;
+    private Inventory Inven;
 
     private float h = 0.0f;
     private float v = 0.0f;
@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     {
         State = GetComponent<PlayerState>();
         Controller = GetComponent<CharacterController>();
+        Inven = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
@@ -40,25 +41,21 @@ public class PlayerController : MonoBehaviour
             State.Speed = 0;
         }
 
-        State.CurAni = ANIM_SORT.NONE;
-
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //일반 공격
             // State.WeaponCategory = Inven.무엇;
+            if (State.CurAni == ANIM_SORT.SHOOT) return;
             State.CurAni = ANIM_SORT.ATTACK;
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             //총 쏘기
-            //State.WeaponCategory = Inven.무엇;
+            //if (!Inven.SubWeapon) return;
+            if (State.CurAni == ANIM_SORT.ATTACK) return;
             State.CurAni = ANIM_SORT.SHOOT;
-        }
-
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            //회복 아이템 사용
+            Inven.ChangeSubWeapon();
         }
     }
 
@@ -66,5 +63,10 @@ public class PlayerController : MonoBehaviour
     {
         transform.Rotate(transform.up * State.RotSpeed * h * Time.deltaTime);
         Controller.Move(transform.forward * State.Speed * v * Time.deltaTime);    
+    }
+
+    public void ChangeAniSortToNone()
+    {
+        State.CurAni = ANIM_SORT.BASIC;
     }
 }

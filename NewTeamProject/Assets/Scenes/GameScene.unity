@@ -3933,7 +3933,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dist: 10
   height: 10
-  PlayerTr: {fileID: 0}
 --- !u!1001 &557302222
 PrefabInstance:
   m_ObjectHideFlags: 0
