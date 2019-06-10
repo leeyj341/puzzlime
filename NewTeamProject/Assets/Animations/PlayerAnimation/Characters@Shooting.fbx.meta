@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: f616ed9b51c1c7348b20a2d403766be6
+guid: b523356039a30c541800ee5099d186a5
 ModelImporter:
   serializedVersion: 23
   fileIDToRecycleName:
@@ -79,9 +79,8 @@ ModelImporter:
     400070: toes_r
     400072: upperarm_l
     400074: upperarm_r
-    7400000: Idle
+    7400000: Shooting
     9500000: //RootNode
-    2186277476908879412: ImportLogs
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -111,17 +110,17 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Idle
+      name: Shooting
       takeName: mixamo.com
       firstFrame: 0
-      lastFrame: 300
+      lastFrame: 35
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
       cycleOffset: 0
       loop: 0
       hasAdditiveReferencePose: 0
-      loopTime: 1
+      loopTime: 0
       loopBlend: 0
       loopBlendOrientation: 1
       loopBlendPositionY: 1
