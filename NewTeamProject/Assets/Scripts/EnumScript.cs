@@ -40,7 +40,7 @@ public enum BUFF_CATEGORI
     BULLET
 }
 
-public enum ANIM_BEHAVIOR
+public enum ANIM_SORT
 {
     ATTACK,
     SHOOT,

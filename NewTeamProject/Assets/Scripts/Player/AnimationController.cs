@@ -4,32 +4,42 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private Animator playerAnimator;
+    private PlayerState State;
+    private Animator PlayerAnimator;
 
     // Start is called before the first frame update
     void Start()
     {
-        playerAnimator = GetComponent<Animator>();
+        State = GetComponent<PlayerState>();
+        PlayerAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        ChangeAnimationSpeed();
+        ChangeAnimationParameter();
     }
 
-    public void ChangeAnimation()
+    private void ChangeAnimationSpeed()
     {
-
+        if((int)State.WeaponCategory < 2)
+        {
+            State.AnimPlaySpeed = State.AtkSpeed * State.SlashSpeed;
+        }
+        else if((int)State.WeaponCategory == 2)
+        {
+            State.AnimPlaySpeed = State.AtkSpeed * State.StabSpeed;
+        }
     }
 
-    public void ChangeParameter(string parameterName, int nNum)
+    public void ChangeAnimationParameter()
     {
-        playerAnimator.SetInteger(parameterName, nNum);
+        PlayerAnimator.SetFloat("Speed", State.Speed);
+        PlayerAnimator.SetFloat("AtkAnimPlaySpeed", State.AnimPlaySpeed);
+        PlayerAnimator.SetInteger("AniNum", (int)State.CurAni);
+        PlayerAnimator.SetInteger("WeaponNum", (int)State.WeaponCategory);
     }
 
-    public void ChangeParameter(string parameterName, float fNum)
-    {
-        playerAnimator.SetFloat(parameterName, fNum);
-    }
+
 }
