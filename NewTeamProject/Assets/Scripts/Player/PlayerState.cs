@@ -11,7 +11,7 @@ public class PlayerState : MonoBehaviour
     private float atk = 0.0f;                                               // 총 공격력
     private float additionalAtk = 0.0f;                                     // 추가 공격력
 
-    private ATK_CATEGORY weaponCategory = ATK_CATEGORY.STAB;                // 현재 무기 종류
+    private ATK_CATEGORY weaponCategory = ATK_CATEGORY.HACK;                // 현재 무기 종류
     private float atkSpeed = 1.0f;                                          // 공격속도
 
     // 애니메이션 관련 변수

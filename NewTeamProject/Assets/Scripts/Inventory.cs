@@ -16,6 +16,8 @@ public class Inventory : MonoBehaviour
     ItemStatus m_sSubWeapon = null;
 
     public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
+    public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
+    public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
     // Start is called before the first frame update
     void Start()
     {
@@ -106,13 +108,13 @@ public class Inventory : MonoBehaviour
                 m_nCurWeapon--;
         }
 
-        if(Input.GetKey(KeyCode.RightArrow))
+        if(Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (m_nCurWeapon + 1 < m_listWeaponItem.Count)
+            if (m_nCurWeapon + 1 < 5)               //여기
                 m_nCurWeapon++;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (m_listWeaponItem.Count > 0)
             {
@@ -126,7 +128,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             Equip();
 
@@ -141,13 +143,13 @@ public class Inventory : MonoBehaviour
                 m_nCurUse--;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (Input.GetKeyDown(KeyCode.RightArrow))
         {
-            if (m_nCurUse + 1 < m_listUseItem.Count)
+            if (m_nCurUse + 1 < 3)                  //여기
                 m_nCurUse++;
         }
 
-        if (Input.GetKey(KeyCode.DownArrow))
+        if (Input.GetKeyDown(KeyCode.DownArrow))
         {
             if (m_listUseItem.Count > 0)
             {
@@ -156,7 +158,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
+        if (Input.GetKeyDown(KeyCode.UpArrow))
         {
             m_listUseItem[m_nCurUse].US.ActiveItem(m_sSubWeapon);
             m_nCurUse--;
