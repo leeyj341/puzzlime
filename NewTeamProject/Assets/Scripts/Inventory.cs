@@ -8,13 +8,14 @@ public class Inventory : MonoBehaviour
     int m_nCurUse = 0;
     int m_nCurEquip = 0;
     INVEN_MODE m_eMode;
-    ATK_CATEGORY m_eCurWATK = ATK_CATEGORY.HACK;
 
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
-    List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
+    public List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
 
+    private WeaponList m_sWeaponList = null;
     ItemStatus m_sSubWeapon = null;
 
+    public WeaponList WL { get => m_sWeaponList; set => m_sWeaponList = value; }
     public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
     // Start is called before the first frame update
     void Start()
@@ -39,31 +40,43 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemStatus item)
     {
-        bool Added = false;
+        //가방에 공간이 없다면
+        if (m_listWeaponItem.Count >= 5)
+            return false;
 
-        if (item.IsWeapon)
+        //무기인데
+        if (item.ItemCtg == ITEM_CATEGORY.WEAPON)
         {
-            if(m_listWeaponItem.Count < 5)
+            //보조무기면
+            if(item.ItemNubmer / 10 == 4)
+            {
+                //근데 보조무기를 이미 갖고있다면
+                if (m_sSubWeapon) return false;
+                //보조무기가 없다면
+                else
+                {
+                    m_sSubWeapon = item;
+                    return true;
+                }
+            }
+            //주무기면
+            else
             {
                 m_listWeaponItem.Add(item);
-                m_nCurWeapon++;
-                Added = true;
+                return true;
             }
         }
-
-        else if(!item.IsWeapon)
+        //소모품이면
+        else if(item.ItemCtg == ITEM_CATEGORY.USE)
         {
+            //가방에 공간이 있다면
             if (m_listUseItem.Count < 3)
             {
                 m_listUseItem.Add(item);
-                m_nCurUse++;
-                Added = true;
+                return true;
             }
         }
-        if (Added)
-            item.GetComponent<Transform>().gameObject.SetActive(false);
-
-        return Added;
+        return false;
     }
 
     public void ItemUse()
@@ -87,15 +100,13 @@ public class Inventory : MonoBehaviour
 
     void Equip()
     {
-        transform.GetComponent<PlayerState>().AdditionalAtk = m_listWeaponItem[m_nCurWeapon].WS.Atk;
-        m_eCurWATK = m_listWeaponItem[m_nCurWeapon].WS.AtkCtg;
-
-        //공격속도 추가
-
-
+        GameManager.Instance.PS.AdditionalAtk = m_listWeaponItem[m_nCurWeapon].WS.Atk;
+        GameManager.Instance.PS.AtkSpeed = m_listWeaponItem[m_nCurWeapon].WS.Spd;
+        GameManager.Instance.PS.WeaponCategory = m_listWeaponItem[m_nCurWeapon].WS.AtkCtg;
+        
         m_nCurEquip = m_nCurWeapon;
 
-        ChangeWeapon();
+        WL.ChangeWeapon(m_listWeaponItem[m_nCurEquip].ItemName);
     }
 
     void KeyAction_WEAPON_MODE()
@@ -114,22 +125,23 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKey(KeyCode.DownArrow))
         {
-            if (m_listWeaponItem.Count > 0)
+            if (m_listWeaponItem[m_nCurEquip].WS.Dbl == -1) return;
+            
+            m_listWeaponItem.Remove(m_listWeaponItem[m_nCurWeapon]);
+
+            if (m_nCurEquip == m_nCurWeapon)
             {
-                if (m_nCurEquip == m_nCurWeapon)
-                {
-                    m_nCurEquip--;
-                    Equip();
-                }
-                m_listWeaponItem.Remove(m_listWeaponItem[m_nCurWeapon]);
                 m_nCurWeapon--;
+                Equip();
             }
+
+            else if (m_nCurEquip > m_nCurWeapon)
+                m_nCurEquip--;
         }
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
             Equip();
-
         }
     }
 
@@ -158,34 +170,12 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKey(KeyCode.UpArrow))
         {
-            m_listUseItem[m_nCurUse].US.ActiveItem(m_sSubWeapon);
-            m_nCurUse--;
+            if(m_listUseItem[m_nCurUse].US.ActiveItem(m_sSubWeapon))
+            {
+                m_listUseItem.Remove(m_listUseItem[m_nCurUse]);
+                m_nCurUse--;
+            }
         }
     }
-
-    public void ChangeWeapon()
-    {
-        WeaponList[] temp = GetComponentsInChildren<WeaponList>();
-        foreach (WeaponList t in temp)
-        {
-            if (t.transform.Find("피스톨"))
-                t.InactiveWeapon("피스톨");
-
-            if (t.transform.Find("질 낮은 칼"))
-                t.ActiveWeapon("질 낮은 칼");
-        }
-    }
-
-    public void ChangeSubWeapon()
-    {
-        WeaponList[] temp = GetComponentsInChildren<WeaponList>();
-        foreach (WeaponList t in temp)
-        {
-            if (t.transform.Find("질 낮은 칼"))
-                t.InactiveWeapon("질 낮은 칼");
-
-            if (t.transform.Find("피스톨"))
-                t.ActiveWeapon("피스톨");
-        }
-    }
+    
 }

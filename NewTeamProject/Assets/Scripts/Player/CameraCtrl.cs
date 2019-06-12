@@ -23,7 +23,7 @@ public class CameraCtrl : MonoBehaviour
 
     public void SetCamTarget()
     {
-        targetTr = GameManager.Instance.GetPlayer().transform;
+        targetTr = GameManager.Instance.Player.transform;
     }
 
     private void FollowPlayer()
