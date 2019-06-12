@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
             //if (!Inven.SubWeapon) return;
             if (State.CurAni == ANIM_SORT.ATTACK) return;
             State.CurAni = ANIM_SORT.SHOOT;
-            Inven.ChangeSubWeapon();
         }
     }
 

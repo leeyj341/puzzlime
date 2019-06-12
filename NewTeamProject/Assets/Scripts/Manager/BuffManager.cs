@@ -12,7 +12,6 @@ public class Buff
     {
         if (BuffTime <= 0)
             return false; 
-        //플레이어 버프 증가수치 계산부분
         BuffTime -= Time.deltaTime;
         return true;
     }
@@ -57,14 +56,39 @@ public class BuffManager : MonoBehaviour
             BuffTime = BTime,
             BuffCtg = BCtg
         };
-
+        AddBuffToPlayer(buff);
         ListBuff.Add(buff);
     }
 
     public void DelBuff(Buff buff)
     {
-        
-
+        DelBuffToPlayer(buff);
         ListBuff.Remove(buff);
+    }
+    
+    void AddBuffToPlayer(Buff buff)
+    {
+        switch (buff.BuffCtg)
+        {
+            case BUFF_CATEGORY.ATTACK:
+                GameManager.Instance.PS.Atk += buff.BuffForce;
+                break;
+            case BUFF_CATEGORY.SPEED:
+                GameManager.Instance.PS.AtkSpeed += buff.BuffForce;
+                break;
+        }
+    }
+
+    void DelBuffToPlayer(Buff buff)
+    {
+        switch (buff.BuffCtg)
+        {
+            case BUFF_CATEGORY.ATTACK:
+                GameManager.Instance.PS.Atk -= buff.BuffForce;
+                break;
+            case BUFF_CATEGORY.SPEED:
+                GameManager.Instance.PS.AtkSpeed -= buff.BuffForce;
+                break;
+        }
     }
 }

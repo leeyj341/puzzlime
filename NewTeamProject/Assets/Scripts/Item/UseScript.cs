@@ -19,9 +19,8 @@ public class UseScript : MonoBehaviour
     }
     //아이템 옵션 결정
     //ItemStatus에 입력한 아이템 넘버를 기반으로 91~94번까지의 번호를 받아 작동함
-    void SetItemObtion()
+    public void SetItemObtion(int num)
     {
-        int num = gameObject.GetComponent<ItemStatus>().m_nItemNumber;
         switch(num)
         {
             case 91:
@@ -55,15 +54,16 @@ public class UseScript : MonoBehaviour
         {
             case USE_CATEGORY.BULLET:
                 if (!SubWeapon)
-                {
-                    Work = false;
-                    break;
-                }
+                    return Work = false;
                 SubWeapon.WS.Dbl = SubWeapon.WS.Dbl + SubWeapon.WS.MaxDbl / 3;
                 break;
             case USE_CATEGORY.HEALTHPOTION:
-                //플레이어 체력 회복 코드 삽입부분
-                break;
+                if (GameManager.Instance.PS.MaxHp > GameManager.Instance.PS.Hp)
+                    GameManager.Instance.PS.Hp += 3;
+
+                if (GameManager.Instance.PS.MaxHp < GameManager.Instance.PS.Hp)
+                    GameManager.Instance.PS.Hp = GameManager.Instance.PS.MaxHp;
+                    break;
             case USE_CATEGORY.POWERPOTION:
                 BuffManager.Instance.AddBuff(m_fDbl, BUFF_CATEGORY.ATTACK);
                 break;

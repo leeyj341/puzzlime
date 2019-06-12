@@ -15,8 +15,6 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_nSizeOfItem = 5;
-        ItemSet();
     }
 
     // Update is called once per frame
@@ -25,20 +23,25 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    void ItemSet()
-    {
-        for(int i = 0; i < m_nSizeOfItem; i++)
-        {
-            m_listItem.Add(Instantiate(new GameObject()));
-            m_listItem[i].SetActive(false);
-        }
-    }
-
-    GameObject MakeItem()
+    GameObject MakeItemObj(ITEM_CATEGORY ctg, int Num)
     {
         GameObject temp = Instantiate(new GameObject());
         temp.AddComponent<ItemStatus>();
-        
+        temp.GetComponent<ItemStatus>().ItemSet(ctg, Num);
         return temp;
+    }
+
+    ItemStatus MakeItem(ITEM_CATEGORY ctg, int Num)
+    {
+        ItemStatus Temp = new ItemStatus();
+        Temp.ItemSet(ctg, Num);
+        return Temp;
+    }
+
+    public void AddFirstItem()
+    {
+
+        GameManager.Instance.Inven.AddItem(MakeItem(ITEM_CATEGORY.WEAPON, 11));
+        GameManager.Instance.Inven.AddItem(MakeItem(ITEM_CATEGORY.WEAPON, 41));
     }
 }
