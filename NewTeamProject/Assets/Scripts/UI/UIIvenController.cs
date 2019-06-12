@@ -25,7 +25,7 @@ public class UIIvenController : MonoBehaviour
     {
         SetInventoryImage();
 
-        Inven = GameManager.Instance.GetPlayer().GetComponent<Inventory>();
+        Inven = GameManager.Instance.Player.GetComponent<Inventory>();
     }
 
     // Update is called once per frame

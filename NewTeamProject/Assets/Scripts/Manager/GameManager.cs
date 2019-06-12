@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameObject m_gPlayer;
+    private GameObject m_gPlayer;
     private string m_strPlayerTag = "CowBoy";
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
