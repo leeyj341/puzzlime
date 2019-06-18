@@ -8,11 +8,13 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
     private GameObject m_gPlayer;
     private string m_strPlayerTag = "CowBoy";
+    private float gameTime = 180.0f;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
     public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
     public PlayerState PS { get => m_gPlayer.GetComponent<PlayerState>(); }
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
+    public float GameTime { get => gameTime; set => gameTime = value; } // 초단위
     // Start is called before the first frame update
     private void Awake()
     {
@@ -23,6 +25,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-
+        
     }
 }
