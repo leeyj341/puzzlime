@@ -22,6 +22,8 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        m_eMode = INVEN_MODE.WEAPON;
+        InGameUIManager.Instance.ChangeCursor(m_eMode);
     }
 
     // Update is called once per frame
@@ -90,9 +92,15 @@ public class Inventory : MonoBehaviour
     void KeyAction()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
             m_eMode = INVEN_MODE.WEAPON;
+            InGameUIManager.Instance.ChangeCursor(m_eMode);
+        }
         else if (Input.GetKeyDown(KeyCode.Alpha2))
+        {
             m_eMode = INVEN_MODE.USE;
+            InGameUIManager.Instance.ChangeCursor(m_eMode);
+        }
 
         if (m_eMode == INVEN_MODE.WEAPON)
             KeyAction_WEAPON_MODE();

@@ -53,7 +53,6 @@ public class InGameUIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangeGameTime();
         ChangeHpSlider();
     }
 
@@ -71,39 +70,38 @@ public class InGameUIManager : MonoBehaviour
         Inven = GameManager.Instance.Player.GetComponent<Inventory>();
     }
 
-    private void ChangeGameTime()
-    {
-        float remainTime = GameManager.Instance.GameTime - Time.time;
-
-        // 시간 종료를 GameManager에게 알리는 기능 추가
-        // 아니면 게임매니저에서 시간 계산 후 표시해주기만 하는 걸로 바꿈
-        if (remainTime <= 0.0f) remainTime = 0.0f;
-
-        int minutes = (int)remainTime / 60;
-        int seconds = (int)remainTime % 60;
-        string sMinutes;
-        string sSeconds;
-
-        if (minutes < 10)
-            sMinutes = "0" + minutes.ToString();
-        else
-            sMinutes = minutes.ToString();
-
-        if (seconds < 10)
-            sSeconds = "0" + seconds.ToString();
-        else
-            sSeconds = seconds.ToString();
-
-        NumGameTime.text = sMinutes + " : " + sSeconds;
-    }
-
     private void ChangeHpSlider()
     {
         HPSlider.maxValue = GameManager.Instance.PS.MaxHp;
         HPSlider.value = GameManager.Instance.PS.Hp;
 
+        // 테스트용 
         if (Input.GetKeyDown(KeyCode.J)) GameManager.Instance.PS.Hp--;
         if (Input.GetKeyDown(KeyCode.K)) GameManager.Instance.PS.Hp++;
+    }
+
+    public void ChangeGameTime(string sRemaintime)
+    {
+        NumGameTime.text = sRemaintime;
+    }
+
+    public void ChangeCursor(INVEN_MODE curInvenMode)
+    {
+        switch (curInvenMode)
+        {
+            case INVEN_MODE.WEAPON:
+                if (!WeaponCursor.IsActive())
+                    WeaponCursor.gameObject.SetActive(true);
+                if (ItemCursor.IsActive())
+                    ItemCursor.gameObject.SetActive(false);
+                break;
+            case INVEN_MODE.USE:
+                if (!ItemCursor.IsActive())
+                    ItemCursor.gameObject.SetActive(true);
+                if (WeaponCursor.IsActive())
+                    WeaponCursor.gameObject.SetActive(false);
+                break;
+        }
     }
 
     public void MoveCursor(INVEN_MODE curInvenMode, int cursor)

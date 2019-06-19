@@ -7,7 +7,9 @@ public enum CURRUNT_SCENE
 {
     SCENE_MAIN,
     SCENE_SELECT,
-    SCENE_GAME
+    SCENE_SHOP,
+    SCENE_GAME,
+    SCENE_LOADING
 }
 
 public enum ITEM_CATEGORY
