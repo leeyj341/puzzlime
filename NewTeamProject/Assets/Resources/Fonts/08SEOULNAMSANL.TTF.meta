@@ -1,0 +1,23 @@
+fileFormatVersion: 2
+guid: e29a8b7ada6c93c4687aaf585d6e46b4
+TrueTypeFontImporter:
+  externalObjects: {}
+  serializedVersion: 4
+  fontSize: 16
+  forceTextureCase: -2
+  characterSpacing: 0
+  characterPadding: 1
+  includeFontData: 1
+  fontName: 08SeoulNamsan
+  fontNames:
+  - 08SeoulNamsan
+  fallbackFontReferences:
+  - {fileID: 12800000, guid: 6c1e772ed0936eb488e469a439ee7383, type: 3}
+  customCharacters: 
+  fontRenderingMode: 0
+  ascentCalculationMode: 1
+  useLegacyBoundsCalculation: 0
+  shouldRoundAdvanceValue: 1
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

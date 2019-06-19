@@ -6,15 +6,15 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public GameObject m_gPlayer;
-    public Inventory m_sInven;
-    private PlayerState m_sState;
+    private GameObject m_gPlayer;
     private string m_strPlayerTag = "CowBoy";
+    private float gameTime = 180.0f;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
-    public Inventory Inven { get => m_sInven; }
-    public PlayerState PS { get => m_sState; }
+    public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
+    public PlayerState PS { get => m_gPlayer.GetComponent<PlayerState>(); }
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
+    public float GameTime { get => gameTime; set => gameTime = value; } // 초단위
     // Start is called before the first frame update
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        m_sInven = m_gPlayer.GetComponent<Inventory>();
-        m_sState = m_gPlayer.GetComponent<PlayerState>();
+        
     }
 }

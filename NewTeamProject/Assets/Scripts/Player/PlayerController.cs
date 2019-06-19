@@ -27,6 +27,11 @@ public class PlayerController : MonoBehaviour
         Move();             // 움직임
     }
 
+    private void OnControllerColliderHit(ControllerColliderHit hit)
+    {
+        //if (Inven.AddItem(hit.gameObject.tag)) return;
+    }
+
     private void KeyInput()
     {
         h = Input.GetAxis("Horizontal");

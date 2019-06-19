@@ -116,12 +116,16 @@ public class Inventory : MonoBehaviour
         {
             if (m_nCurWeapon > 0 )
                 m_nCurWeapon--;
+
+            InGameUIManager.Instance.MoveCursor(m_eMode, m_nCurWeapon);
         }
 
         if(Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (m_nCurWeapon + 1 < 5)               //여기
                 m_nCurWeapon++;
+
+            InGameUIManager.Instance.MoveCursor(m_eMode, m_nCurWeapon);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
@@ -152,12 +156,16 @@ public class Inventory : MonoBehaviour
         {
             if (m_nCurUse > 0)
                 m_nCurUse--;
+
+            InGameUIManager.Instance.MoveCursor(m_eMode, m_nCurUse);
         }
 
         if (Input.GetKeyDown(KeyCode.RightArrow))
         {
             if (m_nCurUse + 1 < 3)                  //여기
                 m_nCurUse++;
+
+            InGameUIManager.Instance.MoveCursor(m_eMode, m_nCurUse);
         }
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
