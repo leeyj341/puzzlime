@@ -9,19 +9,20 @@ public class Inventory : MonoBehaviour
     int m_nCurEquip = 0;
     INVEN_MODE m_eMode;
 
-    List<ItemStatus> m_listUseItem = new List<ItemStatus>();
-    public List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
+    List<UseScript> m_listUseItem = new List<UseScript>();
+    public List<WeaponScript> m_listWeaponItem = new List<WeaponScript>();
 
     private WeaponList m_sWeaponList = null;
-    ItemStatus m_sSubWeapon = null;
+    WeaponScript m_sSubWeapon = null;
 
     public WeaponList WL { get => m_sWeaponList; set => m_sWeaponList = value; }
-    public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
+    public WeaponScript SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
     // Start is called before the first frame update
     void Start()
     {
+        ItemManager.Instance.AddFirstItem();
     }
 
     // Update is called once per frame
@@ -29,18 +30,10 @@ public class Inventory : MonoBehaviour
     {
         KeyAction();
     }
-
-    public void Consum()
-    {
-        if(!m_listWeaponItem[m_nCurEquip].WS.Consum())
-        {
-            m_listWeaponItem.Remove(m_listWeaponItem[m_nCurEquip]);
-            if (m_nCurWeapon == m_listWeaponItem.Count) m_nCurWeapon--;
-            Equip();
-        }
-    }
-
-    public bool AddItem(ItemStatus item)
+    
+    public bool AddUse(UseScript `)
+   
+    public bool AddWeapon(ItemStatus item)
     {
         //가방에 공간이 없다면
         if (m_listWeaponItem.Count >= 5)
@@ -80,6 +73,12 @@ public class Inventory : MonoBehaviour
         }
         return false;
     }
+
+    public bool Consum(WeaponScript temp)
+    {
+        return temp.Consum();
+    }
+
 
     public void ItemUse()
     {

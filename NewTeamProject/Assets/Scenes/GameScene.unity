@@ -13831,6 +13831,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_gPlayer: {fileID: 0}
+  m_sInven: {fileID: 0}
 --- !u!4 &1866381776
 Transform:
   m_ObjectHideFlags: 0
