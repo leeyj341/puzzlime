@@ -22,9 +22,12 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ItemManager.Instance.AddFirstItem();
+<<<<<<< HEAD
         m_eMode = INVEN_MODE.WEAPON;
         InGameUIManager.Instance.ChangeCursor(m_eMode);
+=======
+        ItemManager.Instance.AddFirstItem();
+>>>>>>> fa2a29709b9ffbfd90efd7c0f12bb444ecb9b999
     }
 
     // Update is called once per frame

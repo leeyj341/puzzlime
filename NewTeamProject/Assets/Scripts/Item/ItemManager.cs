@@ -23,25 +23,37 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    GameObject MakeItemObj(ITEM_CATEGORY ctg, int Num)
+    GameObject MakeItemObj(ITEM_CATEGORY ctg, short Num)
     {
         GameObject temp = Instantiate(new GameObject());
-        temp.AddComponent<ItemStatus>();
-        temp.GetComponent<ItemStatus>().ItemSet(ctg, Num);
+        if (ctg == ITEM_CATEGORY.WEAPON)
+        {
+            temp.AddComponent<WeaponScript>();
+            temp.GetComponent<WeaponScript>().SetItemObtion(Num);
+        }
+        else
+        {
+            temp.AddComponent<UseScript>();
+            temp.GetComponent<UseScript>().SetItemObtion(Num);
+        }
         return temp;
     }
 
-    ItemStatus MakeItem(ITEM_CATEGORY ctg, int Num)
+    WeaponScript MakeWeapon(short num)
     {
-        ItemStatus Temp = new ItemStatus();
-        Temp.ItemSet(ctg, Num);
-        return Temp;
+        WeaponScript temp = new WeaponScript();
+        temp.SetItemObtion(num);
+        return temp;
     }
 
+    UseScript MakeUse(short num)
+    {
+        UseScript temp = new UseScript();
+        temp.SetItemObtion(num);
+        return temp;
+    }
+    
     public void AddFirstItem()
     {
-
-        GameManager.Instance.Inven.AddItem(MakeItem(ITEM_CATEGORY.WEAPON, 11));
-        GameManager.Instance.Inven.AddItem(MakeItem(ITEM_CATEGORY.WEAPON, 41));
     }
 }
