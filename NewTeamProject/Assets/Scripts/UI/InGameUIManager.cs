@@ -9,6 +9,7 @@ public class InGameUIManager : MonoBehaviour
 
     public GameObject Weapons;
     public GameObject Items;
+    public GameObject Gun;
 
     private Inventory Inven;
 
@@ -24,14 +25,15 @@ public class InGameUIManager : MonoBehaviour
     // 인벤토리 무기/아이템 관련 변수들 ---------------------
     private List<Image> ImgWeapon = new List<Image>();
     private List<Image> ImgItem = new List<Image>();
+    private Image ImgGun;
 
     private List<Text> TextWeapon = new List<Text>();
     private List<Text> TextItem = new List<Text>();
+    private Text TextGun;    
 
     // 기타 텍스트 관련 변수들 ------------------------------
     public Text NumLevel;
     public Text NumGameTime;
-    public Text NumBuffTime;
 
     // 플레이어 HP 슬라이더 ---------------------------------
 
@@ -65,13 +67,18 @@ public class InGameUIManager : MonoBehaviour
         // 인벤토리 아이템/무기 이미지 설정
         ImgWeapon.AddRange(Weapons.GetComponentsInChildren<Image>());
         ImgItem.AddRange(Items.GetComponentsInChildren<Image>());
+        ImgGun = Gun.GetComponentInChildren<Image>();
 
         // 인벤 스크립트 설정
         Inven = GameManager.Instance.Player.GetComponent<Inventory>();
+
+        // 게임 레벨 설정
+        NumLevel.text = GameManager.Instance.GameLevel.ToString();
     }
 
     private void ChangeHpSlider()
     {
+        // * 나중에 변경해야 함 -> coroutine 사용, HP가 바뀌는 순간에만 함수 작동되도록
         HPSlider.maxValue = GameManager.Instance.PS.MaxHp;
         HPSlider.value = GameManager.Instance.PS.Hp;
 

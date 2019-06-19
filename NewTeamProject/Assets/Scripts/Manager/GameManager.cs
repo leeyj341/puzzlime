@@ -10,6 +10,7 @@ public class GameManager : MonoBehaviour
     private string m_strPlayerTag = "CowBoy";
     private float m_fGameTime = 900.0f;
     private string m_sRemainTime = "";
+    private int m_nGameLevel = 1;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
     public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
     public string RemainTime { get => m_sRemainTime; set => m_sRemainTime = value; }
+    public int GameLevel { get => m_nGameLevel; set => m_nGameLevel = value; }
     // Start is called before the first frame update
     private void Awake()
     {
@@ -33,11 +35,6 @@ public class GameManager : MonoBehaviour
     private void Update()
     {
         if (GetCurScene() == CURRUNT_SCENE.SCENE_GAME && m_fGameTime > 0.0f) ChangeGameTime();
-    }
-    
-    private void ResetGameTime(float time)
-    {
-        GameTime = time;
     }
 
     private void ChangeGameTime()
@@ -84,5 +81,15 @@ public class GameManager : MonoBehaviour
 
         Debug.Log("활성화된 Scene이 없습니다.");
         return 0;
+    }
+
+    public void ResetGameTime(float time)
+    {
+        GameTime = time;
+    }
+
+    public void GameLevelUp()
+    {
+        m_nGameLevel++;
     }
 }
