@@ -10,7 +10,7 @@ public class Inventory : MonoBehaviour
     INVEN_MODE m_eMode;
 
     List<UseScript> m_listUseItem = new List<UseScript>();
-    public List<WeaponScript> m_listWeaponItem = new List<WeaponScript>();
+    List<WeaponScript> m_listWeaponItem = new List<WeaponScript>();
 
     private WeaponList m_sWeaponList = null;
     WeaponScript m_sSubWeapon = null;
@@ -22,7 +22,6 @@ public class Inventory : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ItemManager.Instance.AddFirstItem();
         m_eMode = INVEN_MODE.WEAPON;
         InGameUIManager.Instance.ChangeCursor(m_eMode);
     }
@@ -33,9 +32,8 @@ public class Inventory : MonoBehaviour
         KeyAction();
     }
     
-    public bool AddUse(UseScript `)
    
-    public bool AddWeapon(ItemStatus item)
+    public bool AddWeapon(WeaponScript item)
     {
         //가방에 공간이 없다면
         if (m_listWeaponItem.Count >= 5)
@@ -45,7 +43,7 @@ public class Inventory : MonoBehaviour
         if (item.ItemCtg == ITEM_CATEGORY.WEAPON)
         {
             //보조무기면
-            if(item.ItemNubmer / 10 == 4)
+            if(item.ItemNumber / 10 == 4)
             {
                 //근데 보조무기를 이미 갖고있다면
                 if (m_sSubWeapon) return false;
@@ -63,29 +61,7 @@ public class Inventory : MonoBehaviour
                 return true;
             }
         }
-        //소모품이면
-        else if(item.ItemCtg == ITEM_CATEGORY.USE)
-        {
-            //가방에 공간이 있다면
-            if (m_listUseItem.Count < 3)
-            {
-                m_listUseItem.Add(item);
-                return true;
-            }
-        }
         return false;
-    }
-
-    public bool Consum(WeaponScript temp)
-    {
-        return temp.Consum();
-    }
-
-
-    public void ItemUse()
-    {
-        if (!m_listWeaponItem[m_nCurWeapon].WS.Consum())
-            m_listWeaponItem.Remove(m_listWeaponItem[m_nCurWeapon]);
     }
 
     void KeyAction()
@@ -106,17 +82,7 @@ public class Inventory : MonoBehaviour
         else if (m_eMode == INVEN_MODE.USE)
             KeyAction_USE_MODE();
     }
-
-    void Equip()
-    {
-        GameManager.Instance.PS.AdditionalAtk = m_listWeaponItem[m_nCurWeapon].WS.Atk;
-        GameManager.Instance.PS.AtkSpeed = m_listWeaponItem[m_nCurWeapon].WS.Spd;
-        GameManager.Instance.PS.WeaponCategory = m_listWeaponItem[m_nCurWeapon].WS.AtkCtg;
-        
-        m_nCurEquip = m_nCurWeapon;
-
-        WL.ChangeWeapon(m_listWeaponItem[m_nCurEquip].ItemName);
-    }
+    
 
     void KeyAction_WEAPON_MODE()
     {
@@ -138,14 +104,13 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.DownArrow))
         {
-            if (m_listWeaponItem[m_nCurEquip].WS.Dbl == -1) return;
+            if (m_listWeaponItem[m_nCurEquip].Dbl == -1) return;
             
             m_listWeaponItem.Remove(m_listWeaponItem[m_nCurWeapon]);
 
             if (m_nCurEquip == m_nCurWeapon)
             {
                 m_nCurWeapon--;
-                Equip();
             }
 
             else if (m_nCurEquip > m_nCurWeapon)
@@ -154,7 +119,6 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            Equip();
         }
     }
 
@@ -187,7 +151,7 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if(m_listUseItem[m_nCurUse].US.ActiveItem(m_sSubWeapon))
+            if(m_listUseItem[m_nCurUse].ActiveItem(m_sSubWeapon))
             {
                 m_listUseItem.Remove(m_listUseItem[m_nCurUse]);
                 m_nCurUse--;
