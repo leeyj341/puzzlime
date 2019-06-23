@@ -5,16 +5,16 @@ using UnityEngine;
 
 public class WeaponScript : ItemStatus
 {
-    ATK_CATEGORY m_eAtkCtg;
-    float m_fItemAtk;
-    float m_fItemSpd;
-    int m_nMaxDbl;
-    int m_nDbl; //내구도
+    private ATK_CATEGORY m_eAtkCtg;
+    private float m_fItemAtk;
+    private float m_fItemSpd;
+    private int m_nMaxDbl;
+    private int m_nDbl; //내구도
     
     public ATK_CATEGORY AtkCtg { get => m_eAtkCtg; }
-    public float Atk { get => m_fItemAtk; }
-    public float Spd { get => m_fItemSpd; }
-    public int MaxDbl { get => m_nMaxDbl; }
+    public float Atk { get => m_fItemAtk; set => m_fItemAtk = value; }
+    public float Spd { get => m_fItemSpd; set => m_fItemSpd = value; }
+    public int MaxDbl { get => m_nMaxDbl; set => m_nMaxDbl = value; }
     public int Dbl { get => m_nDbl; set => m_nDbl = value; }
 
     // Start is called before the first frame update
@@ -30,20 +30,20 @@ public class WeaponScript : ItemStatus
     
     //시리얼 넘버에 해당하는 아이템 정보를 입력하는 함수
     //11~14 : 베기, 21~24 : 찌르기, 31~34 : 때리기, 41~44 사격
-    public void SetItemObtion(short Num)
+    public void SetItemObtion(short Num, ATK_CATEGORY ctg)
     {
-        switch (Num / 10)
+        switch (ctg)
         {
-            case 1:
+            case ATK_CATEGORY.HACK:
                 SetItemObtion_Hack(Num);
                 break;
-            case 2:
+            case ATK_CATEGORY.STAB:
                 SetItemObtion_Stab(Num);
                 break;
-            case 3:
+            case ATK_CATEGORY.HIT:
                 SetItemObtion_Hit(Num);
                 break;
-            case 4:
+            case ATK_CATEGORY.SHOT:
                 SetItemObtion_Shot(Num);
                 break;
         }

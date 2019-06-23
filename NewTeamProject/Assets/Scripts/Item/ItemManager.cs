@@ -5,8 +5,11 @@ using UnityEngine;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
-    int m_nSizeOfItem;
-    List<GameObject> m_listItem = new List<GameObject>();
+    Queue<WeaponScript> m_QueueWeapon = new Queue<WeaponScript>();
+    Queue<UseScript> m_QueueUse = new Queue<UseScript>();
+    
+    public Queue<WeaponScript> Queue_Weapon { get => m_QueueWeapon; }
+    public Queue<UseScript> Queue_Use { get => m_QueueUse; }
 
     private void Awake()
     {
@@ -15,6 +18,11 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        for(int i = 0; i < 50; i++)
+        {
+            m_QueueWeapon.Enqueue(new WeaponScript());
+            m_QueueUse.Enqueue(new UseScript());
+        }
     }
 
     // Update is called once per frame
@@ -23,37 +31,55 @@ public class ItemManager : MonoBehaviour
         
     }
 
-    GameObject MakeItemObj(ITEM_CATEGORY ctg, short Num)
+    public WeaponScript MakeWeapon(short num, ATK_CATEGORY ctg)
     {
-        GameObject temp = Instantiate(new GameObject());
-        if (ctg == ITEM_CATEGORY.WEAPON)
-        {
-            temp.AddComponent<WeaponScript>();
-            temp.GetComponent<WeaponScript>().SetItemObtion(Num);
-        }
-        else
-        {
-            temp.AddComponent<UseScript>();
-            temp.GetComponent<UseScript>().SetItemObtion(Num);
-        }
-        return temp;
+        m_QueueWeapon.Peek().SetItemObtion(num, ctg);
+        return m_QueueWeapon.Dequeue();
     }
 
-    WeaponScript MakeWeapon(short num)
+    public UseScript MakeUse(short num)
     {
-        WeaponScript temp = new WeaponScript();
-        temp.SetItemObtion(num);
-        return temp;
+        m_QueueUse.Peek().SetItemObtion(num);
+        return m_QueueUse.Dequeue();
     }
 
-    UseScript MakeUse(short num)
+    public bool ActiveWeaponItem(WeaponScript Weapon)
     {
-        UseScript temp = new UseScript();
-        temp.SetItemObtion(num);
-        return temp;
+        if (Weapon.Dbl == -1) return false;
+
+        Weapon.Dbl--;
+        if (Weapon.Dbl == 0)
+            return true;
+
+        return false;
     }
-    
-    public void AddFirstItem()
+
+    public bool ActiveUseItem(UseScript use)
     {
+        bool Work = true;
+        switch (use.UseCtg)
+        {
+            case USE_CATEGORY.BULLET:
+                if (!GameManager.Instance.Inven.SubWeapon)
+                    return Work = false;
+                GameManager.Instance.Inven.SubWeapon.Dbl =
+                    GameManager.Instance.Inven.SubWeapon.Dbl + GameManager.Instance.Inven.SubWeapon.MaxDbl / 3;
+                break;
+            case USE_CATEGORY.HEALTHPOTION:
+                if (GameManager.Instance.PS.MaxHp > GameManager.Instance.PS.Hp)
+                    GameManager.Instance.PS.Hp += 3;
+
+                if (GameManager.Instance.PS.MaxHp < GameManager.Instance.PS.Hp)
+                    GameManager.Instance.PS.Hp = GameManager.Instance.PS.MaxHp;
+                break;
+            case USE_CATEGORY.POWERPOTION:
+                BuffManager.Instance.AddBuff(use.Power, BUFF_CATEGORY.ATTACK);
+                break;
+            case USE_CATEGORY.SPEEDPOTION:
+                BuffManager.Instance.AddBuff(use.Power, BUFF_CATEGORY.SPEED);
+                break;
+        }
+
+        return Work;
     }
 }

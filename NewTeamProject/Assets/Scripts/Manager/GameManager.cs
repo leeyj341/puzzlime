@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private GameObject m_gPlayer;
+    private GameObject m_gPlayer = null;
     private string m_strPlayerTag = "CowBoy";
     private float m_fGameTime = 900.0f;
     private string m_sRemainTime = "";
     private int m_nGameLevel = 1;
+    public WeaponList m_sList;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
     public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
     public PlayerState PS { get => m_gPlayer.GetComponent<PlayerState>(); }
+    public WeaponList WL { get => m_sList; set => m_sList = value; }
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
     public string RemainTime { get => m_sRemainTime; set => m_sRemainTime = value; }
@@ -29,7 +31,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+       
     }
 
     private void Update()
