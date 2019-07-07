@@ -25,9 +25,9 @@ public class Inventory : MonoBehaviour
         GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
         GameManager.Instance.WL.InitForArr();
 
-        AddWeapon(ItemManager.Instance.MakeWeapon(21, ATK_CATEGORY.STAB));
-        AddWeapon(ItemManager.Instance.MakeWeapon(11, ATK_CATEGORY.HACK));
-        AddWeapon(ItemManager.Instance.MakeWeapon(31, ATK_CATEGORY.HIT));
+        AddWeapon(ItemManager.Instance.MakeWeapon(22, ATK_CATEGORY.STAB));
+        AddWeapon(ItemManager.Instance.MakeWeapon(12, ATK_CATEGORY.HACK));
+        AddWeapon(ItemManager.Instance.MakeWeapon(32, ATK_CATEGORY.HIT));
         AddWeapon(ItemManager.Instance.MakeWeapon(41, ATK_CATEGORY.SHOT));
 
         Equip(m_listWeaponItem[0]);
@@ -47,10 +47,16 @@ public class Inventory : MonoBehaviour
         
         //보조무기면
         if (item.AtkCtg == ATK_CATEGORY.SHOT)
+        {
             m_sSubWeapon = item;
+            InGameUIManager.Instance.AddWeaponImg(true, m_sSubWeapon.ItemName);
+        }
         //주무기면
         else
+        {
             m_listWeaponItem.Add(item);
+            InGameUIManager.Instance.AddWeaponImg(false, item.ItemName);
+        }            
 
         return true;
     }
@@ -153,14 +159,13 @@ public class Inventory : MonoBehaviour
             
             ItemManager.Instance.Queue_Weapon.Enqueue(m_listWeaponItem[m_nCurWeapon]);
             m_listWeaponItem.RemoveAt(m_nCurWeapon);
+            InGameUIManager.Instance.DeleteImage(m_eMode, m_nCurWeapon);
 
             if (m_nCurEquip >= m_nCurWeapon)
             {
                 m_nCurEquip -= 1;
                 Equip(m_listWeaponItem[m_nCurEquip]);
             }
-
-            InGameUIManager.Instance.MoveCursor(m_eMode, m_nCurWeapon);
         }
 
         if (Input.GetKeyDown(KeyCode.UpArrow))

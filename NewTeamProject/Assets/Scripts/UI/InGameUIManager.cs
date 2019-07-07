@@ -11,16 +11,14 @@ public class InGameUIManager : MonoBehaviour
     public GameObject Items;
     public GameObject Gun;
 
-    private Inventory Inven;
-
     // 인벤 커서 관련 변수들 -------------------------------
     public Image WeaponCursor;
     public Image ItemCursor;
 
-    private float Width;
-
     private Vector2 WeaponCursorPos;
     private Vector2 ItemCursorPos;
+
+    private int CurCursorNum = 0;
 
     // 인벤토리 무기/아이템 관련 변수들 ---------------------
     private List<Image> ImgWeapon = new List<Image>();
@@ -29,7 +27,10 @@ public class InGameUIManager : MonoBehaviour
 
     private List<Text> TextWeapon = new List<Text>();
     private List<Text> TextItem = new List<Text>();
-    private Text TextGun;    
+    private Text TextGun;
+
+    private List<Sprite> SpriteWeapon = new List<Sprite>();
+    private List<Sprite> SpriteItem = new List<Sprite>();
 
     // 기타 텍스트 관련 변수들 ------------------------------
     public Text NumLevel;
@@ -56,6 +57,7 @@ public class InGameUIManager : MonoBehaviour
     void Update()
     {
         ChangeHpSlider();
+        //ChangeUIPos();
     }
 
     private void SetInventoryUI()
@@ -68,9 +70,6 @@ public class InGameUIManager : MonoBehaviour
         ImgWeapon.AddRange(Weapons.GetComponentsInChildren<Image>());
         ImgItem.AddRange(Items.GetComponentsInChildren<Image>());
         ImgGun = Gun.GetComponentInChildren<Image>();
-
-        // 인벤 스크립트 설정
-        Inven = GameManager.Instance.Player.GetComponent<Inventory>();
 
         // 게임 레벨 설정
         NumLevel.text = GameManager.Instance.GameLevel.ToString();
@@ -113,16 +112,89 @@ public class InGameUIManager : MonoBehaviour
 
     public void MoveCursor(INVEN_MODE curInvenMode, int cursor)
     {
+        CurCursorNum = cursor;
         switch (curInvenMode)
         {
             case INVEN_MODE.WEAPON:
-                Width = WeaponCursor.rectTransform.rect.width - WeaponCursor.rectTransform.rect.width / 32.0f;
-                WeaponCursor.rectTransform.anchoredPosition = WeaponCursorPos + new Vector2(Width * cursor, 0);
+                WeaponCursor.rectTransform.anchoredPosition = WeaponCursorPos + new Vector2(GetWidth(true) * cursor, 0);
                 break;
             case INVEN_MODE.USE:
-                Width = ItemCursor.rectTransform.rect.width - ItemCursor.rectTransform.rect.width / 38.0f;
-                ItemCursor.rectTransform.anchoredPosition = ItemCursorPos + new Vector2(Width * cursor, 0);
+                ItemCursor.rectTransform.anchoredPosition = ItemCursorPos + new Vector2(GetWidth(false) * cursor, 0);
                 break;
         }
+    }
+
+    public void AddWeaponImg(bool isSubWeapon, string WeaponName)
+    {
+        if(isSubWeapon)
+        {
+            ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
+            SetImageProperties(ImgGun, Color.white);
+            return;
+        }
+
+        AddSprite(SpriteWeapon, WeaponName);
+        Reorder(SpriteWeapon.Count);
+        
+    }
+
+    public void DeleteImage(INVEN_MODE curInvenMode, int cursor)
+    {
+        switch (curInvenMode)
+        {
+            case INVEN_MODE.WEAPON:
+                SpriteWeapon.RemoveAt(cursor);
+                Reorder(SpriteWeapon.Count);
+                break;
+            case INVEN_MODE.USE:
+                break;
+        }
+    }
+
+    private void AddSprite(List<Sprite> listSprite, string name)
+    {
+        if (listSprite.Count > 5) return;
+        listSprite.Add(Resources.Load<Sprite>("Image/UI_" + name));
+    }
+
+    private void Reorder(int count)
+    {
+        for(int i = 0; i < ImgWeapon.Count; i++)
+        {
+            if (count > i)
+            {
+                ImgWeapon[i].sprite = SpriteWeapon[i];
+                SetImageProperties(ImgWeapon[i], Color.white);
+            }
+            else
+            {
+                ImgWeapon[i].sprite = null;
+                SetImageProperties(ImgWeapon[i], Color.clear);
+            }
+
+        }
+    }
+
+    private void SetImageProperties(Image img, Color color)
+    {
+        img.color = color;
+        img.type = Image.Type.Simple;
+        img.preserveAspect = true;
+    }
+
+    private float GetWidth(bool isWeapon)
+    {
+        if (isWeapon)
+            return WeaponCursor.rectTransform.rect.width - WeaponCursor.rectTransform.rect.width / 32.0f;
+        else
+            return ItemCursor.rectTransform.rect.width - ItemCursor.rectTransform.rect.width / 38.0f;
+    }
+
+    public void ChangeUIPos()
+    {
+        //WeaponCursor.rectTransform.anchoredPosition = WeaponCursorPos + new Vector2(GetWidth(true) * CurCursorNum, 0);
+        //ItemCursor.rectTransform.anchoredPosition = ItemCursorPos + new Vector2(GetWidth(false) * CurCursorNum, 0);
+        for(int i = 0; i < ImgWeapon.Count; i++)
+            ImgWeapon[i].rectTransform.anchoredPosition = new Vector2(WeaponCursorPos.x + GetWidth(true) * i, ImgWeapon[i].rectTransform.anchoredPosition.y);
     }
 }
