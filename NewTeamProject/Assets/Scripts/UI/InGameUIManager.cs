@@ -153,7 +153,7 @@ public class InGameUIManager : MonoBehaviour
 
     private void AddSprite(List<Sprite> listSprite, string name)
     {
-        if (listSprite.Count > 5) return;
+        if (listSprite.Count > 4) return;
         listSprite.Add(Resources.Load<Sprite>("Image/UI_" + name));
     }
 
