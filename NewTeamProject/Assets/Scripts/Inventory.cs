@@ -25,7 +25,7 @@ public class Inventory : MonoBehaviour
         GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
         GameManager.Instance.WL.InitForArr();
 
-        AddWeapon(ItemManager.Instance.MakeWeapon(22, ATK_CATEGORY.STAB));
+        AddWeapon(ItemManager.Instance.MakeWeapon(21, ATK_CATEGORY.STAB));
         AddWeapon(ItemManager.Instance.MakeWeapon(12, ATK_CATEGORY.HACK));
         AddWeapon(ItemManager.Instance.MakeWeapon(32, ATK_CATEGORY.HIT));
         AddWeapon(ItemManager.Instance.MakeWeapon(41, ATK_CATEGORY.SHOT));
