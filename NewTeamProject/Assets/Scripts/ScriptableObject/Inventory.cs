@@ -9,11 +9,11 @@ public class Inventory : MonoBehaviour
     int m_nCurEquip = 0;
     INVEN_MODE m_eMode;
 
-    List<UseScript> m_listUseItem = new List<UseScript>();
-    List<WeaponScript> m_listWeaponItem = new List<WeaponScript>();
-    public WeaponScript m_sSubWeapon = null;
+    List<ItemStatus> m_listUseItem = new List<ItemStatus>(3);
+    List<ItemStatus> m_listWeaponItem = new List<ItemStatus>(5);
+    ItemStatus m_sSubWeapon = null;
     
-    public WeaponScript SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
+    public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; } 
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
     // Start is called before the first frame update
@@ -24,13 +24,9 @@ public class Inventory : MonoBehaviour
 
         GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
         GameManager.Instance.WL.InitForArr();
+        
 
-        AddWeapon(ItemManager.Instance.MakeWeapon(21, ATK_CATEGORY.STAB));
-        AddWeapon(ItemManager.Instance.MakeWeapon(12, ATK_CATEGORY.HACK));
-        AddWeapon(ItemManager.Instance.MakeWeapon(32, ATK_CATEGORY.HIT));
-        AddWeapon(ItemManager.Instance.MakeWeapon(41, ATK_CATEGORY.SHOT));
-
-        Equip(m_listWeaponItem[0]);
+        
     }
 
     // Update is called once per frame
@@ -39,29 +35,29 @@ public class Inventory : MonoBehaviour
         KeyAction();
     }
 
-    public bool AddWeapon(WeaponScript item)
+    public bool AddWeapon(ItemStatus item)
     {
         //가방에 공간이 없다면
         if (m_listWeaponItem.Count >= 5 || m_sSubWeapon)
             return false;
         
         //보조무기면
-        if (item.AtkCtg == ATK_CATEGORY.SHOT)
+        if (item.Data.AtkCtg == ATK_CATEGORY.SHOT)
         {
             m_sSubWeapon = item;
-            InGameUIManager.Instance.AddWeaponImg(true, m_sSubWeapon.ItemName);
+            InGameUIManager.Instance.AddWeaponImg(true, m_sSubWeapon.Data.Name);
         }
         //주무기면
         else
         {
             m_listWeaponItem.Add(item);
-            InGameUIManager.Instance.AddWeaponImg(false, item.ItemName);
+            InGameUIManager.Instance.AddWeaponImg(false, item.Data.Name);
         }            
 
         return true;
     }
 
-    public bool AddUseItem(UseScript item)
+    public bool AddUseItem(ItemStatus item)
     {
         if (m_listUseItem.Count >= 3)
             return false;
@@ -70,34 +66,35 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public void Equip(WeaponScript item)
+    public void Equip(ItemStatus item)
     {
-        GameManager.Instance.WL.ChangeWeapon(item.ItemName);
+        if(!item) return;
+        GameManager.Instance.WL.ChangeWeapon(item.Data.Name);
         SendData(item);
     }
 
-    void SendData(WeaponScript item)
+    void SendData(ItemStatus item)
     {
-        GameManager.Instance.PS.AdditionalAtk = item.Atk;
-        GameManager.Instance.PS.AtkSpeed = item.Spd;
-        GameManager.Instance.PS.WeaponCategory = item.AtkCtg;
+        GameManager.Instance.PS.AdditionalAtk = item.Data.ItemPower;
+        GameManager.Instance.PS.AtkSpeed = item.Data.ItemSpd;
+        GameManager.Instance.PS.WeaponCategory = item.Data.AtkCtg;
     }
 
     public void AttackSub()
     {
-        if(ItemManager.Instance.ActiveWeaponItem(m_sSubWeapon))
-        {
-            m_sSubWeapon = null;
-        }
+        if (m_sSubWeapon.Dbl == 0) return;
+
+        m_sSubWeapon.Dbl -= 1;
     }
 
     public void Attack()
     {
-        if (ItemManager.Instance.ActiveWeaponItem(m_listWeaponItem[m_nCurEquip]))
-        {
-            ItemManager.Instance.Queue_Weapon.Enqueue(m_listWeaponItem[m_nCurEquip]);
-            m_listWeaponItem.Remove(m_listWeaponItem[m_nCurEquip]);
+        if (m_listWeaponItem[m_nCurEquip].Dbl == 0) return;
 
+        m_listWeaponItem[m_nCurEquip].Dbl -= 1;
+
+        if(m_listWeaponItem[m_nCurEquip].Dbl == 0)
+        {
             m_nCurEquip--;
 
             Equip(m_listWeaponItem[m_nCurEquip]);
@@ -106,11 +103,9 @@ public class Inventory : MonoBehaviour
 
     public void Use()
     {
-        if(ItemManager.Instance.ActiveUseItem(m_listUseItem[m_nCurUse]))
-        {
-            ItemManager.Instance.Queue_Use.Enqueue(m_listUseItem[m_nCurUse]);
-            m_listUseItem.RemoveAt(m_nCurUse);
-        }
+        if (m_listUseItem[m_nCurUse].Dbl == 0) return;
+
+        m_listUseItem[m_nCurUse].Dbl--;
     }
 
     void KeyAction()
@@ -157,8 +152,7 @@ public class Inventory : MonoBehaviour
 
             if (m_listWeaponItem[m_nCurWeapon].Dbl == -1) return;
             
-            ItemManager.Instance.Queue_Weapon.Enqueue(m_listWeaponItem[m_nCurWeapon]);
-            m_listWeaponItem.RemoveAt(m_nCurWeapon);
+            
             InGameUIManager.Instance.DeleteImage(m_eMode, m_nCurWeapon);
 
             if (m_nCurEquip >= m_nCurWeapon)
@@ -202,7 +196,6 @@ public class Inventory : MonoBehaviour
         {
             if (m_listUseItem.Count > 0)
             {
-                ItemManager.Instance.Queue_Use.Enqueue(m_listUseItem[m_nCurUse]);
                 m_listUseItem.RemoveAt(m_nCurUse);
                 m_nCurUse -= 1;
             }
