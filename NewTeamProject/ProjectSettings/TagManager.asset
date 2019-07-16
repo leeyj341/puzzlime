@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CowBoy
   - CowGirl
+  - Weapon
   layers:
   - Default
   - TransparentFX

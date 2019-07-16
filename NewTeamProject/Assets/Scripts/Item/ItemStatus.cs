@@ -7,18 +7,26 @@ public class ItemStatus : MonoBehaviour
     Rigidbody m_sRb;
     SphereCollider m_sCollider;
 
-    protected short m_nItemNumber;
-    protected ITEM_CATEGORY m_eItemCtg;
-    protected string m_sName;
-    
-    public short ItemNumber { get => m_nItemNumber; set => m_nItemNumber = value; }
-    public ITEM_CATEGORY ItemCtg { get => m_eItemCtg; set => m_eItemCtg = value; }
-    public string ItemName { get => m_sName; set => m_sName = value; }
-
+    ItemData m_Data;
+    private int m_nDbl;
+    public ItemData Data { get => m_Data; set => m_Data = value; }
+    public int Dbl { get => m_nDbl; set => m_nDbl = value; }
+   
     private void Start()
     {
         m_sRb = transform.GetComponent<Rigidbody>();
         m_sCollider = transform.GetComponent<SphereCollider>();
+    }
+
+    private void Update()
+    {
+        transform.Rotate(0, 2, 0);
+    }
+
+    public void SetItemData(ItemData data)
+    {
+        m_Data = data;
+        m_nDbl = m_Data.MaxDbl;
     }
 
     public void ActivateItem(bool Active)

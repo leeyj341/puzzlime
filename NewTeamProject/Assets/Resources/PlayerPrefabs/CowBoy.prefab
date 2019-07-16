@@ -221,7 +221,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10014aebe588de348b1b495af469f26c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PS: {fileID: 11400000, guid: e7c066d0d1a5f70418f355877e13f3fe, type: 2}
 --- !u!114 &1909687895620250674
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -247,6 +246,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_sSubWeapon: {fileID: 0}
+  pData: {fileID: 11400000, guid: e7c066d0d1a5f70418f355877e13f3fe, type: 2}
+  pData1: {fileID: 11400000, guid: 5136a55d3c8da0e4b90ee26b68dfc0c9, type: 2}
 --- !u!1 &3242714490453611075
 GameObject:
   m_ObjectHideFlags: 0

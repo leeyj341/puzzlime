@@ -1,28 +1,22 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
-    Queue<WeaponScript> m_QueueWeapon = new Queue<WeaponScript>();
-    Queue<UseScript> m_QueueUse = new Queue<UseScript>();
-    
-    public Queue<WeaponScript> Queue_Weapon { get => m_QueueWeapon; }
-    public Queue<UseScript> Queue_Use { get => m_QueueUse; }
+    List<ItemData> m_listItemData = new List<ItemData>();
 
     private void Awake()
     {
-        if (!ItemManager.Instance) Instance = this; 
+        if (!ItemManager.Instance) Instance = this;
+
     }
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < 50; i++)
-        {
-            m_QueueWeapon.Enqueue(new WeaponScript());
-            m_QueueUse.Enqueue(new UseScript());
-        }
+       
     }
 
     // Update is called once per frame
@@ -30,56 +24,30 @@ public class ItemManager : MonoBehaviour
     {
         
     }
-
-    public WeaponScript MakeWeapon(short num, ATK_CATEGORY ctg)
+    
+    void MakeItemData()
     {
-        m_QueueWeapon.Peek().SetItemObtion(num, ctg);
-        return m_QueueWeapon.Dequeue();
-    }
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(11));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(12));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(13));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(14));
 
-    public UseScript MakeUse(short num)
-    {
-        m_QueueUse.Peek().SetItemObtion(num);
-        return m_QueueUse.Dequeue();
-    }
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(21));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(22));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(23));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(24));
 
-    public bool ActiveWeaponItem(WeaponScript Weapon)
-    {
-        if (Weapon.Dbl == -1) return false;
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(31));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(32));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(33));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(34));
 
-        Weapon.Dbl--;
-        if (Weapon.Dbl == 0)
-            return true;
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(41));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(42));
 
-        return false;
-    }
-
-    public bool ActiveUseItem(UseScript use)
-    {
-        bool Work = true;
-        switch (use.UseCtg)
-        {
-            case USE_CATEGORY.BULLET:
-                if (!GameManager.Instance.Inven.SubWeapon)
-                    return Work = false;
-                GameManager.Instance.Inven.SubWeapon.Dbl =
-                    GameManager.Instance.Inven.SubWeapon.Dbl + GameManager.Instance.Inven.SubWeapon.MaxDbl / 3;
-                break;
-            case USE_CATEGORY.HEALTHPOTION:
-                if (GameManager.Instance.PS.MaxHp > GameManager.Instance.PS.Hp)
-                    GameManager.Instance.PS.Hp += 3;
-
-                if (GameManager.Instance.PS.MaxHp < GameManager.Instance.PS.Hp)
-                    GameManager.Instance.PS.Hp = GameManager.Instance.PS.MaxHp;
-                break;
-            case USE_CATEGORY.POWERPOTION:
-                BuffManager.Instance.AddBuff(use.Power, BUFF_CATEGORY.ATTACK);
-                break;
-            case USE_CATEGORY.SPEEDPOTION:
-                BuffManager.Instance.AddBuff(use.Power, BUFF_CATEGORY.SPEED);
-                break;
-        }
-
-        return Work;
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(91));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(92));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(93));
+        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(94));
     }
 }

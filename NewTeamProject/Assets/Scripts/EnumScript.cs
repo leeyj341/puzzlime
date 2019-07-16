@@ -15,7 +15,8 @@ public enum CURRUNT_SCENE
 public enum ITEM_CATEGORY
 {
     WEAPON,
-    USE
+    USE,
+    NONE
 }
 
 public enum ATK_CATEGORY
@@ -32,7 +33,8 @@ public enum USE_CATEGORY
     HEALTHPOTION,
     SPEEDPOTION,
     POWERPOTION,
-    BULLET
+    BULLET,
+    NONE
 }
 
 public enum BUFF_CATEGORY
