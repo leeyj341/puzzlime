@@ -49,13 +49,13 @@ public class Inventory : MonoBehaviour
         if (item.AtkCtg == ATK_CATEGORY.SHOT)
         {
             m_sSubWeapon = item;
-            InGameUIManager.Instance.AddWeaponImg(true, m_sSubWeapon.ItemName);
+            InGameUIManager.Instance.AddImg(m_sSubWeapon.ItemName);
         }
         //주무기면
         else
         {
             m_listWeaponItem.Add(item);
-            InGameUIManager.Instance.AddWeaponImg(false, item.ItemName);
+            InGameUIManager.Instance.AddImg(m_eMode, item.ItemName);
         }            
 
         return true;

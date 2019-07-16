@@ -57,12 +57,12 @@ public class InGameUIManager : MonoBehaviour
     void Update()
     {
         ChangeHpSlider();
-        //ChangeUIPos();
+        ChangeUIPos();
     }
 
     private void SetInventoryUI()
     {
-        //커서 초기 위치 저장
+        // 커서 초기 위치 저장
         WeaponCursorPos = WeaponCursor.rectTransform.anchoredPosition;
         ItemCursorPos = ItemCursor.rectTransform.anchoredPosition;
 
@@ -124,18 +124,25 @@ public class InGameUIManager : MonoBehaviour
         }
     }
 
-    public void AddWeaponImg(bool isSubWeapon, string WeaponName)
+    public void AddImg(INVEN_MODE curInvenMode, string itemName)
     {
-        if(isSubWeapon)
+        switch (curInvenMode)
         {
-            ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
-            SetImageProperties(ImgGun, Color.white);
-            return;
-        }
+            case INVEN_MODE.WEAPON:
+                AddSprite(SpriteWeapon, 4, itemName);
+                Reorder(ImgWeapon, SpriteWeapon);
+                break;
+            case INVEN_MODE.USE:
+                AddSprite(SpriteItem, 2, itemName);
+                Reorder(ImgItem, SpriteItem);
+                break;
+        }  
+    }
 
-        AddSprite(SpriteWeapon, WeaponName);
-        Reorder(SpriteWeapon.Count);
-        
+    public void AddImg(string WeaponName)
+    {
+        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
+        SetImageProperties(ImgGun, Color.white);
     }
 
     public void DeleteImage(INVEN_MODE curInvenMode, int cursor)
@@ -144,32 +151,40 @@ public class InGameUIManager : MonoBehaviour
         {
             case INVEN_MODE.WEAPON:
                 SpriteWeapon.RemoveAt(cursor);
-                Reorder(SpriteWeapon.Count);
+                Reorder(ImgWeapon, SpriteWeapon);
                 break;
             case INVEN_MODE.USE:
+                SpriteItem.RemoveAt(cursor);
+                Reorder(ImgItem, SpriteItem);
                 break;
         }
     }
-
-    private void AddSprite(List<Sprite> listSprite, string name)
+    
+    public void DeleteImage()
     {
-        if (listSprite.Count > 4) return;
-        listSprite.Add(Resources.Load<Sprite>("Image/UI_" + name));
+        ImgGun.sprite = null;
+        SetImageProperties(ImgGun, Color.clear);
     }
 
-    private void Reorder(int count)
+    private void AddSprite(List<Sprite> listSprite, int limitCount, string imgName)
     {
-        for(int i = 0; i < ImgWeapon.Count; i++)
+        if (listSprite.Count > limitCount) return;
+        listSprite.Add(Resources.Load<Sprite>("Image/UI_" + imgName));
+    }
+
+    private void Reorder(List<Image> listImg, List<Sprite> listSprite)
+    {
+        for(int i = 0; i < listImg.Count; i++)
         {
-            if (count > i)
+            if (listSprite.Count > i)
             {
-                ImgWeapon[i].sprite = SpriteWeapon[i];
-                SetImageProperties(ImgWeapon[i], Color.white);
+                listImg[i].sprite = listSprite[i];
+                SetImageProperties(listImg[i], Color.white);
             }
             else
             {
-                ImgWeapon[i].sprite = null;
-                SetImageProperties(ImgWeapon[i], Color.clear);
+                listImg[i].sprite = null;
+                SetImageProperties(listImg[i], Color.clear);
             }
 
         }
@@ -192,8 +207,8 @@ public class InGameUIManager : MonoBehaviour
 
     public void ChangeUIPos()
     {
-        //WeaponCursor.rectTransform.anchoredPosition = WeaponCursorPos + new Vector2(GetWidth(true) * CurCursorNum, 0);
-        //ItemCursor.rectTransform.anchoredPosition = ItemCursorPos + new Vector2(GetWidth(false) * CurCursorNum, 0);
+        WeaponCursor.rectTransform.anchoredPosition = WeaponCursorPos + new Vector2(GetWidth(true) * CurCursorNum, 0);
+        ItemCursor.rectTransform.anchoredPosition = ItemCursorPos + new Vector2(GetWidth(false) * CurCursorNum, 0);
         for(int i = 0; i < ImgWeapon.Count; i++)
             ImgWeapon[i].rectTransform.anchoredPosition = new Vector2(WeaponCursorPos.x + GetWidth(true) * i, ImgWeapon[i].rectTransform.anchoredPosition.y);
     }
