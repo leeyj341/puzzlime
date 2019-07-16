@@ -60,40 +60,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\DemoManager.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\FollowMouse.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\FPSDisplay.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\FPSTest.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\LoopingParticleSystemsManager.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\MouseRotateCamera.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\OneshotParticleSystemsManager.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\_Demo\ParticleManager.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\AnimatedLight.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\DestroyAfterTime.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\DestroyOnParticlesDead.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\DestroyOnTrailsDestroyed.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\IgnoreTimeScale.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\ParticleSystems.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\ParticleSystemsSimulationSpeed.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\PerlinNoise.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\RendererSortingOrder.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\Rotator.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\TrailRenderers.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\_Common\Scripts\TransformNoise.cs" />
-    <Compile Include="Assets\Asset\Effect\Particle Systems\Ultimate VFX\2 - Expansions\XP - TITLES\Scripts\DemoManager_XPTitles.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\_Common\CreateLUT.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\AttractionParticleAffector.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\MT (EXPERIMENTAL)\ParticleAffectorMT.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\MT (EXPERIMENTAL)\TurbulenceParticleAffectorMT.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\Noise.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\ParticleAffector.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\TurbulenceParticleAffector.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Affectors\Scripts\VortexParticleAffector.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Flocking\ParticleFlocking.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Lights\Scripts\ParticleLights.cs" />
-    <Compile Include="Assets\Asset\Effect\Scripting\Effects\Particle Plexus\Scripts\ParticlePlexus.cs" />
-    <Compile Include="Assets\Asset\Effect\Shaders\_Common\IEBase.cs" />
-    <Compile Include="Assets\Asset\Effect\Shaders\Image Effects\Resources\Sharpen\Sharpen.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\InitializeGameInfo.cs" />
     <Compile Include="Assets\Scripts\Inventory.cs" />
@@ -112,23 +78,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerVariable.cs" />
     <Compile Include="Assets\Scripts\SelectSceneScripts\SelectCharacter.cs" />
     <Compile Include="Assets\Scripts\UI\InGameUIManager.cs" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\No Fog\NoFog-Add.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distance Fade\DistanceFade-AnimBlendAlpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Intersection Highlight\IntersectionHighlight-Add.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distortion\Distortion-Add.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Cutout\AlphaCutoff-Add.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\No Fog\NoFog-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Mask\Mask-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distance Fade\DistanceFade-Add.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Image Effects\Resources\Sharpen\Sharpen.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Intersection Highlight\IntersectionHighlight-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Cutout\AlphaCutoff-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distortion\Distortion-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Editor Extensions\Utilities\Multi-Asset Renamer\README.txt" />
     <None Include="Assets\Asset\FREE Food Pack\Shaders\Food.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distance Fade\DistanceFade-AnimBlendAdd.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Distance Fade\DistanceFade-Alpha.shader" />
-    <None Include="Assets\Asset\Effect\Shaders\Particles\Unmultiply\Unmultiply-AlphaFromLuminance.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/User/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
