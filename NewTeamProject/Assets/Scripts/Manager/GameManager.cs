@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
@@ -11,11 +12,11 @@ public class GameManager : MonoBehaviour
     private float m_fGameTime = 900.0f;
     private string m_sRemainTime = "";
     private int m_nGameLevel = 1;
+    public PlayerState PS;
     public WeaponList m_sList;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
     public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
-    public PlayerState PS { get => m_gPlayer.GetComponent<PlayerState>(); }
     public WeaponList WL { get => m_sList; set => m_sList = value; }
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
@@ -27,11 +28,18 @@ public class GameManager : MonoBehaviour
         if (!GameManager.Instance)
             Instance = this;
         DontDestroyOnLoad(gameObject);
+
+        if(!PS)
+        {
+            PS = ScriptableObject.CreateInstance<PlayerState>();
+            AssetDatabase.CreateAsset(PS, "Assets/Data/PlayerState.asset");
+            AssetDatabase.SaveAssets();
+        }
     }
 
     private void Start()
     {
-       
+        
     }
 
     private void Update()
