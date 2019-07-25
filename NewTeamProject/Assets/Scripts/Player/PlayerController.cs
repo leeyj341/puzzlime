@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        State = GetComponent<PlayerState>();
+        State = GameManager.Instance.PS;
         Controller = GetComponent<CharacterController>();
         Inven = GetComponent<Inventory>();
     }

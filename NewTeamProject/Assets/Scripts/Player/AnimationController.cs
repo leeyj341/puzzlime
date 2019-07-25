@@ -10,7 +10,7 @@ public class AnimationController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        State = GetComponent<PlayerState>();
+        State = GameManager.Instance.PS;
         PlayerAnimator = GetComponent<Animator>();
     }
 
