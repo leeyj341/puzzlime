@@ -88,9 +88,9 @@ public class ItemDropSystem : ScriptableObject
         switch (Weapon)
         {
             case 0:
-                return (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Item_12"), new Vector3(0, 0, 0), Quaternion.identity);
+                return (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Item_41"), new Vector3(0, 0, 0), Quaternion.identity);
             case 1:
-                return (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Item_13"), new Vector3(0, 0, 0), Quaternion.identity);
+                return (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Item_42"), new Vector3(0, 0, 0), Quaternion.identity);
         }
         return null;
     }

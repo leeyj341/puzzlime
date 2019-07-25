@@ -177,6 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f524c4c762508479bcc1b8912b78a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Data: {fileID: 11400000, guid: d0e496a0fe4c0d447a62389352d659d9, type: 2}
 --- !u!1001 &3105790242772166116
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -184,6 +185,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 3105790242863922393}
     m_Modifications:
+    - target: {fileID: 9034878698071781345, guid: d7ac8ab024293b64dade4df7caff1348,
+        type: 3}
+      propertyPath: m_Name
+      value: ItemMesh
+      objectReference: {fileID: 0}
     - target: {fileID: 9040373262859059171, guid: d7ac8ab024293b64dade4df7caff1348,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -253,11 +259,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.x
       value: 0.7
-      objectReference: {fileID: 0}
-    - target: {fileID: 9034878698071781345, guid: d7ac8ab024293b64dade4df7caff1348,
-        type: 3}
-      propertyPath: m_Name
-      value: ItemMesh
       objectReference: {fileID: 0}
     - target: {fileID: 9035725766652400104, guid: d7ac8ab024293b64dade4df7caff1348,
         type: 3}

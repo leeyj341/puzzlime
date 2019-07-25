@@ -6,7 +6,9 @@ using UnityEditor;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
-    List<ItemData> m_listItemData = new List<ItemData>();
+    Dictionary<int, ItemData> m_DictItemData = new Dictionary<int, ItemData>();
+
+    public ItemData DictData(int Key) { return m_DictItemData[Key]; }
 
     private void Awake()
     {
@@ -16,38 +18,45 @@ public class ItemManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-       
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
-    
-    void MakeItemData()
-    {
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(11));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(12));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(13));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(14));
 
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(21));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(22));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(23));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(24));
-
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(31));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(32));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(33));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(34));
-
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(41));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(42));
-
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(91));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(92));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(93));
-        m_listItemData.Add(ScriptableObject.CreateInstance<ItemData>().SetItemObtion(94));
     }
 }
+//    void MakeItemData()
+//    {
+//        AddItemInDict(11, "Data_11");
+//        AddItemInDict(12, "Data_12");
+//        AddItemInDict(13, "Data_13");
+//        AddItemInDict(14, "Data_14");
+
+//        AddItemInDict(21, "Data_21");
+//        AddItemInDict(22, "Data_22");
+//        AddItemInDict(23, "Data_23");
+//        AddItemInDict(24, "Data_24");
+
+//        AddItemInDict(31, "Data_31");
+//        AddItemInDict(32, "Data_32");
+//        AddItemInDict(33, "Data_33");
+//        AddItemInDict(34, "Data_34");
+
+//        AddItemInDict(41, "Data_41");
+//        AddItemInDict(42, "Data_42");
+
+//        AddItemInDict(91, "Data_91");
+//        AddItemInDict(92, "Data_92");
+//        AddItemInDict(93, "Data_93");
+//        AddItemInDict(94, "Data_94");
+
+//        AssetDatabase.SaveAssets();
+//    }
+
+//    void AddItemInDict(int Key, string FileName)
+//    {
+//        m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
+//        AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
+//    }
+

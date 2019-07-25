@@ -142,12 +142,14 @@ public class ItemData : ScriptableObject
                 ItemCtg = ITEM_CATEGORY.USE;
                 UseCtg = USE_CATEGORY.SPEEDPOTION;
                 ItemPower = 0.2f;
+                MaxDbl = 20;
                 break;
             case 93:
                 Name = "공격향상물약";
                 ItemCtg = ITEM_CATEGORY.USE;
                 UseCtg = USE_CATEGORY.POWERPOTION;
                 ItemPower = 0.2f;
+                MaxDbl = 20;
                 break;
             case 94:
                 Name = "만능총알";
