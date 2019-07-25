@@ -39,7 +39,8 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        
+        WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
+        WL.InitForArr();
     }
 
     private void Update()

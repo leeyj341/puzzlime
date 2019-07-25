@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
     int m_nCurWeapon = 0;
     int m_nCurUse = 0;
     int m_nCurEquip = 0;
-    INVEN_MODE m_eMode;
+    INVEN_MODE m_eMode = INVEN_MODE.WEAPON;
 
     Queue<ItemStatus> m_QueueEmptyItem = new Queue<ItemStatus>();
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
@@ -19,15 +19,22 @@ public class Inventory : MonoBehaviour
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
     // Start is called before the first frame update
-    void Start()
+    
+    void FirstSetting()
     {
-        m_eMode = INVEN_MODE.WEAPON;
         InGameUIManager.Instance.ChangeCursor(m_eMode);
 
-        GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
-        GameManager.Instance.WL.InitForArr();
-
         MakeNewItemStatus();
+
+        AddFirst();
+    }
+
+    void AddFirst()
+    {
+        AddItem(ItemManager.Instance.DictData(11));
+        AddItem(ItemManager.Instance.DictData(22));
+        AddItem(ItemManager.Instance.DictData(23));
+        Equip(m_listWeaponItem[0]);
     }
 
     void MakeNewItemStatus()
@@ -42,15 +49,15 @@ public class Inventory : MonoBehaviour
         KeyAction();
     }
 
-    public bool AddItem(ItemStatus item)
+    public bool AddItem(ItemData item)
     {   
-        if(item.m_Data.ItemCtg == ITEM_CATEGORY.WEAPON)
+        if(item.ItemCtg == ITEM_CATEGORY.WEAPON)
         {
             //보조무기면
-            if (item.m_Data.AtkCtg == ATK_CATEGORY.SHOT)
+            if (item.AtkCtg == ATK_CATEGORY.SHOT)
             {
-                m_QueueEmptyItem.Peek().m_Data = item.m_Data;
-                m_QueueEmptyItem.Peek().Dbl = item.m_Data.MaxDbl;
+                m_QueueEmptyItem.Peek().m_Data = item;
+                m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
                 InGameUIManager.Instance.AddImg(m_eMode, m_sSubWeapon.m_Data.Name);
             }
@@ -58,18 +65,18 @@ public class Inventory : MonoBehaviour
             else
             {
                 if (m_listWeaponItem.Count >= 5) return false;
-                m_QueueEmptyItem.Peek().m_Data = item.m_Data;
-                m_QueueEmptyItem.Peek().Dbl = item.m_Data.MaxDbl;
+                m_QueueEmptyItem.Peek().m_Data = item;
+                m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_listWeaponItem.Add(m_QueueEmptyItem.Dequeue());
-                InGameUIManager.Instance.AddImg(m_eMode, item.m_Data.Name);
+                InGameUIManager.Instance.AddImg(m_eMode, item.Name);
             }
         }
 
-        else if(item.m_Data.ItemCtg == ITEM_CATEGORY.USE)
+        else if(item.ItemCtg == ITEM_CATEGORY.USE)
         {
             if (m_listUseItem.Count >= 3) return false;
-            m_QueueEmptyItem.Peek().m_Data = item.m_Data;
-            m_QueueEmptyItem.Peek().Dbl = item.m_Data.MaxDbl;
+            m_QueueEmptyItem.Peek().m_Data = item;
+            m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
             m_listUseItem.Add(m_QueueEmptyItem.Dequeue());
         }
 
