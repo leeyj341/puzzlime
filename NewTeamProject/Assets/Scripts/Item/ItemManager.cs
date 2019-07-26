@@ -57,7 +57,15 @@ public class ItemManager : MonoBehaviour
 
     void AddItemInDict(int Key, string FileName)
     {
-        m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
-        AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
+        ItemData Temp = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Data/" + FileName + ".asset");
+        if (Temp)
+        {
+            m_DictItemData.Add(Key, Temp);
+        }
+        else
+        {
+            m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
+            AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
+        }
     }
 }

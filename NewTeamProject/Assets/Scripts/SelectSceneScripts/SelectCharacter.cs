@@ -14,7 +14,7 @@ public class SelectCharacter : MonoBehaviour, IPointerClickHandler
     private void Select()
     {
         //캐릭터 선택 정보 전달, scene 전환
-        GameManager.Instance.PlayerTag = tag;
+        GameManager.Instance.PS.Tag = tag;
         SceneManager.LoadScene("GameScene");
        
     } 

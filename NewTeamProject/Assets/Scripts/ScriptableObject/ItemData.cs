@@ -140,9 +140,9 @@ public class ItemData : ScriptableObject
             case 92:
                 Name = "속도향상물약";
                 ItemCtg = ITEM_CATEGORY.USE;
-                UseCtg = USE_CATEGORY.SPEEDPOTION;
-                ItemPower = 0.2f;
-                MaxDbl = 20;
+                UseCtg = USE_CATEGORY.SPEEDPOTION; // 버프
+                ItemPower = 0.2f;           // 추가 비율
+                MaxDbl = 20;                // 지속 시간 (초)
                 break;
             case 93:
                 Name = "공격향상물약";

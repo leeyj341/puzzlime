@@ -20,6 +20,8 @@ MonoBehaviour:
   AdditionalAtk: 0
   WeaponCategory: 0
   AtkSpeed: 1
+  Tag: CowBoy
+  DefaultWeaponNum: 0
   CurAni: 2
   AnimPlaySpeed: 1
   SlashSpeed: 3

@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Inventory", menuName = "Data/Inventory")]
 public class Inventory : MonoBehaviour
 {
     int m_nCurWeapon = 0;
@@ -14,14 +13,28 @@ public class Inventory : MonoBehaviour
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
     List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
     ItemStatus m_sSubWeapon = null;
+    public WeaponList m_sList;
 
     public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; }
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
+
     // Start is called before the first frame update
-    
+    private void Start()
+    {
+        FirstSetting();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        KeyAction();
+    }
+
     void FirstSetting()
     {
+        m_sList.InitForArr();
+
         InGameUIManager.Instance.ChangeCursor(m_eMode);
 
         MakeNewItemStatus();
@@ -41,12 +54,6 @@ public class Inventory : MonoBehaviour
     {
         for(int i = 0; i < 10; i++)
             m_QueueEmptyItem.Enqueue(new ItemStatus());
-    }
-    
-    // Update is called once per frame
-    void Update()
-    {
-        KeyAction();
     }
 
     public bool AddItem(ItemData item)
@@ -85,8 +92,7 @@ public class Inventory : MonoBehaviour
 
     public void Equip(ItemStatus item)
     {
-        if(!item) return;
-        GameManager.Instance.WL.ChangeWeapon(item.m_Data.Name);
+        m_sList.ChangeWeapon(item.m_Data.Name);
         SendData(item);
     }
 
