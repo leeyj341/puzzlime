@@ -18,6 +18,8 @@ public class InitializeGameInfo : MonoBehaviour
         // 플레이어 생성
         CreateHintPrefabs();
         CreateCharacter();
+
+        StartCoroutine(GameManager.Instance.StartCount(3));
     }
 
     // Update is called once per frame

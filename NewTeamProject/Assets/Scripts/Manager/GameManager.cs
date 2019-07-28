@@ -7,18 +7,18 @@ using UnityEngine.SceneManagement;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    private float m_fGameTime = 900.0f;
-    private string m_sRemainTime = "";
+
+    private float m_fGameTime = Constants.GameTime;
     private int m_nGameLevel = 1;
+
     private PlayerState m_PS;
     private Inventory m_Inven;
-   
 
     public Inventory Inven { get => m_Inven; set => m_Inven = value; }
     public PlayerState PS { get => m_PS; set => m_PS = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
-    public string RemainTime { get => m_sRemainTime; set => m_sRemainTime = value; }
     public int GameLevel { get => m_nGameLevel; set => m_nGameLevel = value; }
+
     // Start is called before the first frame update
     private void Awake()
     {
@@ -29,37 +29,52 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        CreatePlayerState();
+        // GameScene 테스트용
+        //LoadPlayerState("PlayerState");
     }
 
     private void Update()
     {
-        if (GetCurScene() == CURRUNT_SCENE.SCENE_GAME && m_fGameTime > 0.0f) ChangeGameTime();
     }
 
-    private void CreatePlayerState()
+    public IEnumerator StartCount(int count)
     {
-        if (!PS)
+        yield return null;
+
+        while (count > 0)
         {
-            if (!AssetDatabase.LoadAssetAtPath<PlayerState>("Assets/Data/PlayerState.asset"))
-            {
-                PS = ScriptableObject.CreateInstance<PlayerState>();
-                AssetDatabase.CreateAsset(PS, "Assets/Data/PlayerState.asset");
-                AssetDatabase.SaveAssets();
-            }
-            else
-                PS = AssetDatabase.LoadAssetAtPath<PlayerState>("Assets/Data/PlayerState.asset");
+            InGameUIManager.Instance.ShowCount(count);
+            count--;
+
+            yield return new WaitForSeconds(1.0f);
+        }
+
+        InGameUIManager.Instance.TextCount.gameObject.SetActive(false);
+        InGameUIManager.Instance.TextStart.gameObject.SetActive(true);
+
+        yield return null;
+
+        // 타이머 시작
+        StartCoroutine(ChangeGameTime());
+    }
+
+    private IEnumerator ChangeGameTime()
+    {
+        while (m_fGameTime > 0.0f)
+        {
+            m_fGameTime -= Time.deltaTime;
+            if (m_fGameTime <= 0.0f) m_fGameTime = 0.0f;
+
+            InGameUIManager.Instance.ShowGameTime(ChangeFloatToString(m_fGameTime));
+
+            yield return null;
         }
     }
 
-    private void ChangeGameTime()
+    private string ChangeFloatToString(float time)
     {
-        m_fGameTime = m_fGameTime - Time.deltaTime;
-
-        if (m_fGameTime <= 0.0f) m_fGameTime = 0.0f;
-
-        int minutes = (int)m_fGameTime / 60;
-        int seconds = (int)m_fGameTime % 60;
+        int minutes = (int)time / 60;
+        int seconds = (int)time % 60;
         string sMinutes;
         string sSeconds;
 
@@ -73,9 +88,7 @@ public class GameManager : MonoBehaviour
         else
             sSeconds = seconds.ToString();
 
-        m_sRemainTime = sMinutes + " : " + sSeconds;
-
-        InGameUIManager.Instance.ChangeGameTime(m_sRemainTime);
+        return sMinutes + " : " + sSeconds;
     }
 
     private CURRUNT_SCENE GetCurScene()
@@ -98,13 +111,25 @@ public class GameManager : MonoBehaviour
         return 0;
     }
 
-    public void ResetGameTime(float time)
+    public void ResetGameTime()
     {
-        GameTime = time;
+        GameTime = Constants.GameTime;
     }
 
     public void GameLevelUp()
     {
         m_nGameLevel++;
+    }
+
+    public void CreateNewPlayerState(string fileName)
+    {
+        PS = ScriptableObject.CreateInstance<PlayerState>();
+        AssetDatabase.CreateAsset(PS, "Assets/Data/" + fileName + ".asset");
+        AssetDatabase.SaveAssets();
+    }
+
+    public void LoadPlayerState(string fileName)
+    {
+        PS = AssetDatabase.LoadAssetAtPath<PlayerState>("Assets/Data/" + fileName + ".asset");
     }
 }

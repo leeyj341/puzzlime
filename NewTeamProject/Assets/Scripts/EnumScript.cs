@@ -55,3 +55,8 @@ public enum INVEN_MODE
     WEAPON,
     USE
 }
+
+public static class Constants
+{
+    public const float GameTime = 900.0f;
+}
