@@ -6,8 +6,6 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerState State;
     private CharacterController Controller;
-    private Inventory Inven;
-
     private float h = 0.0f;
     private float v = 0.0f;
 
@@ -17,7 +15,6 @@ public class PlayerController : MonoBehaviour
     {
         State = GameManager.Instance.PS;
         Controller = GetComponent<CharacterController>();
-        Inven = GetComponent<Inventory>();
     }
 
     // Update is called once per frame
