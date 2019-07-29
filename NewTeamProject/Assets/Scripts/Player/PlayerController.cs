@@ -20,8 +20,12 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (GameManager.Instance.GameTime == Constants.GameTime) return;
+
         KeyInput();         // 키입력 
         Move();             // 움직임
+
+        Die();
     }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
@@ -66,8 +70,18 @@ public class PlayerController : MonoBehaviour
         Controller.Move(transform.forward * State.Speed * v * Time.deltaTime);    
     }
 
+    private void Die()
+    {
+        if (State.Hp <= 0.0f)
+        {
+            gameObject.SetActive(false);
+        }
+    }
+
     public void ChangeAniSortToNone()
     {
         State.CurAni = ANIM_SORT.BASIC;
     }
+
+    
 }

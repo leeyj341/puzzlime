@@ -33,16 +33,16 @@ public class InGameUIManager : MonoBehaviour
     private List<Sprite> SpriteItem = new List<Sprite>();
 
     // 기타 텍스트 관련 변수들 ------------------------------
-    public Text NumLevel;
-    public Text NumGameTime;
+    public Text TextLevel;
+    public Text TextGameTime;
+    public Text TextCount;
+    public Text TextStart;
 
     // 플레이어 HP 슬라이더 ---------------------------------
 
     public Slider HPSlider;
 
     //-----------------------------------------------------
-
-        
 
     private void Awake()
     {
@@ -53,7 +53,6 @@ public class InGameUIManager : MonoBehaviour
     void Start()
     {
         SetInventoryUI();
-
     }
 
     // Update is called once per frame
@@ -75,7 +74,7 @@ public class InGameUIManager : MonoBehaviour
         ImgGun = Gun.GetComponentInChildren<Image>();
 
         // 게임 레벨 설정
-        NumLevel.text = GameManager.Instance.GameLevel.ToString();
+        TextLevel.text = GameManager.Instance.GameLevel.ToString();
     }
 
     private void ChangeHpSlider()
@@ -89,9 +88,13 @@ public class InGameUIManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.K)) GameManager.Instance.PS.Hp++;
     }
 
-    public void ChangeGameTime(string sRemaintime)
+    public void ShowGameTime(string sRemaintime)
     {
-        NumGameTime.text = sRemaintime;
+        TextGameTime.text = sRemaintime;
+    }
+    public void ShowCount(int count)
+    {
+        TextCount.text = count.ToString();
     }
 
     public void ChangeCursor(INVEN_MODE curInvenMode)
@@ -141,10 +144,9 @@ public class InGameUIManager : MonoBehaviour
                 break;
         }  
     }
-
-    public void AddImg(string GunName)
+    public void AddImg(string WeaponName)
     {
-        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + GunName);
+        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
         SetImageProperties(ImgGun, Color.white);
     }
 
@@ -162,7 +164,6 @@ public class InGameUIManager : MonoBehaviour
                 break;
         }
     }
-    
     public void DeleteImage()
     {
         ImgGun.sprite = null;

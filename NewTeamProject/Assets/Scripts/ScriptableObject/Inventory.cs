@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "Inventory", menuName = "Data/Inventory")]
-public class Inventory : ScriptableObject
+public class Inventory : MonoBehaviour
 {
     int m_nCurWeapon = 0;
     int m_nCurUse = 0;
@@ -14,17 +13,27 @@ public class Inventory : ScriptableObject
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
     List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
     ItemStatus m_sSubWeapon = null;
+    public WeaponList m_sList;
 
     public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; }
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
+
     // Start is called before the first frame update
-    
-    public void FirstSetting()
+    private void Start()
     {
-        m_listWeaponItem.Clear();
-        m_listUseItem.Clear();
-        m_QueueEmptyItem.Clear();
+        FirstSetting();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        KeyAction();
+    }
+
+    void FirstSetting()
+    {
+        m_sList.InitForArr();
 
         InGameUIManager.Instance.ChangeCursor(m_eMode);
 
@@ -33,7 +42,7 @@ public class Inventory : ScriptableObject
         AddFirst();
     }
 
-    public void AddFirst()
+    void AddFirst()
     {
         AddItem(ItemManager.Instance.DictData(11));
         AddItem(ItemManager.Instance.DictData(22));
@@ -46,9 +55,6 @@ public class Inventory : ScriptableObject
         for(int i = 0; i < 10; i++)
             m_QueueEmptyItem.Enqueue(new ItemStatus());
     }
-    
-    // Update is called once per frame
-    
 
     public bool AddItem(ItemData item)
     {   
@@ -60,7 +66,7 @@ public class Inventory : ScriptableObject
                 m_QueueEmptyItem.Peek().m_Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
-                InGameUIManager.Instance.AddImg(m_sSubWeapon.m_Data.Name);
+                InGameUIManager.Instance.AddImg(m_eMode, m_sSubWeapon.m_Data.Name);
             }
             //주무기면
             else
@@ -86,7 +92,7 @@ public class Inventory : ScriptableObject
 
     public void Equip(ItemStatus item)
     {
-        GameManager.Instance.WL.ChangeWeapon(item.m_Data.Name);
+        m_sList.ChangeWeapon(item.m_Data.Name);
         SendData(item);
     }
 
@@ -132,7 +138,7 @@ public class Inventory : ScriptableObject
         m_listUseItem.RemoveAt(m_nCurUse);
     }
 
-    public void KeyAction()
+    void KeyAction()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

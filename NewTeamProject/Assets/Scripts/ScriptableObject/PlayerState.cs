@@ -9,12 +9,19 @@ public class PlayerState : ScriptableObject
     public float Hp = 10.0f;                                               // 체력
     public float MaxHp = 10.0f;                                            // 최대 체력
     public float Speed = 0.0f;                                             // 이동속도
-    public float RotSpeed = 240.0f;                                         // 회전속도
+    public float RotSpeed = 240.0f;                                        // 회전속도
     public float Atk = 0.0f;                                               // 총 공격력
     public float AdditionalAtk = 0.0f;                                     // 추가 공격력
 
     public ATK_CATEGORY WeaponCategory = ATK_CATEGORY.HACK;                // 현재 무기 종류
     public float AtkSpeed = 1.0f;                                          // 공격속도
+
+    public string Tag = "";                                                // 현재플레이어 태그
+    public int DefaultWeaponNum = 0;                                       // 기본 무기
+
+    public int Stage = 1;                                                  // 현재 스테이지
+    public int Gold = 0;                                                   // 소지 현금
+    
 
     // 애니메이션 관련 변수
 

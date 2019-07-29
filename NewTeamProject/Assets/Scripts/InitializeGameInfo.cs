@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
+// GameScene 초기화 클래스
 public class InitializeGameInfo : MonoBehaviour
 {
     //hint
@@ -13,8 +15,11 @@ public class InitializeGameInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        // 플레이어 생성
         CreateHintPrefabs();
-        CreateCharacter();       
+        CreateCharacter();
+
+        StartCoroutine(GameManager.Instance.StartCount(3));
     }
 
     // Update is called once per frame
@@ -33,12 +38,10 @@ public class InitializeGameInfo : MonoBehaviour
 
     private void CreateCharacter()
     {
-        if (GameManager.Instance.Player) return;
-        GameManager.Instance.Player = ((GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + GameManager.Instance.PlayerTag),
-            new Vector3(0, 2, 0), Quaternion.identity));
-        DontDestroyOnLoad(GameManager.Instance.Player);
+        if (GameManager.Instance.Inven) return;
 
-        GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
-        GameManager.Instance.WL.InitForArr();
+        GameObject player = (GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + GameManager.Instance.PS.Tag), new Vector3(0, 2, 0), Quaternion.identity);
+        GameManager.Instance.Inven = player.GetComponent<Inventory>();
+        DontDestroyOnLoad(player);
     }
 }

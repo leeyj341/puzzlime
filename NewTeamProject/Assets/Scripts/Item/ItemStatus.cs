@@ -38,7 +38,7 @@ public class ItemStatus : MonoBehaviour
 
                 break;
             case 92://속도향상
-                BuffManager.Instance.AddBuff(m_Data.MaxDbl, BUFF_CATEGORY.SPEED);
+                BuffManager.Instance.AddBuff(m_Data.MaxDbl, BUFF_CATEGORY.SPEED);   // 버프, 파워도 전달
                 break;
             case 93://공격향상
                 BuffManager.Instance.AddBuff(m_Data.MaxDbl, BUFF_CATEGORY.ATTACK);

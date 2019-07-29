@@ -17,10 +17,14 @@ MonoBehaviour:
   Speed: 0
   RotSpeed: 240
   Atk: 0
-  AdditionalAtk: 0
+  AdditionalAtk: 3
   WeaponCategory: 0
   AtkSpeed: 1
+  Tag: CowBoy
+  DefaultWeaponNum: 0
+  Stage: 1
+  Gold: 0
   CurAni: 2
-  AnimPlaySpeed: 1
+  AnimPlaySpeed: 3
   SlashSpeed: 3
   StabSpeed: 1

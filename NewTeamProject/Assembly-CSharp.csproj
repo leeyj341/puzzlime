@@ -65,6 +65,7 @@
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\ItemStatus.cs" />
     <Compile Include="Assets\Scripts\Item\WeaponList.cs" />
+    <Compile Include="Assets\Scripts\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\Manager\BuffManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
@@ -74,8 +75,10 @@
     <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\ItemDropSystem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\PlayerState.cs" />
-    <Compile Include="Assets\Scripts\SelectSceneScripts\SelectCharacter.cs" />
+    <Compile Include="Assets\Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\InGameUIManager.cs" />
+    <Compile Include="Assets\Scripts\UI\SelectCharacter.cs" />
+    <Compile Include="Assets\Scripts\UI\TextAnimation.cs" />
     <None Include="Assets\Asset\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
       <HintPath>C:/Users/KimTaeWan/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
