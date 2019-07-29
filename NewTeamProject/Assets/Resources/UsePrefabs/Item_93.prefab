@@ -41,7 +41,7 @@ SphereCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7580384673613734100}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 84aece0c6c321434298dae8831ab67d1, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -61,7 +61,7 @@ Rigidbody:
   m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 0
+  m_Constraints: 80
   m_CollisionDetection: 0
 --- !u!114 &7580384673613734101
 MonoBehaviour:
@@ -75,6 +75,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f524c4c762508479bcc1b8912b78a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Mesh: {fileID: 7594012151652915357}
   m_Data: {fileID: 11400000, guid: 4376ec114b7c8ed429896aa8f87cf839, type: 2}
 --- !u!1001 &7580384674223779035
 PrefabInstance:
@@ -148,6 +149,12 @@ PrefabInstance:
 --- !u!4 &7583175907898754047 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000011565625124, guid: 4f544c14cf326b843a5f07e7de41640e,
+    type: 3}
+  m_PrefabInstance: {fileID: 7580384674223779035}
+  m_PrefabAsset: {fileID: 0}
+--- !u!23 &7594012151652915357 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 23000013603468358, guid: 4f544c14cf326b843a5f07e7de41640e,
     type: 3}
   m_PrefabInstance: {fileID: 7580384674223779035}
   m_PrefabAsset: {fileID: 0}

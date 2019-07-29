@@ -16,7 +16,6 @@ public class InitializeGameInfo : MonoBehaviour
     void Start()
     {
         // 플레이어 생성
-        CreateHintPrefabs();
         CreateCharacter();
 
         StartCoroutine(GameManager.Instance.StartCount(3));
@@ -27,14 +26,7 @@ public class InitializeGameInfo : MonoBehaviour
     {
         
     }
-
-    private void CreateHintPrefabs()
-    {
-        for(int i = 0; i< arrNode.Length; i++)
-        {
-            Instantiate(PrefabHint[nBossTolerance], arrNode[i].transform);
-        }
-    }
+    
 
     private void CreateCharacter()
     {

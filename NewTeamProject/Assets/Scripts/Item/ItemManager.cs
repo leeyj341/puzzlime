@@ -7,13 +7,14 @@ public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
     Dictionary<int, ItemData> m_DictItemData = new Dictionary<int, ItemData>();
+    List<GameObject> m_listItem = new List<GameObject>();
+    ItemDropSystem Sys;
 
     public ItemData DictData(int Key) { return m_DictItemData[Key]; }
 
     private void Awake()
     {
         if (!ItemManager.Instance) Instance = this;
-        
     }
     // Start is called before the first frame update
     void Start()
@@ -25,6 +26,11 @@ public class ItemManager : MonoBehaviour
     void Update()
     {
 
+    }
+
+    public void SetSystem(ItemDropSystem System)
+    {
+        Sys = System;
     }
 
     void MakeItemData()
@@ -67,5 +73,19 @@ public class ItemManager : MonoBehaviour
             m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
             AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
         }
+    }
+
+    public void AddItemOnField(GameObject Item)
+    {
+        m_listItem.Add(Item);
+        Item.SetActive(true);
+        Item.GetComponent<ItemStatus>().ActivateItem(true);
+    }
+
+    public void DelItemOnField(GameObject Item)
+    {
+        Item.SetActive(false);
+        m_listItem.Remove(Item);
+        Sys.Recycle(Item);
     }
 }

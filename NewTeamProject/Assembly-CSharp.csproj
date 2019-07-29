@@ -60,8 +60,11 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AirPlaneMovement.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\InitializeGameInfo.cs" />
+    <Compile Include="Assets\Scripts\Inventory.cs" />
+    <Compile Include="Assets\Scripts\Item\ItemDropSystem.cs" />
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\ItemStatus.cs" />
     <Compile Include="Assets\Scripts\Item\WeaponList.cs" />
@@ -71,9 +74,7 @@
     <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObject\Inventory.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
-    <Compile Include="Assets\Scripts\ScriptableObject\ItemDropSystem.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\PlayerState.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\InGameUIManager.cs" />

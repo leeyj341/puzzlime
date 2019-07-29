@@ -156,6 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0f524c4c762508479bcc1b8912b78a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_Mesh: {fileID: 2219564039907091319}
   m_Data: {fileID: 11400000, guid: dd5766ca31adb0542b6a7b1ce92d9754, type: 2}
 --- !u!1001 &2219564040684769602
 PrefabInstance:
