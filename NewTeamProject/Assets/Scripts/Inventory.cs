@@ -58,10 +58,10 @@ public class Inventory : MonoBehaviour
 
     public bool AddItem(ItemData item)
     {   
-        if(item.ItemCtg == ITEM_CATEGORY.WEAPON)
+        if (item.ItemCtg.Equals(ITEM_CATEGORY.WEAPON)) 
         {
             //보조무기면
-            if (item.AtkCtg == ATK_CATEGORY.SHOT)
+            if (item.AtkCtg.Equals(ATK_CATEGORY.SHOT)) 
             {
                 m_QueueEmptyItem.Peek().m_Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
             }
         }
 
-        else if(item.ItemCtg == ITEM_CATEGORY.USE)
+        else if (item.ItemCtg.Equals(ITEM_CATEGORY.USE))
         {
             if (m_listUseItem.Count >= 3) return false;
             m_QueueEmptyItem.Peek().m_Data = item;
@@ -109,7 +109,7 @@ public class Inventory : MonoBehaviour
 
         m_sSubWeapon.Dbl -= 1;
 
-        if(m_sSubWeapon.Dbl == 0)
+        if (m_sSubWeapon.Dbl.Equals(0) )
         {
             m_QueueEmptyItem.Enqueue(m_sSubWeapon);
             m_sSubWeapon = null;
@@ -120,7 +120,7 @@ public class Inventory : MonoBehaviour
     {
         m_listWeaponItem[m_nCurEquip].Dbl -= 1;
 
-        if(m_listWeaponItem[m_nCurEquip].Dbl == 0)
+        if (m_listWeaponItem[m_nCurEquip].Dbl.Equals(0))
         {
             m_QueueEmptyItem.Enqueue(m_listWeaponItem[m_nCurEquip]);
             m_listWeaponItem.RemoveAt(m_nCurEquip);
@@ -151,9 +151,9 @@ public class Inventory : MonoBehaviour
             InGameUIManager.Instance.ChangeCursor(m_eMode);
         }
 
-        if (m_eMode == INVEN_MODE.WEAPON)
+        if (m_eMode.Equals(INVEN_MODE.WEAPON))
             KeyAction_WEAPON_MODE();
-        else if (m_eMode == INVEN_MODE.USE)
+        else if (m_eMode.Equals(INVEN_MODE.USE)) 
             KeyAction_USE_MODE();
     }
     
@@ -180,7 +180,7 @@ public class Inventory : MonoBehaviour
         {
             if (m_listWeaponItem.Count <= m_nCurWeapon) return;
 
-            if (m_listWeaponItem[m_nCurWeapon].Dbl == -1) return;
+            if (m_listWeaponItem[m_nCurWeapon].Dbl.Equals(-1)) return;
            
             InGameUIManager.Instance.DeleteImage(m_eMode, m_nCurWeapon);
 
@@ -196,7 +196,7 @@ public class Inventory : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.UpArrow))
         {
-            if (m_nCurWeapon == m_nCurEquip) return;
+            if (m_nCurWeapon.Equals(m_nCurEquip)) return;
             if(m_nCurWeapon < m_listWeaponItem.Count)
             {
                 m_nCurEquip = m_nCurWeapon;

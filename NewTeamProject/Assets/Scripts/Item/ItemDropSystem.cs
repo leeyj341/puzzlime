@@ -160,7 +160,7 @@ public class ItemDropSystem : MonoBehaviour
 
     public void Recycle(GameObject Item)
     {
-        if (Item.GetComponent<ItemStatus>().m_Data.ItemCtg == ITEM_CATEGORY.WEAPON)
+        if (Item.GetComponent<ItemStatus>().m_Data.ItemCtg.Equals(ITEM_CATEGORY.WEAPON))
             m_QueueWeapon.Enqueue(Item);
         else
             m_QueueUse.Enqueue(Item);

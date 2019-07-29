@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (GameManager.Instance.GameTime == Constants.GameTime) return;
+        if (GameManager.Instance.GameTime.Equals(Constants.GameTime)) return;
 
         KeyInput();         // 키입력 
         Move();             // 움직임
@@ -51,7 +51,7 @@ public class PlayerController : MonoBehaviour
         {
             //일반 공격
             // State.WeaponCategory = Inven.무엇;
-            if (State.CurAni == ANIM_SORT.SHOOT) return;
+            if (State.CurAni.Equals(ANIM_SORT.SHOOT)) return;
             State.CurAni = ANIM_SORT.ATTACK;
         }
 
@@ -59,7 +59,7 @@ public class PlayerController : MonoBehaviour
         {
             //총 쏘기
             //if (!Inven.SubWeapon) return;
-            if (State.CurAni == ANIM_SORT.ATTACK) return;
+            if (State.CurAni.Equals(ANIM_SORT.ATTACK)) return;
             State.CurAni = ANIM_SORT.SHOOT;
         }
     }

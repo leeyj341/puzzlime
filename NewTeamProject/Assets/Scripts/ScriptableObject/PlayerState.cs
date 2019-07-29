@@ -13,7 +13,7 @@ public class PlayerState : ScriptableObject
     public float Atk = 0.0f;                                               // 총 공격력
     public float AdditionalAtk = 0.0f;                                     // 추가 공격력
 
-    public ATK_CATEGORY WeaponCategory = ATK_CATEGORY.HACK;                // 현재 무기 종류
+    public ATK_CATEGORY WeaponCategory = ATK_CATEGORY.NONE;                // 현재 무기 종류
     public float AtkSpeed = 1.0f;                                          // 공격속도
 
     public string Tag = "";                                                // 현재플레이어 태그

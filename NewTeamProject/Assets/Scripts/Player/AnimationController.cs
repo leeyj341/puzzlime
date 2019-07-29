@@ -27,7 +27,7 @@ public class AnimationController : MonoBehaviour
         {
             State.AnimPlaySpeed = State.AtkSpeed * State.SlashSpeed;
         }
-        else if((int)State.WeaponCategory == 2)
+        else if(((int)State.WeaponCategory).Equals(2))
         {
             State.AnimPlaySpeed = State.AtkSpeed * State.StabSpeed;
         }

@@ -74,7 +74,7 @@ public class AirPlaneMovement : MonoBehaviour
         m_sMesh.enabled = true;
         while (m_fT < 1)
         {
-            m_fT += Time.deltaTime / 10.0f;
+            m_fT += Time.deltaTime * 0.1f;
             transform.position = Vector3.Lerp(m_vecStart, m_vecDest, m_fT);
             if(Random.Range(0,100) > 97)
                 m_sSys.ItemDrop();

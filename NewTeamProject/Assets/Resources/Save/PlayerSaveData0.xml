@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<PlayerInfo>
+  <Player>
+    <Hp>10</Hp>
+    <MaxHp>10</MaxHp>
+    <Speed>0</Speed>
+    <RotSpeed>240</RotSpeed>
+    <Atk>0</Atk>
+    <AdditionalAtk>3</AdditionalAtk>
+  </Player>
+</PlayerInfo>

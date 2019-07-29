@@ -42,7 +42,7 @@ public class LoadingSceneManager : MonoBehaviour
             {
                 progressBar.value = Mathf.Lerp(progressBar.value, 1.0f, fTime);
 
-                if (progressBar.value == 1.0f)
+                if (progressBar.value.Equals(1.0f))
                     op.allowSceneActivation = true;
             }
             else

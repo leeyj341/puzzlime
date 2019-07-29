@@ -39,7 +39,7 @@ public class ItemStatus : MonoBehaviour
             if (!m_bFlashSet)
             {
                 m_bFlashSet = true;
-                m_fFlashTime = m_fTime / 5.0f;
+                m_fFlashTime = m_fTime * 0.2f;
                 m_Mesh.enabled = !m_Mesh.enabled;
             }
             else
@@ -119,7 +119,7 @@ public class ItemStatus : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.transform.name == "Ground")
+        if(collision.transform.name.Equals("Ground")) 
         {
             ActivateItem(false);
         }

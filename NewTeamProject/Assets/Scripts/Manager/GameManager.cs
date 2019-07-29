@@ -30,11 +30,7 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         // GameScene 테스트용
-        //LoadPlayerState("PlayerState");
-    }
-
-    private void Update()
-    {
+        LoadPlayerState("PlayerState");
     }
 
     public IEnumerator StartCount(int count)

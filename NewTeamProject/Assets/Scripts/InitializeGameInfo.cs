@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 // GameScene 초기화 클래스
 public class InitializeGameInfo : MonoBehaviour
@@ -22,10 +21,6 @@ public class InitializeGameInfo : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
     
 
     private void CreateCharacter()

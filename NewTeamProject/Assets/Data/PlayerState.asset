@@ -18,9 +18,9 @@ MonoBehaviour:
   RotSpeed: 240
   Atk: 0
   AdditionalAtk: 3
-  WeaponCategory: 0
+  WeaponCategory: 4
   AtkSpeed: 1
-  Tag: CowBoy
+  Tag: 
   DefaultWeaponNum: 0
   Stage: 1
   Gold: 0

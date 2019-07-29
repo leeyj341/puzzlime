@@ -15,10 +15,6 @@ public class TextAnimation : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     private IEnumerator SizeUp()
     {

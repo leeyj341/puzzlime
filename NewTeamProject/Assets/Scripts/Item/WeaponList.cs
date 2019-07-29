@@ -9,17 +9,10 @@ public class WeaponList : MonoBehaviour
     private Transform[] m_ArrTransform = new Transform[15];
 
     public Transform CurWeapon { get => m_sCurWeapon; set => m_sCurWeapon = value; }
+
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
 
     // Update is called once per frame
-    void Update()
-    {
-        
-    }
 
     public void InitForArr()
     {
@@ -30,11 +23,11 @@ public class WeaponList : MonoBehaviour
     public void ChangeWeapon(string WeaponName)
     {
         if(m_sCurWeapon)
-            if (m_sCurWeapon.name == WeaponName) return;
+            if (m_sCurWeapon.name.Equals(WeaponName)) return;
 
         for(int i = 0; i < m_ArrTransform.Length; i++)
         {
-            if (m_ArrTransform[i].name == WeaponName)
+            if (m_ArrTransform[i].name.Equals(WeaponName))
             {
                 if(m_sCurWeapon)
                     InactiveWeapon(m_sCurWeapon);

@@ -20,7 +20,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
     {
         buttonTexts.AddRange(GetComponentsInChildren<Text>());
 
-        if (buttonTexts.Count == 0) return;
+        if (buttonTexts.Count.Equals(0)) return;
         buttonTexts[1].gameObject.SetActive(false);
     }
 
@@ -32,19 +32,20 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        if (buttonTexts.Count == 0) return;
+        if (buttonTexts.Count.Equals(0)) return;
         ChangeText(true);
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        if (buttonTexts.Count == 0) return;
+        if (buttonTexts.Count.Equals(0)) return;
         ChangeText(false);
     }
 
     public void UseStartButton(string nextSceneName)
     {
-        GameManager.Instance.CreateNewPlayerState("PlayerState" + SaveNum);
+        if (SaveNum > 1) return;
+        SaveLoadManager.Instance.SaveNewPlayerInfoXml("PlayerSaveData" + SaveNum);
         SaveNum++;
         SceneManager.LoadScene(nextSceneName);
     }
