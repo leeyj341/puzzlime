@@ -14,7 +14,7 @@ public class InitializeGameInfo : MonoBehaviour
     void Start()
     {
         CreateHintPrefabs();
-        CreateCharacter();
+        CreateCharacter();       
     }
 
     // Update is called once per frame
@@ -37,5 +37,8 @@ public class InitializeGameInfo : MonoBehaviour
         GameManager.Instance.Player = ((GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + GameManager.Instance.PlayerTag),
             new Vector3(0, 2, 0), Quaternion.identity));
         DontDestroyOnLoad(GameManager.Instance.Player);
+
+        GameManager.Instance.WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
+        GameManager.Instance.WL.InitForArr();
     }
 }

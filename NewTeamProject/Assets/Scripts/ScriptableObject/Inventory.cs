@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Inventory", menuName = "Data/Inventory")]
-public class Inventory : MonoBehaviour
+public class Inventory : ScriptableObject
 {
     int m_nCurWeapon = 0;
     int m_nCurUse = 0;
@@ -20,8 +20,12 @@ public class Inventory : MonoBehaviour
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
     // Start is called before the first frame update
     
-    void FirstSetting()
+    public void FirstSetting()
     {
+        m_listWeaponItem.Clear();
+        m_listUseItem.Clear();
+        m_QueueEmptyItem.Clear();
+
         InGameUIManager.Instance.ChangeCursor(m_eMode);
 
         MakeNewItemStatus();
@@ -29,7 +33,7 @@ public class Inventory : MonoBehaviour
         AddFirst();
     }
 
-    void AddFirst()
+    public void AddFirst()
     {
         AddItem(ItemManager.Instance.DictData(11));
         AddItem(ItemManager.Instance.DictData(22));
@@ -44,10 +48,7 @@ public class Inventory : MonoBehaviour
     }
     
     // Update is called once per frame
-    void Update()
-    {
-        KeyAction();
-    }
+    
 
     public bool AddItem(ItemData item)
     {   
@@ -59,7 +60,7 @@ public class Inventory : MonoBehaviour
                 m_QueueEmptyItem.Peek().m_Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
-                InGameUIManager.Instance.AddImg(m_eMode, m_sSubWeapon.m_Data.Name);
+                InGameUIManager.Instance.AddImg(m_sSubWeapon.m_Data.Name);
             }
             //주무기면
             else
@@ -85,7 +86,6 @@ public class Inventory : MonoBehaviour
 
     public void Equip(ItemStatus item)
     {
-        if(!item) return;
         GameManager.Instance.WL.ChangeWeapon(item.m_Data.Name);
         SendData(item);
     }
@@ -132,7 +132,7 @@ public class Inventory : MonoBehaviour
         m_listUseItem.RemoveAt(m_nCurUse);
     }
 
-    void KeyAction()
+    public void KeyAction()
     {
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {

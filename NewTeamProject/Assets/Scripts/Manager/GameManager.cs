@@ -12,12 +12,14 @@ public class GameManager : MonoBehaviour
     private float m_fGameTime = 900.0f;
     private string m_sRemainTime = "";
     private int m_nGameLevel = 1;
-    public PlayerState PS;
+    private Inventory m_sInven;
+    private PlayerState m_sPS;
     public WeaponList m_sList;
 
     public GameObject Player { get => m_gPlayer; set => m_gPlayer = value; }
-    public Inventory Inven { get => m_gPlayer.GetComponent<Inventory>(); }
     public WeaponList WL { get => m_sList; set => m_sList = value; }
+    public Inventory Inven { get => GetInven(); }
+    public PlayerState PS { get => GetPS(); }
     public string PlayerTag { get => m_strPlayerTag; set => m_strPlayerTag = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
     public string RemainTime { get => m_sRemainTime; set => m_sRemainTime = value; }
@@ -27,25 +29,43 @@ public class GameManager : MonoBehaviour
     {
         if (!GameManager.Instance)
             Instance = this;
-        DontDestroyOnLoad(gameObject);
 
-        if(!PS)
-        {
-            PS = ScriptableObject.CreateInstance<PlayerState>();
-            AssetDatabase.CreateAsset(PS, "Assets/Data/PlayerState.asset");
-            AssetDatabase.SaveAssets();
-        }
+        DontDestroyOnLoad(gameObject);
     }
 
     private void Start()
     {
-        WL = GameObject.Find("RightWeapon").GetComponent<WeaponList>();
-        WL.InitForArr();
+        
+        
+    }
+
+    private PlayerState GetPS()
+    {
+        if (!m_sPS)
+        {
+            m_sPS = ScriptableObject.CreateInstance<PlayerState>();
+            AssetDatabase.CreateAsset(PS, "Assets/Data/PlayerState.asset");
+            AssetDatabase.SaveAssets();
+        }
+
+        return m_sPS;
+    }
+
+    private Inventory GetInven()
+    {
+        if(!m_sInven)
+        {
+            m_sInven = ScriptableObject.CreateInstance<Inventory>();
+            AssetDatabase.CreateAsset(m_sInven, "Assets/Data/Inventory.asset");
+            AssetDatabase.SaveAssets();
+        }
+        return m_sInven;
     }
 
     private void Update()
     {
         if (GetCurScene() == CURRUNT_SCENE.SCENE_GAME && m_fGameTime > 0.0f) ChangeGameTime();
+        m_sInven.KeyAction();
     }
 
     private void ChangeGameTime()

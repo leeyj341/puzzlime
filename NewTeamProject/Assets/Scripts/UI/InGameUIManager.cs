@@ -42,6 +42,8 @@ public class InGameUIManager : MonoBehaviour
 
     //-----------------------------------------------------
 
+        
+
     private void Awake()
     {
         if (!Instance) Instance = this;
@@ -51,6 +53,7 @@ public class InGameUIManager : MonoBehaviour
     void Start()
     {
         SetInventoryUI();
+
     }
 
     // Update is called once per frame
@@ -139,9 +142,9 @@ public class InGameUIManager : MonoBehaviour
         }  
     }
 
-    public void AddImg(string WeaponName)
+    public void AddImg(string GunName)
     {
-        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
+        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + GunName);
         SetImageProperties(ImgGun, Color.white);
     }
 

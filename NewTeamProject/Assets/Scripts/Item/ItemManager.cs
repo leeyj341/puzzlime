@@ -6,19 +6,20 @@ using UnityEditor;
 public class ItemManager : MonoBehaviour
 {
     public static ItemManager Instance;
-    Dictionary<int, ItemData> m_DictItemData = new Dictionary<int, ItemData>();
+    public Dictionary<int, ItemData> m_DictItemData = new Dictionary<int, ItemData>();
 
     public ItemData DictData(int Key) { return m_DictItemData[Key]; }
 
     private void Awake()
     {
         if (!ItemManager.Instance) Instance = this;
-        
+
+        MakeItemData();
     }
     // Start is called before the first frame update
     void Start()
     {
-        MakeItemData();
+        GameManager.Instance.Inven.FirstSetting();
     }
 
     // Update is called once per frame
@@ -54,10 +55,19 @@ public class ItemManager : MonoBehaviour
 
         AssetDatabase.SaveAssets();
     }
-
+    
     void AddItemInDict(int Key, string FileName)
     {
-        m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
-        AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
+        ItemData temp = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Data/" + FileName + ".asset");
+        if (!temp)
+        {
+            AssetDatabase.CreateAsset(temp, "Assets/Data/" + FileName + ".asset");
+            m_DictItemData.Add(Key, temp.SetItemObtion(Key));
+        }
+
+        else
+        {
+            m_DictItemData.Add(Key, temp);
+        }
     }
 }
