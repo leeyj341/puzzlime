@@ -106,8 +106,6 @@ public class GameManager : MonoBehaviour
             case "LoadingScene":
                 return CURRUNT_SCENE.SCENE_LOADING;
         }
-
-        Debug.Log("활성화된 Scene이 없습니다.");
         return 0;
     }
 
