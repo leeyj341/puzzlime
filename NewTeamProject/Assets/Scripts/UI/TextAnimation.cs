@@ -41,6 +41,8 @@ public class TextAnimation : MonoBehaviour
             yield return null;
         }
 
+        yield return null;
+
         gameObject.SetActive(false);
     }
 
