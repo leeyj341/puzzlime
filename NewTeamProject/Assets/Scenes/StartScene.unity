@@ -1462,6 +1462,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1370655007}
   - component: {fileID: 1370655008}
+  - component: {fileID: 1370655009}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -1495,6 +1496,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 00bf98837219e90459538caee59753dd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1370655009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1370655006}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a291e617217f40043a32ee216963517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 10
+  MaxHp: 10
+  Speed: 0
+  RotSpeed: 240
+  Atk: 0
+  AdditionalAtk: 0
+  WeaponCategory: 4
+  AtkSpeed: 1
+  Tag: 
+  DefaultWeaponNum: 0
+  Stage: 1
+  Gold: 0
 --- !u!1 &1402037247
 GameObject:
   m_ObjectHideFlags: 0

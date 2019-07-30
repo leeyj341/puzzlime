@@ -29,8 +29,7 @@ public class GameManager : MonoBehaviour
 
     private void Start()
     {
-        // GameScene 테스트용
-        LoadPlayerState("PlayerState");
+        m_PS = GetComponent<PlayerState>();
     }
 
     public IEnumerator StartCount(int count)
@@ -117,13 +116,10 @@ public class GameManager : MonoBehaviour
 
     public void CreateNewPlayerState(string fileName)
     {
-        PS = ScriptableObject.CreateInstance<PlayerState>();
-        AssetDatabase.CreateAsset(PS, "Assets/Data/" + fileName + ".asset");
-        AssetDatabase.SaveAssets();
     }
 
     public void LoadPlayerState(string fileName)
     {
-        PS = AssetDatabase.LoadAssetAtPath<PlayerState>("Assets/Data/" + fileName + ".asset");
+        
     }
 }

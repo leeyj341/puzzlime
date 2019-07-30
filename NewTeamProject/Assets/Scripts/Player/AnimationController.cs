@@ -4,13 +4,19 @@ using UnityEngine;
 
 public class AnimationController : MonoBehaviour
 {
-    private PlayerState State;
+    // 애니메이션 관련 변수
+    private ANIM_SORT curAni = ANIM_SORT.BASIC;
+    private float AnimPlaySpeed = 1.0f;                                     // 최종 애니메이션 재생속도
+    private float SlashSpeed = 3.0f;
+    private float StabSpeed = 1.0f;
+
     private Animator PlayerAnimator;
+
+    public ANIM_SORT CurAni { get => curAni; set => curAni = value; }
 
     // Start is called before the first frame update
     void Start()
     {
-        State = GameManager.Instance.PS;
         PlayerAnimator = GetComponent<Animator>();
     }
 
@@ -23,22 +29,27 @@ public class AnimationController : MonoBehaviour
 
     private void ChangeAnimationSpeed()
     {
-        if((int)State.WeaponCategory < 2)
+        if((int)GameManager.Instance.PS.WeaponCategory < 2)
         {
-            State.AnimPlaySpeed = State.AtkSpeed * State.SlashSpeed;
+            AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * SlashSpeed;
         }
-        else if(((int)State.WeaponCategory).Equals(2))
+        else if(((int)GameManager.Instance.PS.WeaponCategory).Equals(2))
         {
-            State.AnimPlaySpeed = State.AtkSpeed * State.StabSpeed;
+            AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * StabSpeed;
         }
     }
 
-    public void ChangeAnimationParameter()
+    private void ChangeAnimationParameter()
     {
-        PlayerAnimator.SetFloat("Speed", State.Speed);
-        PlayerAnimator.SetFloat("AtkAnimPlaySpeed", State.AnimPlaySpeed);
-        PlayerAnimator.SetInteger("AniNum", (int)State.CurAni);
-        PlayerAnimator.SetInteger("WeaponNum", (int)State.WeaponCategory);
+        PlayerAnimator.SetFloat("Speed", GameManager.Instance.PS.Speed);
+        PlayerAnimator.SetFloat("AtkAnimPlaySpeed", AnimPlaySpeed);
+        PlayerAnimator.SetInteger("AniNum", (int)curAni);
+        PlayerAnimator.SetInteger("WeaponNum", (int)GameManager.Instance.PS.WeaponCategory);
+    }
+
+    public void ChangeAniSort(ANIM_SORT eAnimSort)
+    {
+        curAni = eAnimSort; 
     }
 
 

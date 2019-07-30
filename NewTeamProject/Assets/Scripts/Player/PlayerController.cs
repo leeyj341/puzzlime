@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     private PlayerState State;
     private CharacterController Controller;
+    private AnimationController AnimController;
     private float h = 0.0f;
     private float v = 0.0f;
 
@@ -15,6 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         State = GameManager.Instance.PS;
         Controller = GetComponent<CharacterController>();
+        AnimController = GetComponent<AnimationController>();
     }
 
     // Update is called once per frame
@@ -26,11 +28,6 @@ public class PlayerController : MonoBehaviour
         Move();             // 움직임
 
         Die();
-    }
-
-    private void OnControllerColliderHit(ControllerColliderHit hit)
-    {
-        //if (Inven.AddItem(hit.gameObject.tag)) return;
     }
 
     private void KeyInput()
@@ -50,17 +47,19 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //일반 공격
-            // State.WeaponCategory = Inven.무엇;
-            if (State.CurAni.Equals(ANIM_SORT.SHOOT)) return;
-            State.CurAni = ANIM_SORT.ATTACK;
+            if (AnimController.CurAni.Equals(ANIM_SORT.SHOOT)) return;
+
+            AnimController.ChangeAniSort(ANIM_SORT.ATTACK);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
-            //총 쏘기
-            //if (!Inven.SubWeapon) return;
-            if (State.CurAni.Equals(ANIM_SORT.ATTACK)) return;
-            State.CurAni = ANIM_SORT.SHOOT;
+            // 총 쏘기
+            // 총이 없으면 안 쏘게
+            //if (!GameManager.Instance.Inven.GetSubWeapon()) return;
+            if (AnimController.CurAni.Equals(ANIM_SORT.ATTACK)) return;
+
+            AnimController.ChangeAniSort(ANIM_SORT.SHOOT);
         }
     }
 
@@ -76,11 +75,6 @@ public class PlayerController : MonoBehaviour
         {
             gameObject.SetActive(false);
         }
-    }
-
-    public void ChangeAniSortToNone()
-    {
-        State.CurAni = ANIM_SORT.BASIC;
     }
 
     

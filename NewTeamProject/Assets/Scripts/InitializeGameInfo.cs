@@ -29,6 +29,5 @@ public class InitializeGameInfo : MonoBehaviour
 
         GameObject player = (GameObject)Instantiate(Resources.Load("PlayerPrefabs/" + GameManager.Instance.PS.Tag), new Vector3(0, 2, 0), Quaternion.identity);
         GameManager.Instance.Inven = player.GetComponent<Inventory>();
-        DontDestroyOnLoad(player);
     }
 }
