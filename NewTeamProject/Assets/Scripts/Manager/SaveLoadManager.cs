@@ -53,10 +53,6 @@ public class SaveLoadManager : MonoBehaviour
         atk.InnerText = m_PS.Atk.ToString();
         child.AppendChild(atk);
 
-        XmlElement additionalAtk = xmlDoc.CreateElement("AdditionalAtk");
-        additionalAtk.InnerText = m_PS.AdditionalAtk.ToString();
-        child.AppendChild(additionalAtk);
-
         xmlDoc.Save("./Assets/Resources/Save/" + saveFileName + ".xml");
 
     }

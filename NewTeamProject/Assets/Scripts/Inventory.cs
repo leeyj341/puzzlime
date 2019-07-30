@@ -31,6 +31,14 @@ public class Inventory : MonoBehaviour
         KeyAction();
     }
 
+    public bool GetSubWeapon()
+    {
+        if (!m_sSubWeapon.m_Data)
+            return false;
+
+        else return true;
+    }
+
     void FirstSetting()
     {
         m_sList.InitForArr();
@@ -48,6 +56,7 @@ public class Inventory : MonoBehaviour
         AddItem(ItemManager.Instance.DictData(22));
         AddItem(ItemManager.Instance.DictData(23));
         Equip(m_listWeaponItem[0]);
+        AddItem(ItemManager.Instance.DictData(41));
     }
 
     void MakeNewItemStatus()
@@ -66,7 +75,7 @@ public class Inventory : MonoBehaviour
                 m_QueueEmptyItem.Peek().m_Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
-                InGameUIManager.Instance.AddImg(m_eMode, m_sSubWeapon.m_Data.Name);
+                InGameUIManager.Instance.AddImg(m_sSubWeapon.m_Data.Name);
             }
             //주무기면
             else
@@ -98,7 +107,7 @@ public class Inventory : MonoBehaviour
 
     void SendData(ItemStatus item)
     {
-        GameManager.Instance.PS.AdditionalAtk = item.m_Data.ItemPower;
+        GameManager.Instance.PS.Atk = item.m_Data.ItemPower;
         GameManager.Instance.PS.AtkSpeed = item.m_Data.ItemSpd;
         GameManager.Instance.PS.WeaponCategory = item.m_Data.AtkCtg;
     }

@@ -16231,6 +16231,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1866381776}
   - component: {fileID: 1866381775}
+  - component: {fileID: 1866381778}
   - component: {fileID: 1866381777}
   m_Layer: 0
   m_Name: Managers_test
@@ -16277,6 +16278,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 06589390ea27d5a40bf36a9faa3f90c2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1866381778
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1866381774}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a291e617217f40043a32ee216963517b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hp: 10
+  MaxHp: 10
+  Speed: 0
+  RotSpeed: 240
+  Atk: 0
+  AdditionalAtk: 0
+  WeaponCategory: 4
+  AtkSpeed: 1
+  Tag: CowBoy
+  DefaultWeaponNum: 0
+  Stage: 1
+  Gold: 0
 --- !u!1 &1872896584
 GameObject:
   m_ObjectHideFlags: 0
