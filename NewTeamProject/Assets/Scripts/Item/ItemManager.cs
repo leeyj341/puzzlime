@@ -80,8 +80,8 @@ public class ItemManager : MonoBehaviour
 
     public void DelItemOnField(GameObject Item)
     {
-        Item.SetActive(false);
         m_listItem.Remove(Item);
         Sys.Recycle(Item);
+        Item.SetActive(false);
     }
 }

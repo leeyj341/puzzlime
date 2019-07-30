@@ -24,11 +24,22 @@ public class BuffManager : MonoBehaviour
 {
     public static BuffManager Instance;
     public List<Buff> ListBuff = new List<Buff>();
+    private float m_fBuffAtk;
+    private float m_fBuffSpd;
+
+    public float BuffAtk { get => m_fBuffAtk; set => m_fBuffAtk = value; }
+    public float BuffSpd { get => m_fBuffSpd; set => m_fBuffSpd = value; }
 
     // Start is called before the first frame update
     private void Awake()
     {
         if (!BuffManager.Instance) Instance = this;
+    }
+
+    private void Start()
+    {
+        m_fBuffAtk = 0;
+        m_fBuffSpd = 0;
     }
 
     // Update is called once per frame
@@ -45,12 +56,13 @@ public class BuffManager : MonoBehaviour
         }
     }
     //List에 Buff를 삽입하는 함수, 삽입될 때 플레이어에게 증가수치를 전달해줘야함
-    public void AddBuff(float BTime, BUFF_CATEGORY BCtg)
+    public void AddBuff(float BForce, BUFF_CATEGORY BCtg)
     {
         Buff buff = new Buff
         {
-            BuffTime = BTime,
-            BuffCtg = BCtg
+            BuffForce = BForce,
+            BuffCtg = BCtg,
+            BuffTime = 20.0f
         };
         AddBuffToPlayer(buff);
         ListBuff.Add(buff);
@@ -67,10 +79,10 @@ public class BuffManager : MonoBehaviour
         switch (buff.BuffCtg)
         {
             case BUFF_CATEGORY.ATTACK:
-                GameManager.Instance.PS.Atk += buff.BuffForce;
+                m_fBuffAtk += buff.BuffForce;
                 break;
             case BUFF_CATEGORY.SPEED:
-                GameManager.Instance.PS.AtkSpeed += buff.BuffForce;
+                m_fBuffSpd += buff.BuffForce;
                 break;
         }
     }
@@ -80,10 +92,10 @@ public class BuffManager : MonoBehaviour
         switch (buff.BuffCtg)
         {
             case BUFF_CATEGORY.ATTACK:
-                GameManager.Instance.PS.Atk -= buff.BuffForce;
+                m_fBuffAtk -= buff.BuffForce;
                 break;
             case BUFF_CATEGORY.SPEED:
-                GameManager.Instance.PS.AtkSpeed -= buff.BuffForce;
+                m_fBuffSpd -= buff.BuffForce;
                 break;
         }
     }

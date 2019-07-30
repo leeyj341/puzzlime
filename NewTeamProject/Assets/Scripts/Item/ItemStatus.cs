@@ -29,7 +29,9 @@ public class ItemStatus : MonoBehaviour
         transform.Rotate(0, 2, 0);
         ItemFlash();
         if (!ItemActiveCheck())
-            gameObject.SetActive(false);
+        {
+            ItemManager.Instance.DelItemOnField(gameObject);
+        }
     }
 
     void ItemFlash()
@@ -85,10 +87,10 @@ public class ItemStatus : MonoBehaviour
 
                 break;
             case 92://속도향상
-                BuffManager.Instance.AddBuff(m_Data.MaxDbl, BUFF_CATEGORY.SPEED);   // 버프, 파워도 전달
+                BuffManager.Instance.AddBuff(m_Data.ItemPower, BUFF_CATEGORY.SPEED);   // 버프, 파워도 전달
                 break;
             case 93://공격향상
-                BuffManager.Instance.AddBuff(m_Data.MaxDbl, BUFF_CATEGORY.ATTACK);
+                BuffManager.Instance.AddBuff(m_Data.ItemPower, BUFF_CATEGORY.ATTACK);
                 break;
             case 94://만능총알
                 if (!SubWeapon) return false;
