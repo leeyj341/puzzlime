@@ -29,11 +29,6 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         buttonTexts[0].gameObject.SetActive(!isClicked);
     }
 
-    public void Save()
-    {
-        //
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
         if (buttonTexts.Count.Equals(0)) return;
@@ -55,16 +50,10 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         //SaveLoadManager.Instance.SavePlayerInfoAsXml(si);
     }
 
-    public void UseLoadButton()
-    {
-        // 로드 창 열고, 선택 시 해당 PlayerState 불러오기
-        GameManager.Instance.PS.Set(SaveLoadManager.Instance.LoadPlayerInfoAsXml<SaveInfo>(1));
-
-    }
-
-    public void LoadPlayerInfo()
+    public void LoadPlayerInfo(int saveSlotNum)
     {
         //GetComponentInChildren<GameObject>();
+        GameManager.Instance.PS.Set(SaveLoadManager.Instance.LoadPlayerInfoAsXml<SaveInfo>(saveSlotNum));
     }
 
     public void UseQuitButton()
