@@ -113,13 +113,4 @@ public class GameManager : MonoBehaviour
     {
         m_nGameLevel++;
     }
-
-    public void CreateNewPlayerState(string fileName)
-    {
-    }
-
-    public void LoadPlayerState(string fileName)
-    {
-        
-    }
 }
