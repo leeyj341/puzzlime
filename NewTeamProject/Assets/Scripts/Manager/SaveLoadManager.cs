@@ -1,11 +1,12 @@
-﻿using System.Xml;
+﻿using System.Xml.Serialization;
 using UnityEngine;
-using UnityEditor;
+using System.IO;
+using System.Runtime.Serialization.Formatters.Binary;
+using System.Text;
 
 public class SaveLoadManager : MonoBehaviour
 {
     public static SaveLoadManager Instance;
-    private PlayerState m_PS;
 
     private void Awake()
     {
@@ -13,47 +14,48 @@ public class SaveLoadManager : MonoBehaviour
         DontDestroyOnLoad(gameObject);
     }
 
-    // Start is called before the first frame update
-    void Start()
+    public void SavePlayerInfoAsBinary<T>(T t, int saveFileNum)
     {
-        m_PS = AssetDatabase.LoadAssetAtPath<PlayerState>("Assets/Data/PlayerState.asset");
+        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".bin");
+
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Create);
+        formatter.Serialize(stream, t);
+        stream.Close();
     }
 
-    public void SaveNewPlayerInfoXml(string saveFileName)
+    public T LoadPlayerInfoAsBinary<T>(int saveFileNum)
     {
-        // 선언부
-        XmlDocument xmlDoc = new XmlDocument();
-        xmlDoc.AppendChild(xmlDoc.CreateXmlDeclaration("1.0", "utf-8", "yes"));
+        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".bin");
 
-        // 노드
-        XmlNode root = xmlDoc.CreateNode(XmlNodeType.Element, "PlayerInfo", string.Empty);
-        xmlDoc.AppendChild(root);
+        BinaryFormatter formatter = new BinaryFormatter();
+        FileStream stream = new FileStream(path, FileMode.Open);
+        T t = (T)formatter.Deserialize(stream);
+        stream.Close();
 
-        XmlNode child = xmlDoc.CreateNode(XmlNodeType.Element, "Player", string.Empty);
-        root.AppendChild(child);
+        return t;
+    }
 
-        // 속성
-        XmlElement hp = xmlDoc.CreateElement("Hp");
-        hp.InnerText = m_PS.Hp.ToString();
-        child.AppendChild(hp);
+    public void SavePlayerInfoAsXml<T>(T t, int saveSlotNum = 1)
+    {
+        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveSlotNum + ".xml");
 
-        XmlElement maxHp = xmlDoc.CreateElement("MaxHp");
-        maxHp.InnerText = m_PS.MaxHp.ToString();
-        child.AppendChild(maxHp);
+        XmlSerializer serializer = new XmlSerializer(typeof(T));
+        TextWriter writer = new StreamWriter(new FileStream(path, FileMode.Create), Encoding.UTF8);
+        serializer.Serialize(writer, t);
 
-        XmlElement speed = xmlDoc.CreateElement("Speed");
-        speed.InnerText = m_PS.Speed.ToString();
-        child.AppendChild(speed);
+        writer.Close();
 
-        XmlElement rotSpeed = xmlDoc.CreateElement("RotSpeed");
-        rotSpeed.InnerText = m_PS.RotSpeed.ToString();
-        child.AppendChild(rotSpeed);
+    }
 
-        XmlElement atk = xmlDoc.CreateElement("Atk");
-        atk.InnerText = m_PS.Atk.ToString();
-        child.AppendChild(atk);
+    public T LoadPlayerInfoAsXml<T>(int saveFileNum)
+    {
+        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".xml");
 
-        xmlDoc.Save("./Assets/Resources/Save/" + saveFileName + ".xml");
-
+        XmlSerializer serializer = new XmlSerializer(typeof(T));
+        FileStream stream = new FileStream(path, FileMode.Open);
+        T t = (T)serializer.Deserialize(stream);
+        
+        return t;
     }
 }

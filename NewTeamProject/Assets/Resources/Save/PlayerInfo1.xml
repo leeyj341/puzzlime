@@ -1,0 +1,14 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SaveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WeaponCategory>3</WeaponCategory>
+  <Tag>tt</Tag>
+  <DefaultWeaponNum>21</DefaultWeaponNum>
+  <Stage>6</Stage>
+  <Gold>1000</Gold>
+  <AtkCount>0</AtkCount>
+  <AtkCost>100</AtkCost>
+  <HealthCount>0</HealthCount>
+  <HealthCost>100</HealthCost>
+  <BulletCount>0</BulletCount>
+  <BulletCost>100</BulletCost>
+</SaveInfo>

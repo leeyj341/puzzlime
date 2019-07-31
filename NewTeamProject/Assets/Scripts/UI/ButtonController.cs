@@ -8,7 +8,6 @@ using UnityEngine.SceneManagement;
 public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     List<Text> buttonTexts = new List<Text>();
-    int SaveNum = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -44,16 +43,23 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void UseStartButton(string nextSceneName)
     {
-        if (SaveNum > 1) return;
-        SaveLoadManager.Instance.SaveNewPlayerInfoXml("PlayerSaveData" + SaveNum);
-        SaveNum++;
+        GameManager.Instance.PS.Initialize();
         SceneManager.LoadScene(nextSceneName);
+        //save
+        //SaveInfo si = new SaveInfo();
+        //SaveLoadManager.Instance.SavePlayerInfoAsXml(si);
     }
 
-    public void UseLoadButton(string nextSceneName)
+    public void UseLoadButton()
     {
         // 로드 창 열고, 선택 시 해당 PlayerState 불러오기
-        GameManager.Instance.LoadPlayerState("PlayerState");
+        GameManager.Instance.PS.Set(SaveLoadManager.Instance.LoadPlayerInfoAsXml<SaveInfo>(1));
+
+    }
+
+    public void LoadPlayerInfo()
+    {
+        //GetComponentInChildren<GameObject>();
     }
 
     public void UseQuitButton()

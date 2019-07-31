@@ -59,4 +59,5 @@ public enum INVEN_MODE
 public static class Constants
 {
     public const float GameTime = 900.0f;
+    public const int SaveSlotNum = 2;
 }
