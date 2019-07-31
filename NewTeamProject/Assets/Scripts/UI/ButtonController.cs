@@ -30,6 +30,11 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         buttonTexts[0].gameObject.SetActive(!isClicked);
     }
 
+    public void Save()
+    {
+        //
+    }
+
     public void OnPointerDown(PointerEventData eventData)
     {
         if (buttonTexts.Count.Equals(0)) return;
@@ -72,7 +77,7 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
 
     public void UseBuyButton()
     {
-        // PS 갱신상태 저장
+        ShopManager.Instance.SaveAll();
     }
 
     public void UseGoButton()

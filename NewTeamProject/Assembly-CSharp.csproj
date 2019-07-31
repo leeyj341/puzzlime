@@ -72,11 +72,14 @@
     <Compile Include="Assets\Scripts\Manager\BuffManager.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SaveLoadManager.cs" />
+    <Compile Include="Assets\Scripts\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\ItemData.cs" />
     <Compile Include="Assets\Scripts\ScriptableObject\PlayerState.cs" />
+    <Compile Include="Assets\Scripts\Shop\ShopButtonFunction.cs" />
+    <Compile Include="Assets\Scripts\Shop\ShopText.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\InGameUIManager.cs" />
     <Compile Include="Assets\Scripts\UI\SelectCharacter.cs" />

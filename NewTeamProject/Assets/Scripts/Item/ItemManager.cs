@@ -59,7 +59,7 @@ public class ItemManager : MonoBehaviour
 
     void AddItemInDict(int Key, string FileName)
     {
-        ItemData Temp = AssetDatabase.LoadAssetAtPath<ItemData>("Assets/Data/" + FileName + ".asset");
+        ItemData Temp = AssetDatabase.LoadAssetAtPath<ItemData>(Application.dataPath + "/Data/" + FileName + ".asset");
         if (Temp)
         {
             m_DictItemData.Add(Key, Temp);
@@ -67,7 +67,7 @@ public class ItemManager : MonoBehaviour
         else
         {
             m_DictItemData.Add(Key, ScriptableObject.CreateInstance<ItemData>().SetItemObtion(Key));
-            AssetDatabase.CreateAsset(m_DictItemData[Key], "Assets/Data/" + FileName + ".asset");
+            AssetDatabase.CreateAsset(m_DictItemData[Key], Application.dataPath + "/Data/" + FileName + ".asset");
         }
     }
 
