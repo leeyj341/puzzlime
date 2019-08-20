@@ -2,45 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 
-public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ButtonController : MonoBehaviour
 {
-    List<Text> buttonTexts = new List<Text>();
-
-    // Start is called before the first frame update
-    void Start()
-    {
-        SetButton();
-    }
-
-    private void SetButton()
-    {
-        buttonTexts.AddRange(GetComponentsInChildren<Text>());
-
-        if (buttonTexts.Count.Equals(0)) return;
-        buttonTexts[1].gameObject.SetActive(false);
-    }
-
-    private void ChangeText(bool isClicked)
-    {
-        buttonTexts[1].gameObject.SetActive(isClicked);
-        buttonTexts[0].gameObject.SetActive(!isClicked);
-    }
-
-    public void OnPointerDown(PointerEventData eventData)
-    {
-        if (buttonTexts.Count.Equals(0)) return;
-        ChangeText(true);
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        if (buttonTexts.Count.Equals(0)) return;
-        ChangeText(false);
-    }
-
     public void UseStartButton(string nextSceneName)
     {
         GameManager.Instance.PS.Initialize();
@@ -64,22 +29,6 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         #else
                 Application.Quit();
         #endif
-    }
-
-    public void UseBackButton()
-    {
-        SceneManager.LoadScene("StartScene");
-    }
-
-    public void UseBuyButton()
-    {
-        ShopManager.Instance.SaveAll();
-    }
-
-    public void UseGoButton()
-    {
-        // 게임 시작
-        LoadingSceneManager.LoadScene("GameScene");
     }
 
 }

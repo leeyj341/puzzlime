@@ -75,6 +75,10 @@ public class InGameUIManager : MonoBehaviour
 
         // 게임 레벨 설정
         TextLevel.text = GameManager.Instance.GameLevel.ToString();
+
+        // 플레이어 체력
+        HPSlider.maxValue = GameManager.Instance.PS.MaxHp;
+        HPSlider.value = HPSlider.maxValue;
     }
 
     private void ChangeHpSlider()
