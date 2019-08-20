@@ -38,6 +38,11 @@ public class WeaponList : MonoBehaviour
         }
     }
 
+    public void ShotChange()
+    {
+
+    }
+
     void ActiveWeapon(Transform Weapon)
     {
         Weapon.gameObject.SetActive(true);

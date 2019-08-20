@@ -1175,6 +1175,7 @@ GameObject:
   - component: {fileID: 370894082}
   - component: {fileID: 370894081}
   - component: {fileID: 370894080}
+  - component: {fileID: 370894083}
   m_Layer: 5
   m_Name: BackButton
   m_TagString: Untagged
@@ -1294,6 +1295,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 370894078}
   m_CullTransparentMesh: 0
+--- !u!114 &370894083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 370894078}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43436ee68ec376d48b8b5da1afd8051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &451223210
 GameObject:
   m_ObjectHideFlags: 0
@@ -3050,7 +3063,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1214108589}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43436ee68ec376d48b8b5da1afd8051b, type: 3}
+  m_Script: {fileID: 11500000, guid: e257d9eb55b44924dbda043c5ffc9ad4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!114 &1214108595
@@ -3299,6 +3312,7 @@ GameObject:
   - component: {fileID: 1400697801}
   - component: {fileID: 1400697800}
   - component: {fileID: 1400697799}
+  - component: {fileID: 1400697802}
   m_Layer: 5
   m_Name: GoButton
   m_TagString: Untagged
@@ -3418,6 +3432,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1400697797}
   m_CullTransparentMesh: 0
+--- !u!114 &1400697802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1400697797}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43436ee68ec376d48b8b5da1afd8051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1402732847
 GameObject:
   m_ObjectHideFlags: 0
@@ -3430,6 +3456,7 @@ GameObject:
   - component: {fileID: 1402732851}
   - component: {fileID: 1402732850}
   - component: {fileID: 1402732849}
+  - component: {fileID: 1402732852}
   m_Layer: 5
   m_Name: BuyButton
   m_TagString: Untagged
@@ -3549,6 +3576,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1402732847}
   m_CullTransparentMesh: 0
+--- !u!114 &1402732852
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1402732847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43436ee68ec376d48b8b5da1afd8051b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1512767453
 GameObject:
   m_ObjectHideFlags: 0
