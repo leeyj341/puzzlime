@@ -16,7 +16,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public void SavePlayerInfoAsBinary<T>(T t, int saveFileNum)
     {
-        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".bin");
+        string path = Path.Combine(Application.dataPath, "Resources/Save/SaveInfo" + saveFileNum + ".bin");
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Create);
@@ -26,7 +26,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public T LoadPlayerInfoAsBinary<T>(int saveFileNum)
     {
-        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".bin");
+        string path = Path.Combine(Application.dataPath, "Resources/Save/SaveInfo" + saveFileNum + ".bin");
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
@@ -38,7 +38,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public void SavePlayerInfoAsXml<T>(T t, int saveSlotNum = 1)
     {
-        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveSlotNum + ".xml");
+        string path = Path.Combine(Application.dataPath, "Resources/Save/SaveInfo" + saveSlotNum + ".xml");
 
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         TextWriter writer = new StreamWriter(new FileStream(path, FileMode.Create), Encoding.UTF8);
@@ -50,7 +50,7 @@ public class SaveLoadManager : MonoBehaviour
 
     public T LoadPlayerInfoAsXml<T>(int saveFileNum)
     {
-        string path = Path.Combine(Application.dataPath, "Resources/Save/PlayerInfo" + saveFileNum + ".xml");
+        string path = Path.Combine(Application.dataPath, "Resources/Save/SaveInfo" + saveFileNum + ".xml");
 
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         FileStream stream = new FileStream(path, FileMode.Open);

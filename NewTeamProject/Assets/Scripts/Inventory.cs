@@ -52,7 +52,7 @@ public class Inventory : MonoBehaviour
 
     void AddFirst()
     {
-        AddItem(ItemManager.Instance.DictData(11));
+        AddItem(ItemManager.Instance.DictData(GameManager.Instance.PS.DefaultWeaponNum));
         AddItem(ItemManager.Instance.DictData(22));
         AddItem(ItemManager.Instance.DictData(23));
         Equip(m_listWeaponItem[0]);

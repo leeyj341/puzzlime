@@ -16239,7 +16239,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1866381775
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -16295,7 +16295,6 @@ MonoBehaviour:
   Speed: 0
   RotSpeed: 240
   Atk: 0
-  AdditionalAtk: 0
   WeaponCategory: 4
   AtkSpeed: 1
   Tag: CowBoy

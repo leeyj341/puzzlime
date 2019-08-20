@@ -50,10 +50,11 @@ public class ButtonController : MonoBehaviour, IPointerDownHandler, IPointerUpHa
         //SaveLoadManager.Instance.SavePlayerInfoAsXml(si);
     }
 
-    public void LoadPlayerInfo(int saveSlotNum)
+    public void LoadSaveInfo(int saveSlotNum)
     {
-        //GetComponentInChildren<GameObject>();
+        // 예외처리 어떻게 함...?
         GameManager.Instance.PS.Set(SaveLoadManager.Instance.LoadPlayerInfoAsXml<SaveInfo>(saveSlotNum));
+        LoadingSceneManager.LoadScene("ShopScene");
     }
 
     public void UseQuitButton()
