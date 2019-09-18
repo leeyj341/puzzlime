@@ -1,11 +1,25 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
-using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class SelectCharacter : MonoBehaviour
 {
+    public List<RectTransform> rtList = new List<RectTransform>();
+
+    private bool bIsSelected = false;
+
+    private void Update()
+    {
+        if (GameManager.Instance.PS.DefaultWeaponNum != 0 &&
+            GameManager.Instance.PS.tag != "") bIsSelected = true;
+    }
+
+    public bool IsSelected()
+    {
+        return bIsSelected;
+    }
+
     public void SelectWeapon(int weaponNum)
     {
         GameManager.Instance.PS.DefaultWeaponNum = weaponNum;
@@ -13,24 +27,32 @@ public class SelectCharacter : MonoBehaviour
 
     public void Select(string tag)
     {
-        if (GameManager.Instance.PS.DefaultWeaponNum.Equals(0))
-        {
-            //무기를 선택해주세요! 창 출력
-            return;
-        }
         //캐릭터 선택 정보 전달, scene 전환
-        GameManager.Instance.PS.Tag = tag;
-        LoadingSceneManager.LoadScene("ShopScene");       
+        GameManager.Instance.PS.Tag = tag;     
     }
 
-    public void ChangeScaleToOrigin(RectTransform rt)
+    public void ChangeScaleToOrigin(int CharacterNum)
     {
-        rt.localScale = new Vector3(1, 1, 1);
+        StopAllCoroutines();
+
+        if (rtList[CharacterNum].localScale.x.Equals(1.3f)) rtList[CharacterNum].localScale = new Vector3(1.3f, 1.3f, 1);
+        else rtList[CharacterNum].localScale = new Vector3(1, 1, 1);
     }
 
-    public void ChangeScale(RectTransform rt)
+    public void ChangeScale(int CharacterNum)
     {
-        StartCoroutine(ChaneImageSize(rt));
+        StartCoroutine(ChaneImageSize(rtList[CharacterNum]));
+    }
+
+    public void FixScale(int CharacterNum)
+    {
+        for(int i = 0; i < rtList.Count; i++)
+        {
+            if(i.Equals(CharacterNum))
+                rtList[i].localScale = new Vector3(1.3f, 1.3f, 1);
+            else rtList[i].localScale = new Vector3(1, 1, 1);
+        }
+        
     }
 
     IEnumerator ChaneImageSize(RectTransform rt)

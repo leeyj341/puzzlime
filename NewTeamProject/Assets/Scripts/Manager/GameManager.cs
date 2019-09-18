@@ -86,7 +86,7 @@ public class GameManager : MonoBehaviour
         return sMinutes + " : " + sSeconds;
     }
 
-    private CURRUNT_SCENE GetCurScene()
+    public CURRUNT_SCENE GetCurScene()
     {
         switch (SceneManager.GetActiveScene().name)
         {
