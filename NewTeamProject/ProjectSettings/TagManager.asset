@@ -7,6 +7,8 @@ TagManager:
   - CowBoy
   - CowGirl
   - Weapon
+  - SaveInfo1
+  - SaveInfo2
   layers:
   - Default
   - TransparentFX

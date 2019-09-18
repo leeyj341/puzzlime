@@ -23,8 +23,10 @@ public class ButtonFuntion : MonoBehaviour
 
     public void UseGoButton()
     {
-        if (gameObject.GetComponent<SelectCharacter>().IsSelected())
-            LoadingSceneManager.LoadScene("ShopScene");
+        if (GameManager.Instance.PS.DefaultWeaponNum.Equals(0) ||
+            GameManager.Instance.PS.Tag.Equals("")) return;
+
+        LoadingSceneManager.LoadScene("ShopScene");
     }
 
 }
