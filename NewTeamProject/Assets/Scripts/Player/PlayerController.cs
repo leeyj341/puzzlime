@@ -56,10 +56,11 @@ public class PlayerController : MonoBehaviour
         {
             // 총 쏘기
             // 총이 없으면 안 쏘게
-            //if (!GameManager.Instance.Inven.GetSubWeapon()) return;
-            if (AnimController.CurAni.Equals(ANIM_SORT.ATTACK)) return;
+            if (!GameManager.Instance.Inven.GetSubWeapon()) return;
+            if (AnimController.CurAni.Equals(ANIM_SORT.ATTACK) || AnimController.CurAni.Equals(ANIM_SORT.SHOOT)) return;
 
             AnimController.ChangeAniSort(ANIM_SORT.SHOOT);
+            GameManager.Instance.Inven.AttackSub();
         }
     }
 
@@ -77,5 +78,8 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    
+    public void Fire()
+    {
+        BulletContainer.Instance.Fire();
+    }
 }

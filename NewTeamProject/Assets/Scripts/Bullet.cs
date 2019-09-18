@@ -4,34 +4,39 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    Rigidbody rb;
+    BULLET_TYPE m_eType;
+    
     float m_fDamage;
     float m_fRange;
+    Vector3 m_vStart;
+
+    public BULLET_TYPE Type { get => m_eType; set => m_eType = value; }
     // Start is called before the first frame update
     void Start()
     {
-        m_fDamage = 0;
-        m_fRange = 0;
-        rb = gameObject.GetComponent<Rigidbody>();
+        m_fRange = 10;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-
+        if(Vector3.Distance(m_vStart, transform.position) >= m_fRange)
+            gameObject.SetActive(false);
     }
 
-    public void Fire(float Damage, float range)
+    public void Fire(float damage)
     {
-        m_fDamage = Damage;
-        m_fRange = range;
-        
-        rb.AddForce(new Vector3(0,0,5), ForceMode.Impulse);
+        transform.rotation = GameManager.Instance.Inven.transform.rotation;
+        m_vStart = transform.position = GameManager.Instance.Inven.transform.position + 
+            GameManager.Instance.Inven.gameObject.transform.forward * 3 + Vector3.up * 2;
+
+        m_fDamage = damage;
+        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 5, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.transform.name.Equals("Ground"))
+        if (!collision.transform.name.Equals("CowBoy") &&
+            !collision.transform.name.Equals("CowGirl"))
         {
             gameObject.SetActive(false);
         }

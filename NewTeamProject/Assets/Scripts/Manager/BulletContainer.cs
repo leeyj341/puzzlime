@@ -6,8 +6,8 @@ public class BulletContainer : MonoBehaviour
 {
     public static BulletContainer Instance;
 
-    List<GameObject> m_listBullet = new List<GameObject>();
-
+    List<GameObject> m_listBullet_41 = new List<GameObject>();
+    List<GameObject> m_listBullet_42 = new List<GameObject>();
     private void Awake()
     {
         if (!Instance) Instance = this;
@@ -19,31 +19,69 @@ public class BulletContainer : MonoBehaviour
         MakeBullet();   
     }
 
+    public void BulletOff()
+    {
+        for(int i = 0; i < m_listBullet_41.Count; i++)
+        {
+            m_listBullet_41[i].SetActive(false);
+            m_listBullet_42[i].SetActive(false);
+        }
+    }
+
     public void MakeBullet()
     {
         for(int i = 0; i < 20; i++)
         {
-            GameObject temp = (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Bullet"));
-            m_listBullet.Add(temp);
+            m_listBullet_41.Add(MakeBullet_41());
+            m_listBullet_42.Add(MakeBullet_42());
         }
     }
-    
-    public void Fire(float damage, float range, Transform tpPlayer)
+
+    GameObject MakeBullet_41()
     {
-        GameObject CurBulletObj = FindBullet();
+        GameObject temp = (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Bullet"), transform);
+        temp.GetComponent<Bullet>().Type = BULLET_TYPE.TYPE_41;
+        temp.GetComponent<Bullet>().GetComponent<Rigidbody>().useGravity = false;
+        temp.GetComponent<Bullet>().GetComponent<Rigidbody>().mass = 0.1f;
+        return temp;
+    }
+
+    GameObject MakeBullet_42()
+    {
+        GameObject temp = (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Bullet"), transform);
+        temp.GetComponent<Bullet>().Type = BULLET_TYPE.TYPE_42;
+        temp.GetComponent<Bullet>().GetComponent<Rigidbody>().useGravity = true;
+        temp.GetComponent<Bullet>().GetComponent<Rigidbody>().mass = 0.5f;
+        return temp;
+    }
+
+    public void Fire()
+    {
+        GameObject CurBulletObj = FindBullet(GameManager.Instance.Inven.SubWeapon.m_Data.ItemNumber);
         if (!CurBulletObj) return;
         Bullet CurBullet = CurBulletObj.GetComponent<Bullet>();
         CurBulletObj.SetActive(true);
-        CurBulletObj.transform.rotation = tpPlayer.rotation;
-        CurBulletObj.transform.position = tpPlayer.position;
-        CurBullet.Fire(damage, range);
+        CurBulletObj.GetComponent<Bullet>().Fire(GameManager.Instance.Inven.SubWeapon.m_Data.ItemPower);
     }
 
-    GameObject FindBullet()
+    GameObject FindBullet(int SubNum)
     {
-        for(int i = 0; i < m_listBullet.Count; i++)
+        if(SubNum == 41)
         {
-            if (m_listBullet[i].activeSelf) return m_listBullet[i];
+            for (int i = 0; i < m_listBullet_41.Count; i++)
+            {
+                if (!m_listBullet_41[i].activeSelf)
+                    return m_listBullet_41[i];
+            }
+        }
+
+        else if(SubNum == 42)
+        {
+            for (int i = 0; i < m_listBullet_42.Count; i++)
+            {
+                if (!m_listBullet_42[i].activeSelf)
+                    return m_listBullet_42[i];
+            }
         }
 
         return null;

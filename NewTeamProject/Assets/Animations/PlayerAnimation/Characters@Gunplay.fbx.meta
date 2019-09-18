@@ -133,6 +133,22 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
+      - time: 0.5118338
+        functionName: Fire
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 10014aebe588de348b1b495af469f26c,
+          type: 3}
+        floatParameter: 0
+        intParameter: 2
+        messageOptions: 0
+      - time: 1
+        functionName: ChangeEquip
+        data: 
+        objectReferenceParameter: {fileID: 11500000, guid: 94a293475aebda044b837efda28fe87f,
+          type: 3}
+        floatParameter: 0
+        intParameter: 0
+        messageOptions: 0
       - time: 1
         functionName: ChangeAniSort
         data: 

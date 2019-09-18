@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum BULLET_TYPE
+{
+    TYPE_41,
+    TYPE_42
+}
 
 public enum CURRUNT_SCENE
 {

@@ -114,7 +114,9 @@ public class Inventory : MonoBehaviour
 
     public void AttackSub()
     {
-        if (!m_sSubWeapon) return;
+        if (!GetSubWeapon()) return;
+
+        m_sList.ChangeSub(m_sSubWeapon.m_Data.Name);
 
         m_sSubWeapon.Dbl -= 1;
 
@@ -124,7 +126,7 @@ public class Inventory : MonoBehaviour
             m_sSubWeapon = null;
         }
     }
-
+    
     public void Attack()
     {
         m_listWeaponItem[m_nCurEquip].Dbl -= 1;
@@ -247,5 +249,10 @@ public class Inventory : MonoBehaviour
             if(m_nCurUse < m_listUseItem.Count)
                 Use();
         }
+    }
+
+    public void ChangeEquip()
+    {
+        m_sList.ChangeEquip();
     }
 }
