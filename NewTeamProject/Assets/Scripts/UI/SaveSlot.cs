@@ -34,7 +34,11 @@ public class SaveSlot : MonoBehaviour
 
     public void InitSlotText()
     {
+#if UNITY_EDITOR
         string path = Path.Combine(Application.dataPath, "Resources/Save/" + tag + ".xml");
+#else
+        string path = Path.Combine(Application.persistentDataPath, tag + ".xml");
+#endif
         if (File.Exists(path))
         {
             si = SaveLoadManager.Instance.LoadPlayerInfoAsXml<SaveInfo>(path);

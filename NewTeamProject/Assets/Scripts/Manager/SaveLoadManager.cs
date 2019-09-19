@@ -26,7 +26,11 @@ public class SaveLoadManager : MonoBehaviour
 
     public T LoadPlayerInfoAsBinary<T>(int saveFileNum)
     {
+#if UNITY_EDITOR
         string path = Path.Combine(Application.dataPath, "Resources/Save/SaveInfo" + saveFileNum + ".bin");
+#else
+        string path = Path.Combine(Application.persistentDataPath, "Resources/Save/SaveInfo" + saveFileNum + ".bin");
+#endif
 
         BinaryFormatter formatter = new BinaryFormatter();
         FileStream stream = new FileStream(path, FileMode.Open);
@@ -38,7 +42,11 @@ public class SaveLoadManager : MonoBehaviour
 
     public void SavePlayerInfoAsXml<T>(T t, string saveSlotName)
     {
+#if UNITY_EDITOR
         string path = Path.Combine(Application.dataPath, "Resources/Save/" + saveSlotName + ".xml");
+#else
+        string path = Path.Combine(Application.persistentDataPath, saveSlotName + ".xml");
+#endif
 
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         TextWriter writer = new StreamWriter(new FileStream(path, FileMode.Create), Encoding.UTF8);
