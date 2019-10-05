@@ -110,12 +110,14 @@ public class ItemStatus : MonoBehaviour
         {
             m_sRb.isKinematic = false;
             m_sRb.useGravity = true;
+            m_sCollider.isTrigger = false;
             m_bFlashSet = false;
         }
         else
         {
             m_sRb.isKinematic = true;
             m_sRb.useGravity = false;
+            m_sCollider.isTrigger = true;
         }
     }
 
