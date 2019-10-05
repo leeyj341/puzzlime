@@ -1,31 +1,43 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Buff
 {
     public float BuffForce;
     public BUFF_CATEGORY BuffCtg;
     public float BuffTime;
-
-    public bool Update()
+    
+    public bool isBuffWalk()
     {
         if (BuffTime <= 0)
-            return false; 
+        {
+            BuffTime = 0;
+            return false;
+        } 
         BuffTime -= Time.deltaTime;
         return true;
     }
 
-    public Buff() { }
+    public Buff() { BuffTime = 0; BuffForce = 0; }
     ~Buff() { }
 }
 
 public class BuffManager : MonoBehaviour
 {
     public static BuffManager Instance;
-    public List<Buff> ListBuff = new List<Buff>();
     private float m_fBuffAtk;
     private float m_fBuffSpd;
+
+    public Image ImgBuffAtk;
+    public Text TextBuffAtk;
+
+    public Image ImgBuffSpd;
+    public Text TextBuffSpd;
+
+    Buff m_cAtkBuff = new Buff();
+    Buff m_cSpdBuff = new Buff();
 
     public float BuffAtk { get => m_fBuffAtk; set => m_fBuffAtk = value; }
     public float BuffSpd { get => m_fBuffSpd; set => m_fBuffSpd = value; }
@@ -40,63 +52,64 @@ public class BuffManager : MonoBehaviour
     {
         m_fBuffAtk = 0;
         m_fBuffSpd = 0;
+
+        m_cAtkBuff.BuffCtg = BUFF_CATEGORY.ATTACK;
+        m_cSpdBuff.BuffCtg = BUFF_CATEGORY.SPEED;
     }
 
     // Update is called once per frame
     void Update()
     {
-        //List에 담긴 Buff의 업데이트를 수행함
-        //버프 지속시간이 종료될 때 버프로 인해 증가된 수치가 삭제되도록 조치해야함
-        if (ListBuff.Count.Equals(0)) return;
-
-        for(int i = 0; i < ListBuff.Count; i++)
-        {
-            if (!ListBuff[i].Update())
-                DelBuff(ListBuff[i]);
-        }
+        AtkTextUpdate();
+        SpdTextUpdate();
     }
     //List에 Buff를 삽입하는 함수, 삽입될 때 플레이어에게 증가수치를 전달해줘야함
     public void AddBuff(float BForce, BUFF_CATEGORY BCtg)
     {
-        Buff buff = new Buff
+        if(BCtg == BUFF_CATEGORY.ATTACK)
         {
-            BuffForce = BForce,
-            BuffCtg = BCtg,
-            BuffTime = 20.0f
-        };
-        AddBuffToPlayer(buff);
-        ListBuff.Add(buff);
-    }
+            m_cAtkBuff.BuffTime += 20.0f;
+            if (m_cAtkBuff.BuffTime > 60.0f)
+                m_cAtkBuff.BuffTime = 60.0f;
+            m_cAtkBuff.BuffForce = BForce;
+        }
 
-    public void DelBuff(Buff buff)
-    {
-        DelBuffToPlayer(buff);
-        ListBuff.Remove(buff);
-    }
-    
-    void AddBuffToPlayer(Buff buff)
-    {
-        switch (buff.BuffCtg)
+        else
         {
-            case BUFF_CATEGORY.ATTACK:
-                m_fBuffAtk += buff.BuffForce;
-                break;
-            case BUFF_CATEGORY.SPEED:
-                m_fBuffSpd += buff.BuffForce;
-                break;
+            m_cSpdBuff.BuffTime += 20.0f;
+            if (m_cSpdBuff.BuffTime > 60.0f)
+                m_cSpdBuff.BuffTime = 60.0f;
+            m_cSpdBuff.BuffForce = BForce;
         }
     }
 
-    void DelBuffToPlayer(Buff buff)
+    void AtkTextUpdate()
     {
-        switch (buff.BuffCtg)
+        if (!m_cAtkBuff.isBuffWalk())
+        { 
+            TextBuffAtk.text = "Off";
+            m_fBuffAtk = 0;
+        }
+        else
         {
-            case BUFF_CATEGORY.ATTACK:
-                m_fBuffAtk -= buff.BuffForce;
-                break;
-            case BUFF_CATEGORY.SPEED:
-                m_fBuffSpd -= buff.BuffForce;
-                break;
+            int TextCount = (int)m_cAtkBuff.BuffTime;
+            TextBuffAtk.text = TextCount.ToString();
+            m_fBuffAtk = m_cAtkBuff.BuffForce;
+        }
+    }
+
+    void SpdTextUpdate()
+    {
+        if (!m_cSpdBuff.isBuffWalk())
+        {
+            TextBuffSpd.text = "Off";
+            m_fBuffSpd = 0;
+        }
+        else
+        {
+            int TextCount = (int)m_cSpdBuff.BuffTime;
+            TextBuffSpd.text = TextCount.ToString();
+            m_fBuffSpd = m_cSpdBuff.BuffForce;
         }
     }
 }

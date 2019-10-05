@@ -5,7 +5,7 @@ using UnityEngine;
 public class AirPlaneMovement : MonoBehaviour
 {
     ItemDropSystem m_sSys;
-    MeshRenderer m_sMesh;
+    public MeshRenderer m_sMesh;
 
     Vector3[] m_ArrNode_Left = new Vector3[5];
     Vector3[] m_ArrNode_Top = new Vector3[5];
@@ -17,7 +17,7 @@ public class AirPlaneMovement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_sMesh = gameObject.GetComponent<MeshRenderer>();
+        m_sMesh = gameObject.GetComponentInChildren<MeshRenderer>();
         m_sSys = gameObject.GetComponent<ItemDropSystem>();
         for (int i = 0; i < 5; i++)
         {

@@ -13,11 +13,13 @@ public class Inventory : MonoBehaviour
     List<ItemStatus> m_listUseItem = new List<ItemStatus>();
     List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
     ItemStatus m_sSubWeapon = null;
+    bool m_bisSubWeapon = false;
     public WeaponList m_sList;
 
     public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; }
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
+    public bool isSubWeapon { get => m_bisSubWeapon; set => m_bisSubWeapon = value; }
 
     // Start is called before the first frame update
     private void Start()
@@ -29,14 +31,6 @@ public class Inventory : MonoBehaviour
     void Update()
     {
         KeyAction();
-    }
-
-    public bool GetSubWeapon()
-    {
-        if (!m_sSubWeapon.m_Data)
-            return false;
-
-        else return true;
     }
 
     void FirstSetting()
@@ -56,7 +50,8 @@ public class Inventory : MonoBehaviour
         AddItem(ItemManager.Instance.DictData(22));
         AddItem(ItemManager.Instance.DictData(23));
         Equip(m_listWeaponItem[0]);
-        AddItem(ItemManager.Instance.DictData(41));
+        AddItem(ItemManager.Instance.DictData(42));
+        AddItem(ItemManager.Instance.DictData(92));
     }
 
     void MakeNewItemStatus()
@@ -76,6 +71,7 @@ public class Inventory : MonoBehaviour
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
                 InGameUIManager.Instance.AddImg(m_sSubWeapon.m_Data.Name);
+                m_bisSubWeapon = true;
             }
             //주무기면
             else
@@ -114,19 +110,23 @@ public class Inventory : MonoBehaviour
 
     public void AttackSub()
     {
-        if (!GetSubWeapon()) return;
-
         m_sList.ChangeSub(m_sSubWeapon.m_Data.Name);
 
         m_sSubWeapon.Dbl -= 1;
+    }
 
-        if (m_sSubWeapon.Dbl.Equals(0) )
+    public void SubWeaponOff()
+    {
+        if (m_sSubWeapon.Dbl == 0)
         {
             m_QueueEmptyItem.Enqueue(m_sSubWeapon);
             m_sSubWeapon = null;
+            m_bisSubWeapon = false;
+
+            InGameUIManager.Instance.DeleteImage();
         }
     }
-    
+
     public void Attack()
     {
         m_listWeaponItem[m_nCurEquip].Dbl -= 1;

@@ -92,11 +92,7 @@
     <None Include="Assets\Resources\Save\SaveInfo1.xml" />
     <None Include="Assets\Asset\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-<<<<<<< HEAD
       <HintPath>C:/Users/KimTaeWan/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
-=======
-      <HintPath>C:/Users/yjlee/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
->>>>>>> d0a80a283a69db4592b8395c530018d97686d329
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
