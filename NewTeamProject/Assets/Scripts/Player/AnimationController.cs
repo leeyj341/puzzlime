@@ -5,47 +5,45 @@ using UnityEngine;
 public class AnimationController : MonoBehaviour
 {
     // 애니메이션 관련 변수
-    private ANIM_SORT curAni = ANIM_SORT.BASIC;
-    private float AnimPlaySpeed = 1.0f;                                     // 최종 애니메이션 재생속도
-    private float SlashSpeed = 3.0f;
-    private float StabSpeed = 1.0f;
+    private float animPlaySpeed = 1.0f;                                     // 최종 애니메이션 재생속도
+    private float slashSpeed = 3.0f;
+    private float stabSpeed = 1.0f;
 
-    private Animator PlayerAnimator;
+    private Animator playerAnimator;
 
-    public ANIM_SORT CurAni { get => curAni; set => curAni = value; }
-
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        PlayerAnimator = GetComponent<Animator>();
+        playerAnimator = GetComponent<Animator>();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void UpdateSpeed(float speed)
     {
-        UpdateAnimationParameter();
+        playerAnimator.SetFloat("Speed", speed);
     }
 
-    private void UpdateAnimationParameter()
+    public void UpdateAnimationParameter()
     {
         if ((int)GameManager.Instance.PS.WeaponCategory < 2)
         {
-            AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * SlashSpeed;
+            animPlaySpeed = GameManager.Instance.PS.AtkSpeed * slashSpeed;
         }
         else if (((int)GameManager.Instance.PS.WeaponCategory).Equals(2))
         {
-            AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * StabSpeed;
+            animPlaySpeed = GameManager.Instance.PS.AtkSpeed * stabSpeed;
         }
 
-        PlayerAnimator.SetFloat("AtkAnimPlaySpeed", AnimPlaySpeed);
-        PlayerAnimator.SetFloat("Speed", GameManager.Instance.PS.Speed);   
+        playerAnimator.SetFloat("AtkAnimPlaySpeed", animPlaySpeed);
+    }
+
+    public int GetCurAniNum()
+    {
+        return playerAnimator.GetInteger("AniNum");
     }
 
     public void ChangeAniSort(ANIM_SORT eAnimSort)
     {
-        curAni = eAnimSort;
-        PlayerAnimator.SetInteger("AniNum", (int)curAni);
-        PlayerAnimator.SetInteger("WeaponNum", (int)GameManager.Instance.PS.WeaponCategory);
+        playerAnimator.SetInteger("AniNum", (int)eAnimSort);
+        playerAnimator.SetInteger("WeaponNum", (int)GameManager.Instance.PS.WeaponCategory);
     }
 
 

@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerState State;
-    private CharacterController Controller;
-    private AnimationController AnimController;
+    private PlayerState state;
+    private CharacterController controller;
+    private AnimationController animController;
     private float h = 0.0f;
     private float v = 0.0f;
 
@@ -14,9 +14,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        State = GameManager.Instance.PS;
-        Controller = GetComponent<CharacterController>();
-        AnimController = GetComponent<AnimationController>();
+        state = GameManager.Instance.PS;
+        controller = GetComponent<CharacterController>();
+        animController = GetComponent<AnimationController>();
     }
 
     // Update is called once per frame
@@ -37,41 +37,44 @@ public class PlayerController : MonoBehaviour
 
         if (v != 0)
         {
-            State.Speed = 10.0f;
+            state.Speed = 10.0f;
+            animController.UpdateSpeed(state.Speed);
         }
         else
         {
-            State.Speed = 0;
+            state.Speed = 0;
+            animController.UpdateSpeed(state.Speed);
         }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
             //일반 공격
-            if (AnimController.CurAni.Equals(ANIM_SORT.SHOOT)) return;
+            if (animController.GetCurAniNum().Equals((int)ANIM_SORT.SHOOT)) return;
 
-            AnimController.ChangeAniSort(ANIM_SORT.ATTACK);
+            animController.UpdateAnimationParameter();
+            animController.ChangeAniSort(ANIM_SORT.ATTACK);
         }
 
         if (Input.GetKeyDown(KeyCode.R))
         {
             // 총 쏘기
             if (!GameManager.Instance.Inven.isSubWeapon) return;
-            if (AnimController.CurAni.Equals(ANIM_SORT.ATTACK) || AnimController.CurAni.Equals(ANIM_SORT.SHOOT)) return;
+            if (!animController.GetCurAniNum().Equals((int)ANIM_SORT.BASIC)) return;
 
-            AnimController.ChangeAniSort(ANIM_SORT.SHOOT);
+            animController.ChangeAniSort(ANIM_SORT.SHOOT);
             GameManager.Instance.Inven.AttackSub();
         }
     }
 
     private void Move()
     {
-        transform.Rotate(transform.up * State.RotSpeed * h * Time.deltaTime);
-        Controller.Move(transform.forward * State.Speed * v * Time.deltaTime);    
+        transform.Rotate(transform.up * state.RotSpeed * h * Time.deltaTime);
+        controller.Move(transform.forward * state.Speed * v * Time.deltaTime);    
     }
 
     private void Die()
     {
-        if (State.Hp <= 0.0f)
+        if (state.Hp <= 0.0f)
         {
             gameObject.SetActive(false);
         }

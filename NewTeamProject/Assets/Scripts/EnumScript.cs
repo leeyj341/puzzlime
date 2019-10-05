@@ -50,9 +50,9 @@ public enum BUFF_CATEGORY
 
 public enum ANIM_SORT
 {
+    BASIC,
     ATTACK,
-    SHOOT,
-    BASIC
+    SHOOT
 }
 
 public enum INVEN_MODE
