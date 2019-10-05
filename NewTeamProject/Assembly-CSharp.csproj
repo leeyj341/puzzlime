@@ -75,6 +75,11 @@
     <Compile Include="Assets\Scripts\Manager\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ShopManager.cs" />
+    <Compile Include="Assets\Scripts\Monster\Area.cs" />
+    <Compile Include="Assets\Scripts\Monster\EnemyController.cs" />
+    <Compile Include="Assets\Scripts\Monster\MonsterContainer.cs" />
+    <Compile Include="Assets\Scripts\Monster\MonsterInfo.cs" />
+    <Compile Include="Assets\Scripts\Monster\MonsterSpawner.cs" />
     <Compile Include="Assets\Scripts\Player\AnimationController.cs" />
     <Compile Include="Assets\Scripts\Player\CameraCtrl.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerController.cs" />
@@ -84,7 +89,6 @@
     <Compile Include="Assets\Scripts\Shop\ShopButtonFunction.cs" />
     <Compile Include="Assets\Scripts\Shop\ShopText.cs" />
     <Compile Include="Assets\Scripts\Test\CubeMove.cs" />
-    <Compile Include="Assets\Scripts\Test\EnemyMove.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonFuntion.cs" />
     <Compile Include="Assets\Scripts\UI\ChangeButtonText.cs" />

@@ -23,33 +23,29 @@ public class AnimationController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        ChangeAnimationSpeed();
-        ChangeAnimationParameter();
+        UpdateAnimationParameter();
     }
 
-    private void ChangeAnimationSpeed()
+    private void UpdateAnimationParameter()
     {
-        if((int)GameManager.Instance.PS.WeaponCategory < 2)
+        if ((int)GameManager.Instance.PS.WeaponCategory < 2)
         {
             AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * SlashSpeed;
         }
-        else if(((int)GameManager.Instance.PS.WeaponCategory).Equals(2))
+        else if (((int)GameManager.Instance.PS.WeaponCategory).Equals(2))
         {
             AnimPlaySpeed = GameManager.Instance.PS.AtkSpeed * StabSpeed;
         }
-    }
 
-    private void ChangeAnimationParameter()
-    {
-        PlayerAnimator.SetFloat("Speed", GameManager.Instance.PS.Speed);
         PlayerAnimator.SetFloat("AtkAnimPlaySpeed", AnimPlaySpeed);
-        PlayerAnimator.SetInteger("AniNum", (int)curAni);
-        PlayerAnimator.SetInteger("WeaponNum", (int)GameManager.Instance.PS.WeaponCategory);
+        PlayerAnimator.SetFloat("Speed", GameManager.Instance.PS.Speed);   
     }
 
     public void ChangeAniSort(ANIM_SORT eAnimSort)
     {
-        curAni = eAnimSort; 
+        curAni = eAnimSort;
+        PlayerAnimator.SetInteger("AniNum", (int)curAni);
+        PlayerAnimator.SetInteger("WeaponNum", (int)GameManager.Instance.PS.WeaponCategory);
     }
 
 

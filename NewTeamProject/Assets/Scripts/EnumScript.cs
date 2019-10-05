@@ -61,6 +61,22 @@ public enum INVEN_MODE
     USE
 }
 
+public enum AI_TYPE
+{
+    NONMOVE,
+    MOVE
+}
+
+public enum MONSTER_STATUS
+{
+    FIND,
+    MOVE,
+    FOLLOW,
+    FOLLOW_BACK,
+    ATTACK,
+    END
+}
+
 public static class Constants
 {
     public const float GameTime = 900.0f;

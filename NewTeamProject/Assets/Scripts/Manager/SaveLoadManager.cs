@@ -40,14 +40,8 @@ public class SaveLoadManager : MonoBehaviour
         return t;
     }
 
-    public void SavePlayerInfoAsXml<T>(T t, string saveSlotName)
+    public void SaveAsXml<T>(T t, string path)
     {
-#if UNITY_EDITOR
-        string path = Path.Combine(Application.dataPath, "Resources/Save/" + saveSlotName + ".xml");
-#else
-        string path = Path.Combine(Application.persistentDataPath, saveSlotName + ".xml");
-#endif
-
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         TextWriter writer = new StreamWriter(new FileStream(path, FileMode.Create), Encoding.UTF8);
         serializer.Serialize(writer, t);
@@ -56,7 +50,7 @@ public class SaveLoadManager : MonoBehaviour
 
     }
 
-    public T LoadPlayerInfoAsXml<T>(string path)
+    public T LoadAsXml<T>(string path)
     {
         XmlSerializer serializer = new XmlSerializer(typeof(T));
         FileStream stream = new FileStream(path, FileMode.Open);

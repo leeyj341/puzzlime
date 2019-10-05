@@ -55,7 +55,6 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             // 총 쏘기
-            // 총이 없으면 안 쏘게
             if (!GameManager.Instance.Inven.GetSubWeapon()) return;
             if (AnimController.CurAni.Equals(ANIM_SORT.ATTACK) || AnimController.CurAni.Equals(ANIM_SORT.SHOOT)) return;
 
