@@ -7,19 +7,6 @@ public class SelectCharacter : MonoBehaviour
 {
     public List<RectTransform> rtList = new List<RectTransform>();
 
-    private bool bIsSelected = false;
-
-    private void Update()
-    {
-        if (GameManager.Instance.PS.DefaultWeaponNum != 0 &&
-            GameManager.Instance.PS.tag != "") bIsSelected = true;
-    }
-
-    public bool IsSelected()
-    {
-        return bIsSelected;
-    }
-
     public void SelectWeapon(int weaponNum)
     {
         GameManager.Instance.PS.DefaultWeaponNum = weaponNum;

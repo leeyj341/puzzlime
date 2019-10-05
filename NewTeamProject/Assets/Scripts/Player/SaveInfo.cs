@@ -13,11 +13,8 @@ public class SaveInfo
     public int Gold = 0;                                                   // 소지 현금
 
     public int AtkCount = 0;
-    public int AtkCost = 100;
     public int HealthCount = 0;
-    public int HealthCost = 100;
     public int BulletCount = 0;
-    public int BulletCost = 100;
 
     public SaveInfo()
     {
@@ -27,5 +24,9 @@ public class SaveInfo
         DefaultWeaponNum = GameManager.Instance.PS.DefaultWeaponNum;
         Stage = GameManager.Instance.PS.Stage;
         Gold = GameManager.Instance.PS.Gold;
+
+        AtkCount = ShopManager.Instance.CountAtk.Count;
+        HealthCount = ShopManager.Instance.CountHealth.Count;
+        BulletCount = ShopManager.Instance.CountBullet.Count;
     }
 }

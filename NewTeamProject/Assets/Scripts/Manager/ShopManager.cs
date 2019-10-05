@@ -1,12 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Xml.Serialization;
 
-[XmlRoot]
 public class BuyCount
 {
-    [XmlElement]
     public int Count;
     public int CurCount;
     public int Cost;
@@ -74,5 +71,19 @@ public class ShopManager : MonoBehaviour
     {
         GameManager.Instance.PS.Gold -= (CountAtk.SaveCount() + CountBullet.SaveCount() + CountHealth.SaveCount());
         ST.TextUpdate();
+    }
+
+    public void Set(SaveInfo si)
+    {
+        CountAtk.Count = si.AtkCount;
+        CountHealth.Count = si.HealthCount;
+        CountBullet.Count = si.BulletCount;
+    }
+
+    public void Initialize()
+    {
+        CountAtk.Count = 0;
+        CountHealth.Count = 0;
+        CountBullet.Count = 0;
     }
 }

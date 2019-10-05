@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<SaveInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <WeaponCategory>1</WeaponCategory>
+  <Tag>CowBoy</Tag>
+  <DefaultWeaponNum>31</DefaultWeaponNum>
+  <Stage>1</Stage>
+  <Gold>1000</Gold>
+  <AtkCount>3</AtkCount>
+  <HealthCount>2</HealthCount>
+  <BulletCount>10</BulletCount>
+</SaveInfo>
