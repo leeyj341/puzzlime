@@ -41,7 +41,7 @@ public class InGameUIManager : MonoBehaviour
     // 플레이어 HP 슬라이더 ---------------------------------
 
     public Slider HPSlider;
-
+    
     //-----------------------------------------------------
 
     private void Awake()

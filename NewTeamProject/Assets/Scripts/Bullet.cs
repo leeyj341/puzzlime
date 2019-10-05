@@ -14,13 +14,13 @@ public class Bullet : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        m_fRange = 10;
+        m_fRange = 50;
     }
 
     private void Update()
     {
-        if(Vector3.Distance(m_vStart, transform.position) >= m_fRange)
-            gameObject.SetActive(false);
+        if (Vector3.Distance(m_vStart, transform.position) >= m_fRange)
+            BulletOff();
     }
 
     public void Fire(float damage)
@@ -30,7 +30,9 @@ public class Bullet : MonoBehaviour
             GameManager.Instance.Inven.gameObject.transform.forward * 3 + Vector3.up * 2;
 
         m_fDamage = damage;
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 5, ForceMode.Impulse);
+        Vector3 temp = (transform.position - GameManager.Instance.Inven.transform.position);
+        temp.y = 0;
+        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 3, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -38,7 +40,13 @@ public class Bullet : MonoBehaviour
         if (!collision.transform.name.Equals("CowBoy") &&
             !collision.transform.name.Equals("CowGirl"))
         {
-            gameObject.SetActive(false);
+            BulletOff();
         }
+    }
+
+    public void BulletOff()
+    {
+        gameObject.SetActive(false);
+        transform.GetComponent<Rigidbody>().Sleep();
     }
 }
