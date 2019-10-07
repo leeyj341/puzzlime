@@ -52,7 +52,9 @@ public enum ANIM_SORT
 {
     BASIC,
     ATTACK,
-    SHOOT
+    SHOOT,
+    DAMAGED,
+    DEAD
 }
 
 public enum INVEN_MODE
@@ -61,20 +63,22 @@ public enum INVEN_MODE
     USE
 }
 
-public enum AI_TYPE
+public enum MONSTER_TYPE
 {
-    NONMOVE,
-    MOVE
+    NONE,
+    RANGED,
+    MELEE,
 }
 
 public enum MONSTER_STATUS
 {
-    FIND,
-    MOVE,
-    FOLLOW,
-    FOLLOW_BACK,
+    FINDING,
+    PATROL,
     ATTACK,
-    END
+    DAMAGED,
+    DEAD,
+    CHASE,
+    CHASE_BACK
 }
 
 public static class Constants
