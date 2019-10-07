@@ -76,7 +76,7 @@ public class AirPlaneMovement : MonoBehaviour
         {
             m_fT += Time.deltaTime * 0.1f;
             transform.position = Vector3.Lerp(m_vecStart, m_vecDest, m_fT);
-            if(Random.Range(0,100) > 97)
+            if(Random.Range(0,100) > 98)
                 m_sSys.ItemDrop();
             yield return null;
         }

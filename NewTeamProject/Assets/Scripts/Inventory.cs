@@ -80,7 +80,7 @@ public class Inventory : MonoBehaviour
                 m_QueueEmptyItem.Peek().m_Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_listWeaponItem.Add(m_QueueEmptyItem.Dequeue());
-                InGameUIManager.Instance.AddImg(m_eMode, item.Name);
+                InGameUIManager.Instance.AddImg(INVEN_MODE.WEAPON, item.Name);
             }
         }
 
@@ -90,6 +90,7 @@ public class Inventory : MonoBehaviour
             m_QueueEmptyItem.Peek().m_Data = item;
             m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
             m_listUseItem.Add(m_QueueEmptyItem.Dequeue());
+            InGameUIManager.Instance.AddImg(INVEN_MODE.USE, item.Name);
         }
 
         return true;
@@ -134,6 +135,7 @@ public class Inventory : MonoBehaviour
         if (m_listWeaponItem[m_nCurEquip].Dbl.Equals(0))
         {
             m_QueueEmptyItem.Enqueue(m_listWeaponItem[m_nCurEquip]);
+            InGameUIManager.Instance.DeleteImage(INVEN_MODE.WEAPON, m_nCurEquip);
             m_listWeaponItem.RemoveAt(m_nCurEquip);
             m_nCurEquip--;
             Equip(m_listWeaponItem[m_nCurEquip]);
@@ -145,6 +147,7 @@ public class Inventory : MonoBehaviour
         if (!m_listUseItem[m_nCurUse].UseItem(m_sSubWeapon))
             return;
 
+        InGameUIManager.Instance.DeleteImage(INVEN_MODE.USE, m_nCurUse);
         m_QueueEmptyItem.Enqueue(m_listUseItem[m_nCurUse]);
         m_listUseItem.RemoveAt(m_nCurUse);
     }

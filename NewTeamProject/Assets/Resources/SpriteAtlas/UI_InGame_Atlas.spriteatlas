@@ -59,17 +59,17 @@ SpriteAtlas:
   - {fileID: 21300000, guid: 1f8eb58f5d73e4f418a7aa97b09488c1, type: 3}
   - {fileID: 21300000, guid: 07a27dffa7a092040951eb255477e97c, type: 3}
   m_PackedSpriteNamesToIndex:
-  - Up_Down_Blue_Buff
+  - "UI_\uC18D\uB3C4\uD5A5\uC0C1"
   - progressBar1
   - ItemCursor
-  - Up_Down_Red_Buff
-  - Heart_Buff
+  - "UI_\uACF5\uACA9\uD5A5\uC0C1"
+  - "UI_\uCCB4\uB825\uD68C\uBCF5"
   - back
   - ItemBack
   - InvenBack
   - Speed_Buff_Img
   - Power_Buff_Img
-  - Bullet_Buff
+  - "UI_\uCD1D\uC54C"
   - WeaponCursor
   m_Tag: UI_InGame_Atlas
   m_IsVariant: 0

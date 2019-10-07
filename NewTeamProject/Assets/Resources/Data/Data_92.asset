@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Data_92
   m_EditorClassIdentifier: 
   ItemNumber: 92
-  Name: "\uC18D\uB3C4\uD5A5\uC0C1\uBB3C\uC57D"
+  Name: "\uC18D\uB3C4\uD5A5\uC0C1"
   ItemCtg: 1
   AtkCtg: 4
   UseCtg: 1

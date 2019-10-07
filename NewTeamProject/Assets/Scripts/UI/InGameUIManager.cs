@@ -148,7 +148,7 @@ public class InGameUIManager : MonoBehaviour
     }
     public void AddImg(string WeaponName)
     {
-        ImgGun.sprite = Resources.Load<Sprite>("Image/UI_" + WeaponName);
+        ImgGun.sprite = Resources.Load<Sprite>("Sprite/UI_" + WeaponName);
         SetImageProperties(ImgGun, Color.white);
     }
 
@@ -175,7 +175,7 @@ public class InGameUIManager : MonoBehaviour
     private void AddSprite(List<Sprite> listSprite, int limitCount, string imgName)
     {
         if (listSprite.Count > limitCount) return;
-        listSprite.Add(Resources.Load<Sprite>("Image/UI_" + imgName));
+        listSprite.Add(Resources.Load<Sprite>("Sprite/UI_" + imgName));
     }
 
     private void Reorder(List<Image> listImg, List<Sprite> listSprite)
