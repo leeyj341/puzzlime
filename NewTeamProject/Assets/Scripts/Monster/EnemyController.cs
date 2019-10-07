@@ -85,8 +85,7 @@ public class EnemyController : MonoBehaviour
 
     void Motion_Chase()
     {
-        if ((Vector3.Distance(status.MyArea.Position, transform.position) > status.MyArea.LimitedDistance)
-            || (Vector3.Distance(transform.position, goal.position) > status.RecognizedRange))
+        if (Vector3.Distance(transform.position, goal.position) > status.RecognizedRange)
         {
             backPosition = RandomPosition(status.MyArea.name);
             status.CurStatus = MONSTER_STATUS.CHASE_BACK;
@@ -100,9 +99,10 @@ public class EnemyController : MonoBehaviour
 
     void Motion_Chase_Back()
     {
-        if (Vector3.Distance(status.MyArea.Position, transform.position) <= status.RecognizedRange)
+        if (Vector3.Distance(transform.position, backPosition) <= 1.0f)
         {
             status.CurStatus = MONSTER_STATUS.FINDING;
+            agent.isStopped = true;
         }
         else
         {
@@ -121,7 +121,7 @@ public class EnemyController : MonoBehaviour
     {
         float posX = status.MyArea.Position.x;
         float posZ = status.MyArea.Position.z;
-        float distance = status.MyArea.GetRadius();
+        float distance = status.MyArea.GetPatrolRadius();
 
         float randomX = Random.Range(posX - distance, posX + distance);
         float randomZ = Random.Range(posZ - distance, posZ + distance);

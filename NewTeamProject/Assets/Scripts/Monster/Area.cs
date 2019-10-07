@@ -5,20 +5,17 @@ using UnityEngine;
 public class Area : MonoBehaviour
 {
     private Vector3 position = Vector3.zero;
-    private float limitedDistance = 0.0f;
     private SphereCollider sCollider = null;
 
     private bool isPlayerEntered = false;
 
-    public Vector3 Position { get => position; set => position = value; }
-    public float LimitedDistance { get => limitedDistance; set => limitedDistance = value; }
+    public Vector3 Position { get => position; }
 
     public bool IsPlayerEntered { get => isPlayerEntered; }
 
     void Awake()
     {
         position = transform.position;
-        limitedDistance = 30.0f;            // 중점부터 ~ Distance
         sCollider = GetComponent<SphereCollider>();
 
         MonsterSpawner.Instance.AddArea(gameObject.name, this);
@@ -27,10 +24,13 @@ public class Area : MonoBehaviour
     // 구역 범위 체크
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if (collision.gameObject.tag.Equals("Player"))
+            isPlayerEntered = true;
+        else
+            isPlayerEntered = false;
     }
 
-    public float GetRadius()
+    public float GetPatrolRadius()
     {
         return sCollider.radius;
     }

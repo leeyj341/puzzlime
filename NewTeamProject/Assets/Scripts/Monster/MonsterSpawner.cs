@@ -27,12 +27,12 @@ public class MonsterSpawner : MonoBehaviour
     {
         float posX = dicArea[areaName].Position.x;
         float posZ = dicArea[areaName].Position.z;
-        float distance = dicArea[areaName].GetRadius();
+        float distance = dicArea[areaName].GetPatrolRadius();
 
         float randomX = Random.Range(posX - distance, posX + distance);
         float randomZ = Random.Range(posZ - distance, posZ + distance);
 
-        return new Vector3(randomX, 0.0f, randomZ);
+        return new Vector3(randomX, 2.0f, randomZ);
     }
 
     void SpawnMonster(string areaName, string prefabName)

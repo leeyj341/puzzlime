@@ -33,6 +33,8 @@ public class MonsterStatus
         hp = mInfo.Hp;
         atk = mInfo.Atk;
         myArea = area;
+
+        recognizedRange = area.GetPatrolRadius();
     }
 
 }
