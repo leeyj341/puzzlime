@@ -1,0 +1,81 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!687078895 &4343727234628468602
+SpriteAtlas:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: UI_Weapon_Atlas
+  m_EditorData:
+    serializedVersion: 2
+    textureSettings:
+      serializedVersion: 2
+      anisoLevel: 1
+      compressionQuality: 50
+      maxTextureSize: 2048
+      textureCompression: 0
+      filterMode: 1
+      generateMipMaps: 0
+      readable: 0
+      crunchedCompression: 0
+      sRGB: 1
+    platformSettings: []
+    packingSettings:
+      serializedVersion: 2
+      padding: 4
+      blockOffset: 1
+      allowAlphaSplitting: 0
+      enableRotation: 0
+      enableTightPacking: 0
+    variantMultiplier: 1
+    packables:
+    - {fileID: 2800000, guid: e116db3b203fbb14497799038a651d6f, type: 3}
+    - {fileID: 2800000, guid: 362923e4acd0a2948a28fed92abf8011, type: 3}
+    - {fileID: 2800000, guid: 966abfd80659fc749b1a2e32aead7ab5, type: 3}
+    - {fileID: 2800000, guid: f48c723356c342248a2ad481abdbd169, type: 3}
+    - {fileID: 2800000, guid: 4fdfe423c024d3940858f94871f9647a, type: 3}
+    - {fileID: 2800000, guid: 5f16473e9284bde4b89aac2812728c59, type: 3}
+    - {fileID: 2800000, guid: 73b5c29de66172f44ae9495986b34d0e, type: 3}
+    - {fileID: 2800000, guid: 27665eceed350774eb42515673e56f66, type: 3}
+    - {fileID: 2800000, guid: 48e2baa48bf8e324bbdd53c65b3c522c, type: 3}
+    - {fileID: 2800000, guid: feb4e5d1a7a13d04796afd70f52e8c34, type: 3}
+    - {fileID: 2800000, guid: 02a561095ba3a1740baa6a1fe5b1aef4, type: 3}
+    - {fileID: 2800000, guid: d50fee381cebf7f4fa917a49a76cf53b, type: 3}
+    - {fileID: 2800000, guid: c2161f2303eb0bc46a7af8d3b19b5a2e, type: 3}
+    - {fileID: 2800000, guid: 2854a6971b4cf1a4a978a30acfd8e89f, type: 3}
+    totalSpriteSurfaceArea: 1260000
+    bindAsDefault: 1
+  m_MasterAtlas: {fileID: 0}
+  m_PackedSprites:
+  - {fileID: 21300000, guid: feb4e5d1a7a13d04796afd70f52e8c34, type: 3}
+  - {fileID: 21300000, guid: 4fdfe423c024d3940858f94871f9647a, type: 3}
+  - {fileID: 21300000, guid: c2161f2303eb0bc46a7af8d3b19b5a2e, type: 3}
+  - {fileID: 21300000, guid: f48c723356c342248a2ad481abdbd169, type: 3}
+  - {fileID: 21300000, guid: 48e2baa48bf8e324bbdd53c65b3c522c, type: 3}
+  - {fileID: 21300000, guid: 362923e4acd0a2948a28fed92abf8011, type: 3}
+  - {fileID: 21300000, guid: 2854a6971b4cf1a4a978a30acfd8e89f, type: 3}
+  - {fileID: 21300000, guid: d50fee381cebf7f4fa917a49a76cf53b, type: 3}
+  - {fileID: 21300000, guid: 966abfd80659fc749b1a2e32aead7ab5, type: 3}
+  - {fileID: 21300000, guid: 02a561095ba3a1740baa6a1fe5b1aef4, type: 3}
+  - {fileID: 21300000, guid: e116db3b203fbb14497799038a651d6f, type: 3}
+  - {fileID: 21300000, guid: 73b5c29de66172f44ae9495986b34d0e, type: 3}
+  - {fileID: 21300000, guid: 5f16473e9284bde4b89aac2812728c59, type: 3}
+  - {fileID: 21300000, guid: 27665eceed350774eb42515673e56f66, type: 3}
+  m_PackedSpriteNamesToIndex:
+  - "UI_\uC77C\uBCF8\uB3C4"
+  - "UI_\uC218\uC815\uAC80"
+  - "UI_\uCE58\uB3C4"
+  - "UI_\uBE57\uC790\uB8E8"
+  - "UI_\uC774 \uB098\uAC04 \uAC80"
+  - "UI_\uB300\uB450"
+  - "UI_\uD53C\uC2A4\uD1A8"
+  - "UI_\uCC28"
+  - "UI_\uB9AC\uBCFC\uBC84"
+  - "UI_\uC9C8 \uB0AE\uC740 \uCE7C"
+  - "UI_\uACE4\uBD09"
+  - "UI_\uC218\uC815\uC7A5\uCC3D"
+  - "UI_\uC218\uC815\uB300\uAC80"
+  - "UI_\uC2E0\uAE30\uD55C \uB9C9\uB300"
+  m_Tag: UI_Weapon_Atlas
+  m_IsVariant: 0

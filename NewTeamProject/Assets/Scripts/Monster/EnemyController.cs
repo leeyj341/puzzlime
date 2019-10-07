@@ -4,72 +4,78 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyController : MonoBehaviour
-{
+{  
+    private NavMeshAgent agent = null;
+    private EnemyAniController aniController = null;
+    
     private Transform goal = null;
     private Vector3 backPosition = Vector3.zero;
-    private NavMeshAgent agent = null;
-    private Area myArea = null;
+    private Coroutine coChangeMotion;
 
-    private IEnumerator coroutineChange = null;
+    private MonsterStatus status = null;
 
-    private MONSTER_STATUS currentStatus = MONSTER_STATUS.FIND;
-
-    public Area Area { get => myArea; set => myArea = value; }
+    public MonsterStatus Status { get => status; set => status = value; }
 
     // Start is called before the first frame update
-    void Awake()
+    void Start()
     {
         Init();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        Move();
-    }
-
-    void Move()
-    {
-        switch (currentStatus)
-        {
-            case MONSTER_STATUS.FIND:
-                Motion_Find();
-                break;
-            case MONSTER_STATUS.MOVE:
-                break;
-            case MONSTER_STATUS.FOLLOW:
-                Motion_Follow();
-                break;
-            case MONSTER_STATUS.FOLLOW_BACK:
-                Motion_Follow_Back();
-                break;
-            case MONSTER_STATUS.ATTACK:
-                break;
-            case MONSTER_STATUS.END:
-                break;
-        }
     }
 
     void Init()
     {
         goal = GameObject.Find("Player").transform;
         agent = GetComponent<NavMeshAgent>();
+        aniController = GetComponent<EnemyAniController>();
+        aniController.SetAnimatorType(status.Type);
 
-        //coroutineChange = ChangeMotion(currentStatus);
-        //StartCoroutine(coroutineChange);
+        StartCoroutine("ChangeMotion");
+    }
+
+    void UpdateAniParameter()
+    {
+
+    }
+
+    IEnumerator ChangeMotion()
+    {
+        yield return null;
+
+        aniController.UpdateAnimatorParameter(status.CurStatus);
+        switch (status.CurStatus)
+        {
+            case MONSTER_STATUS.FINDING:
+                Motion_Find();
+                break;
+            case MONSTER_STATUS.PATROL:
+                break;
+            case MONSTER_STATUS.CHASE:
+                Motion_Chase();
+                break;
+            case MONSTER_STATUS.CHASE_BACK:
+                Motion_Chase_Back();
+                break;
+            case MONSTER_STATUS.ATTACK:
+                break;
+            case MONSTER_STATUS.DAMAGED:
+                break;
+            case MONSTER_STATUS.DEAD:
+                break;
+        }
     }
 
     void Motion_Find()
     {
         // 플레이어를 찾았으면
-        if (Vector3.Distance(goal.position, transform.position) <= myArea.MoveDistance)
+        if (Vector3.Distance(transform.position, goal.position) <= status.RecognizedRange)
         {
-            currentStatus = MONSTER_STATUS.FOLLOW;
+            status.CurStatus = MONSTER_STATUS.CHASE;
         }
         else
         {
-            currentStatus = MONSTER_STATUS.FIND;
+            status.CurStatus = MONSTER_STATUS.FINDING;
         }
+        StartCoroutine("ChangeMotion");
     }
 
     void Motion_Move()
@@ -77,30 +83,33 @@ public class EnemyController : MonoBehaviour
 
     }
 
-    void Motion_Follow()
+    void Motion_Chase()
     {
-        if(Vector3.Distance(myArea.Position, transform.position) > myArea.LimitedDistance)
+        if ((Vector3.Distance(status.MyArea.Position, transform.position) > status.MyArea.LimitedDistance)
+            || (Vector3.Distance(transform.position, goal.position) > status.RecognizedRange))
         {
-            backPosition = RandomPosition(myArea.name);
-            currentStatus = MONSTER_STATUS.FOLLOW_BACK;
+            backPosition = RandomPosition(status.MyArea.name);
+            status.CurStatus = MONSTER_STATUS.CHASE_BACK;
         }
         else
         {
             agent.SetDestination(goal.position);
         }
+        StartCoroutine("ChangeMotion");
     }
 
-    void Motion_Follow_Back()
+    void Motion_Chase_Back()
     {
-        if (Vector3.Distance(myArea.Position, transform.position) <= myArea.MoveDistance)
+        if (Vector3.Distance(status.MyArea.Position, transform.position) <= status.RecognizedRange)
         {
-            currentStatus = MONSTER_STATUS.FIND;
+            status.CurStatus = MONSTER_STATUS.FINDING;
         }
         else
         {
             // 계속 돌아가라라라ㅏ라
             agent.SetDestination(backPosition);
         }
+        StartCoroutine("ChangeMotion");
     }
 
     void Motion_Attack()
@@ -110,9 +119,9 @@ public class EnemyController : MonoBehaviour
 
     Vector3 RandomPosition(string areaName)
     {
-        float posX = myArea.Position.x;
-        float posZ = myArea.Position.z;
-        float distance = myArea.MoveDistance;
+        float posX = status.MyArea.Position.x;
+        float posZ = status.MyArea.Position.z;
+        float distance = status.MyArea.GetRadius();
 
         float randomX = Random.Range(posX - distance, posX + distance);
         float randomZ = Random.Range(posZ - distance, posZ + distance);

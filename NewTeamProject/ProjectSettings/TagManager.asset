@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - SaveInfo1
   - SaveInfo2
+  - UsingSpriteAtlas
   layers:
   - Default
   - TransparentFX
