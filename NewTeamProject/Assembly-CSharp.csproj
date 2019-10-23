@@ -76,6 +76,8 @@
     <Compile Include="Assets\Scripts\Manager\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\Monster\Area.cs" />
+    <Compile Include="Assets\Scripts\Monster\Controller_Melee.cs" />
+    <Compile Include="Assets\Scripts\Monster\Controller_Ranged.cs" />
     <Compile Include="Assets\Scripts\Monster\EnemyAniController.cs" />
     <Compile Include="Assets\Scripts\Monster\EnemyController.cs" />
     <Compile Include="Assets\Scripts\Monster\MonsterContainer.cs" />
@@ -102,7 +104,7 @@
     <None Include="Assets\Resources\Save\SaveInfo2.xml" />
     <None Include="Assets\Asset\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/KimTaeWan/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/yjlee/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>

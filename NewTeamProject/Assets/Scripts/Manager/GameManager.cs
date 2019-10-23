@@ -14,6 +14,7 @@ public class GameManager : MonoBehaviour
     private PlayerState m_PS;
     private Inventory m_Inven;
 
+    public Transform PlayerTransfrom { get => m_Inven.gameObject.transform; }
     public Inventory Inven { get => m_Inven; set => m_Inven = value; }
     public PlayerState PS { get => m_PS; set => m_PS = value; }
     public float GameTime { get => m_fGameTime; set => m_fGameTime = value; }
