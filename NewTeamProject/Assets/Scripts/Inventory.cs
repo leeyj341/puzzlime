@@ -2,6 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public class InventoryItem
+{
+    private int dbl;
+    private ItemData data;
+
+    public int Dbl { set => dbl = value; get => dbl; }
+    public ItemData Data { set => data = value; get => data; }
+
+    public InventoryItem Init()
+    {
+        dbl = 0;
+        data = null;
+        return this;
+    }
+
+    public bool UseItem(InventoryItem Subweapon)
+    {
+        if (data.ItemCtg != ITEM_CATEGORY.USE) return false;
+
+        switch (data.ItemNumber)
+        {
+            case 91://체력회복
+
+                break;
+            case 92://속도향상
+                BuffManager.Instance.AddBuff(data.ItemPower, BUFF_CATEGORY.SPEED);   // 버프, 파워도 전달
+                break;
+            case 93://공격향상
+                BuffManager.Instance.AddBuff(data.ItemPower, BUFF_CATEGORY.ATTACK);
+                break;
+            case 94://만능총알
+                if (Subweapon == null) return false;
+
+                Subweapon.Dbl += (int)(Subweapon.data.MaxDbl * data.ItemPower);
+                if (Subweapon.Dbl > Subweapon.data.MaxDbl) Subweapon.Dbl = Subweapon.data.MaxDbl;
+
+                break;
+        }
+
+        return true;
+    }
+}
+
 public class Inventory : MonoBehaviour
 {
     int m_nCurWeapon = 0;
@@ -9,18 +52,16 @@ public class Inventory : MonoBehaviour
     int m_nCurEquip = 0;
     INVEN_MODE m_eMode = INVEN_MODE.WEAPON;
 
-    Queue<ItemStatus> m_QueueEmptyItem = new Queue<ItemStatus>();
-    List<ItemStatus> m_listUseItem = new List<ItemStatus>();
-    List<ItemStatus> m_listWeaponItem = new List<ItemStatus>();
-    ItemStatus m_sSubWeapon = null;
-    bool m_bisSubWeapon = false;
+    Queue<InventoryItem> m_QueueEmptyItem = new Queue<InventoryItem>();
+    List<InventoryItem> m_listUseItem = new List<InventoryItem>();
+    List<InventoryItem> m_listWeaponItem = new List<InventoryItem>();
+    InventoryItem m_sSubWeapon = null;
     public WeaponList m_sList;
 
-    public ItemStatus SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; }
+    public InventoryItem SubWeapon { get => m_sSubWeapon; set => m_sSubWeapon = value; }
     public int CursorWeapon { get => m_nCurWeapon; set => m_nCurWeapon = value; }
     public int CursorUse { get => m_nCurUse; set => m_nCurUse = value; }
-    public bool isSubWeapon { get => m_bisSubWeapon; set => m_bisSubWeapon = value; }
-
+    
     // Start is called before the first frame update
     private void Start()
     {
@@ -52,12 +93,14 @@ public class Inventory : MonoBehaviour
         Equip(m_listWeaponItem[0]);
         AddItem(ItemManager.Instance.DictData(42));
         AddItem(ItemManager.Instance.DictData(92));
+        AddItem(ItemManager.Instance.DictData(93));
+        AddItem(ItemManager.Instance.DictData(92));
     }
 
     void MakeNewItemStatus()
     {
         for(int i = 0; i < 10; i++)
-            m_QueueEmptyItem.Enqueue(new ItemStatus());
+            m_QueueEmptyItem.Enqueue(new InventoryItem().Init());
     }
 
     public bool AddItem(ItemData item)
@@ -67,17 +110,16 @@ public class Inventory : MonoBehaviour
             //보조무기면
             if (item.AtkCtg.Equals(ATK_CATEGORY.SHOT)) 
             {
-                m_QueueEmptyItem.Peek().m_Data = item;
+                m_QueueEmptyItem.Peek().Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_sSubWeapon = m_QueueEmptyItem.Dequeue();
-                InGameUIManager.Instance.AddImg(m_sSubWeapon.m_Data.Name);
-                m_bisSubWeapon = true;
+                InGameUIManager.Instance.AddImg(m_sSubWeapon.Data.Name);
             }
             //주무기면
             else
             {
                 if (m_listWeaponItem.Count >= 5) return false;
-                m_QueueEmptyItem.Peek().m_Data = item;
+                m_QueueEmptyItem.Peek().Data = item;
                 m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
                 m_listWeaponItem.Add(m_QueueEmptyItem.Dequeue());
                 InGameUIManager.Instance.AddImg(INVEN_MODE.WEAPON, item.Name);
@@ -87,7 +129,7 @@ public class Inventory : MonoBehaviour
         else if (item.ItemCtg.Equals(ITEM_CATEGORY.USE))
         {
             if (m_listUseItem.Count >= 3) return false;
-            m_QueueEmptyItem.Peek().m_Data = item;
+            m_QueueEmptyItem.Peek().Data = item;
             m_QueueEmptyItem.Peek().Dbl = item.MaxDbl;
             m_listUseItem.Add(m_QueueEmptyItem.Dequeue());
             InGameUIManager.Instance.AddImg(INVEN_MODE.USE, item.Name);
@@ -96,22 +138,22 @@ public class Inventory : MonoBehaviour
         return true;
     }
 
-    public void Equip(ItemStatus item)
+    public void Equip(InventoryItem item)
     {
-        m_sList.ChangeWeapon(item.m_Data.Name);
+        m_sList.ChangeWeapon(item.Data.Name);
         SendData(item);
     }
 
-    void SendData(ItemStatus item)
+    void SendData(InventoryItem item)
     {
-        GameManager.Instance.PS.Atk = item.m_Data.ItemPower;
-        GameManager.Instance.PS.AtkSpeed = item.m_Data.ItemSpd;
-        GameManager.Instance.PS.WeaponCategory = item.m_Data.AtkCtg;
+        GameManager.Instance.PS.Atk = item.Data.ItemPower;
+        GameManager.Instance.PS.AtkSpeed = item.Data.ItemSpd;
+        GameManager.Instance.PS.WeaponCategory = item.Data.AtkCtg;
     }
 
     public void AttackSub()
     {
-        m_sList.ChangeSub(m_sSubWeapon.m_Data.Name);
+        m_sList.ChangeSub(m_sSubWeapon.Data.Name);
 
         m_sSubWeapon.Dbl -= 1;
     }
@@ -122,8 +164,7 @@ public class Inventory : MonoBehaviour
         {
             m_QueueEmptyItem.Enqueue(m_sSubWeapon);
             m_sSubWeapon = null;
-            m_bisSubWeapon = false;
-
+            
             InGameUIManager.Instance.DeleteImage();
         }
     }

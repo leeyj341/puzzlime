@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b07d83221c541144790a30e21a6c36d3, type: 3}
+  m_Name: Boss_Bobline
+  m_EditorClassIdentifier: 
+  Ctg: 0
+  MaxHP: 130
+  Atk: 10
+  Speed: 5
+  Skill1Cost: 0
+  Skill2Cost: 0
+  Skill3Cost: 0
+  GroggyTime: 0

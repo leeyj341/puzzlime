@@ -57,11 +57,11 @@ public class BulletContainer : MonoBehaviour
 
     public void Fire()
     {
-        GameObject CurBulletObj = FindBullet(GameManager.Instance.Inven.SubWeapon.m_Data.ItemNumber);
+        GameObject CurBulletObj = FindBullet(GameManager.Instance.Inven.SubWeapon.Data.ItemNumber);
         if (!CurBulletObj) return;
         Bullet CurBullet = CurBulletObj.GetComponent<Bullet>();
         CurBulletObj.SetActive(true);
-        CurBulletObj.GetComponent<Bullet>().Fire(GameManager.Instance.Inven.SubWeapon.m_Data.ItemPower);
+        CurBulletObj.GetComponent<Bullet>().Fire(GameManager.Instance.Inven.SubWeapon.Data.ItemPower);
     }
 
     GameObject FindBullet(int SubNum)
