@@ -9,4 +9,5 @@ public class MonsterInfo : ScriptableObject
     public float Hp = 0.0f;
     public float Atk = 0.0f;
     public float Speed = 0.0f;
+    public float AtkRange = 0.0f;
 }

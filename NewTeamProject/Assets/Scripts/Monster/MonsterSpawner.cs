@@ -10,6 +10,8 @@ public class MonsterSpawner : MonoBehaviour
     private Dictionary<string, Area> dicArea = new Dictionary<string, Area>();      // 모든 스폰 지역
     private MonsterContainer monsterContainer = new MonsterContainer();             // 모든 몬스터 종류
 
+    private List<GameObject> listMonsterPool = new List<GameObject>();
+
     void Awake()
     {
         if (!Instance) Instance = this;
@@ -19,26 +21,25 @@ public class MonsterSpawner : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        // 무작위 스폰...?
-        SpawnMonster("Area1", "GoblinWarriorMale");
-    }
-
-    Vector3 RandomPosition(string areaName)
-    {
-        float posX = dicArea[areaName].Position.x;
-        float posZ = dicArea[areaName].Position.z;
-        float distance = dicArea[areaName].GetPatrolRadius();
-
-        float randomX = Random.Range(posX - distance, posX + distance);
-        float randomZ = Random.Range(posZ - distance, posZ + distance);
-
-        return new Vector3(randomX, 2.0f, randomZ);
+        // 포털에서 스폰후 지역 찾아감.
+        SpawnMonster("Area1", "고블린남자");
     }
 
     void SpawnMonster(string areaName, string prefabName)
     {
-        GameObject enemy = Instantiate(Resources.Load("MonsterPrefab/" + prefabName), RandomPosition(areaName), Quaternion.identity) as GameObject;
+        Vector3 spawnPos = dicArea[areaName].ListPortal[Random.Range(1, 3)].position;
+        spawnPos.y = 2.0f;
+
+        GameObject enemy = Instantiate(Resources.Load("MonsterPrefab/" + prefabName), spawnPos, Quaternion.identity, transform) as GameObject;
         enemy.GetComponent<EnemyController>().Status = new MonsterStatus(monsterContainer.Find(prefabName), dicArea[areaName]);
+
+        // 첫 스폰 후 풀에 등록
+        listMonsterPool.Add(enemy);
+    }
+
+    void RespawnMonster()
+    {
+        // 어떤 방식으로 재생성 할지 상의 후 작성
     }
 
     public void AddArea(string name, Area area)

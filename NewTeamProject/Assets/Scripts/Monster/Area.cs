@@ -5,33 +5,34 @@ using UnityEngine;
 public class Area : MonoBehaviour
 {
     private Vector3 position = Vector3.zero;
-    private SphereCollider sCollider = null;
-
-    private bool isPlayerEntered = false;
+    private List<Transform> listPortal = new List<Transform>();
+    private bool monsterExit = false;
+    private float patrolRange = 0.0f;
 
     public Vector3 Position { get => position; }
-
-    public bool IsPlayerEntered { get => isPlayerEntered; }
+    public List<Transform> ListPortal { get => listPortal; }
+    public bool MonsterExit { get => monsterExit; }
+    public float PatrolRange { get => patrolRange; }
 
     void Awake()
     {
         position = transform.position;
-        sCollider = GetComponent<SphereCollider>();
+        patrolRange = GetComponent<BoxCollider>().size.x / 4.0f;       // 임시
+        listPortal.AddRange(GetComponentsInChildren<Transform>());
+        monsterExit = false;
 
         MonsterSpawner.Instance.AddArea(gameObject.name, this);
     }
 
     // 구역 범위 체크
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        if (collision.gameObject.tag.Equals("Player"))
-            isPlayerEntered = true;
-        else
-            isPlayerEntered = false;
+        if (other.gameObject.tag.Equals("Monster"))
+            monsterExit = false;
     }
-
-    public float GetPatrolRadius()
+    private void OnTriggerExit(Collider other)
     {
-        return sCollider.radius;
-    }
+        if (other.gameObject.tag.Equals("Monster"))
+            monsterExit = true;
+    }   
 }

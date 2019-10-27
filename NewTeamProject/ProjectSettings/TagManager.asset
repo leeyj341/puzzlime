@@ -10,6 +10,8 @@ TagManager:
   - SaveInfo1
   - SaveInfo2
   - UsingSpriteAtlas
+  - Obstacle
+  - Monster
   layers:
   - Default
   - TransparentFX

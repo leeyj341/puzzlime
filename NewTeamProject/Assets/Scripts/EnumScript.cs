@@ -73,13 +73,12 @@ public enum MONSTER_TYPE
 
 public enum MONSTER_STATUS
 {
-    FINDING,
+    IDLE,
     PATROL,
+    CHASE,
     ATTACK,
     DAMAGED,
-    DEAD,
-    CHASE,
-    CHASE_BACK
+    DEAD
 }
 
 public enum BOSS_CTG

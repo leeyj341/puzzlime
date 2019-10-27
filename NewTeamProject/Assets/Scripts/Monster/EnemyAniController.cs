@@ -20,4 +20,12 @@ public class EnemyAniController : MonoBehaviour
     {
         animator.SetInteger("MonsterStatus", (int)eStatus);
     }
+
+    public bool IsAnimationEnd()
+    {
+        if (animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.9f)
+            return true;
+
+        return false;
+    }
 }

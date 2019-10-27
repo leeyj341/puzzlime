@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4b506fced763054fa46aded818a875b, type: 3}
   m_Name: Goblin_Male
   m_EditorClassIdentifier: 
-  PrefabName: GoblinMale
+  PrefabName: "\uACE0\uBE14\uB9B0\uB0A8\uC790"
   Type: 2
   Hp: 0
   Atk: 0
-  Speed: 0
+  Speed: 5
+  AtkRange: 3
