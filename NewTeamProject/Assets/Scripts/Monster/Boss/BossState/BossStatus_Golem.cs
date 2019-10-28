@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 public class BossStatus_Golem : BossState
 {
@@ -21,6 +22,15 @@ public class BossStatus_Golem : BossState
 
     }
 
+    protected override void LoadBossData()
+    {
+#if UNITY_EDITOR
+        BossData bossData = AssetDatabase.LoadAssetAtPath<BossData>("Assets/Resources/Data/Boss_Golem.asset");
+#else
+        BossData bossData = Resources.Load<BossData>("Data/Boss_Golem");
+#endif
+    }
+
     public override void Attack()
     {
 
@@ -31,14 +41,6 @@ public class BossStatus_Golem : BossState
     }
 
     public override void Move()
-    {
-    }
-
-    protected override void SkillAction(int index)
-    {
-    }
-
-    protected override void SkillSetting(int index)
     {
     }
 }

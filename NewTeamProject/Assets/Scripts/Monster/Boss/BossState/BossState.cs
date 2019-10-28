@@ -18,10 +18,10 @@ public abstract class BossState : MonoBehaviour
     public float CurHP { get => currentHP; }
 
     protected abstract void InitBoss();
-    protected abstract void SkillSetting(int index);
-    protected abstract void SkillAction(int index);
 
     public abstract void Move();
     public abstract void Attack();
     public abstract void Die();
+
+    protected abstract void LoadBossData();
 }

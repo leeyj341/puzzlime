@@ -90,6 +90,7 @@ public enum BOSS_CTG
 
 public enum BOSS_STATE
 {
+    APPEAR,
     IDLE,
     MOVE,
     CHASE,

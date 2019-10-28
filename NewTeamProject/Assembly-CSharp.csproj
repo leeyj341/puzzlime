@@ -61,6 +61,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AirPlaneMovement.cs" />
+    <Compile Include="Assets\Scripts\Buff\BuffManager.cs" />
+    <Compile Include="Assets\Scripts\Buff\BuffUI.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />
     <Compile Include="Assets\Scripts\EnumScript.cs" />
     <Compile Include="Assets\Scripts\InitializeGameInfo.cs" />
@@ -69,13 +71,24 @@
     <Compile Include="Assets\Scripts\Item\ItemManager.cs" />
     <Compile Include="Assets\Scripts\Item\ItemStatus.cs" />
     <Compile Include="Assets\Scripts\Item\WeaponList.cs" />
-    <Compile Include="Assets\Scripts\Manager\BuffManager.cs" />
     <Compile Include="Assets\Scripts\Manager\BulletContainer.cs" />
     <Compile Include="Assets\Scripts\Manager\GameManager.cs" />
     <Compile Include="Assets\Scripts\Manager\LoadingSceneManager.cs" />
     <Compile Include="Assets\Scripts\Manager\SaveLoadManager.cs" />
     <Compile Include="Assets\Scripts\Manager\ShopManager.cs" />
     <Compile Include="Assets\Scripts\Monster\Area.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossData.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossSkill\Bash.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossSkill\Gauge.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossSkill\Rage.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossSkill\Rush.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossSkill\SkillData.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossState\BossState.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossState\BossStatus_Gobline.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossState\BossStatus_Golem.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\BossState\BossStatus_Skeleton.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\StageBossSpawner.cs" />
+    <Compile Include="Assets\Scripts\Monster\Boss\StateChangeMachine.cs" />
     <Compile Include="Assets\Scripts\Monster\Controller_Melee.cs" />
     <Compile Include="Assets\Scripts\Monster\Controller_Ranged.cs" />
     <Compile Include="Assets\Scripts\Monster\EnemyAniController.cs" />
@@ -104,7 +117,7 @@
     <None Include="Assets\Resources\Save\SaveInfo2.xml" />
     <None Include="Assets\Asset\FREE Food Pack\Shaders\Food.shader" />
     <Reference Include="Unity.PackageManagerUI.Editor">
-      <HintPath>C:/Users/yjlee/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
+      <HintPath>C:/Users/KimTaeWan/Documents/unity3D_portfolio/NewTeamProject/Library/ScriptAssemblies/Unity.PackageManagerUI.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
