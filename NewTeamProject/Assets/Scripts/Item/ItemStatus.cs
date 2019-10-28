@@ -77,33 +77,6 @@ public class ItemStatus : MonoBehaviour
         m_Data = data;
     }
 
-    public bool UseItem(ItemStatus SubWeapon)
-    {
-        if (m_Data.ItemCtg != ITEM_CATEGORY.USE) return false;
-
-        switch(m_Data.ItemNumber)
-        {
-            case 91://체력회복
-
-                break;
-            case 92://속도향상
-                BuffManager.Instance.AddBuff(m_Data.ItemPower, BUFF_CATEGORY.SPEED);   // 버프, 파워도 전달
-                break;
-            case 93://공격향상
-                BuffManager.Instance.AddBuff(m_Data.ItemPower, BUFF_CATEGORY.ATTACK);
-                break;
-            case 94://만능총알
-                if (!SubWeapon) return false;
-
-                SubWeapon.Dbl += (int)(SubWeapon.m_Data.MaxDbl * m_Data.ItemPower);
-                if (SubWeapon.Dbl > SubWeapon.m_Data.MaxDbl) SubWeapon.Dbl = SubWeapon.m_Data.MaxDbl;
-
-                break;
-        }
-
-        return true;
-    }
-
     public void ActivateItem(bool Active)
     {
         if(Active)

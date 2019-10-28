@@ -67,8 +67,8 @@ SpriteAtlas:
   - back
   - ItemBack
   - InvenBack
-  - Speed_Buff_Img
-  - Power_Buff_Img
+  - Speed_Buff
+  - Power_Buff
   - "UI_\uCD1D\uC54C"
   - WeaponCursor
   m_Tag: UI_InGame_Atlas

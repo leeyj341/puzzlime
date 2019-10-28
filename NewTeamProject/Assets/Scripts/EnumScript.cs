@@ -45,7 +45,8 @@ public enum USE_CATEGORY
 public enum BUFF_CATEGORY
 {
     SPEED,
-    ATTACK
+    ATTACK,
+    NONE
 }
 
 public enum ANIM_SORT
@@ -78,6 +79,26 @@ public enum MONSTER_STATUS
     ATTACK,
     DAMAGED,
     DEAD
+}
+
+public enum BOSS_CTG
+{
+    TYPE_GOBLINE,
+    TYPE_SKELETON,
+    TYPE_GOLEM
+}
+
+public enum BOSS_STATE
+{
+    IDLE,
+    MOVE,
+    CHASE,
+    ATTACK1,
+    ATTACK2,
+    ATTACK3,
+    GROGGY,
+    DEAD,
+    NONE
 }
 
 public static class Constants

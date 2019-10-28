@@ -58,7 +58,7 @@ public class PlayerController : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.R))
         {
             // 총 쏘기
-            if (!GameManager.Instance.Inven.isSubWeapon) return;
+            if (GameManager.Instance.Inven.SubWeapon == null) return;
             if (!animController.GetCurAniNum().Equals((int)ANIM_SORT.BASIC)) return;
 
             animController.ChangeAniSort(ANIM_SORT.SHOOT);
