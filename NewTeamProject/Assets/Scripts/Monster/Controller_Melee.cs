@@ -32,7 +32,7 @@ public class Controller_Melee : EnemyController
             yield return null;
             fTime += Time.deltaTime;
 
-            if (FindPlayer(transform.position) && !status.MyArea.MonsterExit)
+            if (FindPlayer(transform.position))
                 ChangeCoroutine(Motion_Chase());
         }
 
@@ -52,7 +52,7 @@ public class Controller_Melee : EnemyController
             // 무작위 좌표로 이동
             yield return null;
 
-            if (FindPlayer(transform.position) && !status.MyArea.MonsterExit)
+            if (FindPlayer(transform.position))
                 ChangeCoroutine(Motion_Chase());
         }
 
@@ -66,7 +66,7 @@ public class Controller_Melee : EnemyController
 
         aniController.UpdateAnimatorParameter(MONSTER_STATUS.CHASE);
 
-        while (FindPlayer(transform.position) && !status.MyArea.MonsterExit)          // 1. 인식 범위 내 && 2. 이동 범위 내 
+        while (FindPlayer(transform.position))          // 1. 인식 범위 내 && 2. 이동 범위 내 
         {
             yield return null;
             agent.SetDestination(GameManager.Instance.PlayerTransfrom.position);
@@ -90,7 +90,7 @@ public class Controller_Melee : EnemyController
         if (IsPlayerInAttackRange(transform.position))
             ChangeCoroutine(Motion_Attack());
 
-        else if (FindPlayer(transform.position) && !status.MyArea.MonsterExit)
+        else if (FindPlayer(transform.position))
             ChangeCoroutine(Motion_Chase());
 
         else
