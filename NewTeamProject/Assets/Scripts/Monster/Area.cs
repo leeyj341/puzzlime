@@ -17,22 +17,10 @@ public class Area : MonoBehaviour
     void Awake()
     {
         position = transform.position;
-        patrolRange = GetComponent<BoxCollider>().size.x / 4.0f;       // 임시
+        patrolRange = GetComponent<BoxCollider>().size.x * 0.45f;
         listPortal.AddRange(GetComponentsInChildren<Transform>());
         monsterExit = false;
 
         MonsterSpawner.Instance.AddArea(gameObject.name, this);
-    }
-
-    // 구역 범위 체크
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.tag.Equals("Monster"))
-            monsterExit = false;
-    }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.gameObject.tag.Equals("Monster"))
-            monsterExit = true;
-    }   
+    }  
 }

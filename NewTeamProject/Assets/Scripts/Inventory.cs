@@ -102,7 +102,7 @@ public class Inventory : MonoBehaviour
         SendData(item);
     }
 
-    void SendData(ItemStatus item)
+    void SendData(ItemStatus item) // 모든 공격력 계산은 여기서 (상점, 무기, 버프)
     {
         GameManager.Instance.PS.Atk = item.m_Data.ItemPower;
         GameManager.Instance.PS.AtkSpeed = item.m_Data.ItemSpd;
