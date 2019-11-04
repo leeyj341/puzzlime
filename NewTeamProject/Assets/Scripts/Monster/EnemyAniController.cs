@@ -28,4 +28,9 @@ public class EnemyAniController : MonoBehaviour
 
         return false;
     }
+
+    public string GetName()
+    {
+        return animator.GetCurrentAnimatorStateInfo(0).shortNameHash.ToString();
+    }
 }

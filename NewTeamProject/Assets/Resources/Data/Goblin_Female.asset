@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   PrefabName: "\uACE0\uBE14\uB9B0\uC5EC\uC790"
   Type: 2
-  Hp: 0
+  Hp: 10
   Atk: 0
   Speed: 5
   AtkRange: 3

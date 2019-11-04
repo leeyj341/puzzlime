@@ -5,6 +5,8 @@ public class MonsterStatus
 {
     private MONSTER_TYPE type = MONSTER_TYPE.NONE;
 
+    private float origHp = 0.0f;
+    private float origAtk = 0.0f;
     private float hp = 0.0f;
     private float atk = 0.0f;
     private float additionalHp = 1.0f;
@@ -18,6 +20,8 @@ public class MonsterStatus
 
     public MONSTER_TYPE Type { get => type; set => type = value; }
 
+    public float OrigHp { get => origHp; set => origHp = value; }
+    public float OrigAtk { get => origAtk; set => origAtk = value; }
     public float Hp { get => hp; set => hp = value; }
     public float Atk { get => atk; set => atk = value; }
     public float AdditionalHp { get => additionalHp; set => additionalHp = value; }
@@ -32,13 +36,18 @@ public class MonsterStatus
     public MonsterStatus(MonsterInfo mInfo, Area area)
     {
         type = mInfo.Type;
-        hp = mInfo.Hp;
-        atk = mInfo.Atk;
+        origHp = mInfo.Hp;
+        origAtk = mInfo.Atk;
         speed = mInfo.Speed;
         myArea = area;
         attackRange = mInfo.AtkRange;
 
         recognizedRange = area.PatrolRange;
+    }
+
+    public void Reset()
+    {
+
     }
 
 }

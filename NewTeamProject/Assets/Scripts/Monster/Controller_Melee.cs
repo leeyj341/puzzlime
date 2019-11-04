@@ -32,7 +32,7 @@ public class Controller_Melee : EnemyController
             yield return null;
             fTime += Time.deltaTime;
 
-            if (FindPlayer(transform.position))
+            if (FindPlayer())
                 ChangeCoroutine(Motion_Chase());
         }
 
@@ -52,7 +52,7 @@ public class Controller_Melee : EnemyController
             // 무작위 좌표로 이동
             yield return null;
 
-            if (FindPlayer(transform.position))
+            if (FindPlayer())
                 ChangeCoroutine(Motion_Chase());
         }
 
@@ -66,12 +66,12 @@ public class Controller_Melee : EnemyController
 
         aniController.UpdateAnimatorParameter(MONSTER_STATUS.CHASE);
 
-        while (FindPlayer(transform.position))          // 1. 인식 범위 내 && 2. 이동 범위 내 
+        while (FindPlayer())          // 1. 인식 범위 내 && 2. 이동 범위 내 
         {
             yield return null;
             agent.SetDestination(GameManager.Instance.PlayerTransfrom.position);
 
-            if (IsPlayerInAttackRange(transform.position))                       // 공격 범위 안에 들어온 경우 공격    
+            if (IsPlayerInAttackRange())                       // 공격 범위 안에 들어온 경우 공격    
                 ChangeCoroutine(Motion_Attack());
         }
 
@@ -87,10 +87,31 @@ public class Controller_Melee : EnemyController
 
         yield return new WaitUntil(() => aniController.IsAnimationEnd());
 
-        if (IsPlayerInAttackRange(transform.position))
+        if (IsPlayerInAttackRange())
             ChangeCoroutine(Motion_Attack());
 
-        else if (FindPlayer(transform.position))
+        else if (FindPlayer())
+            ChangeCoroutine(Motion_Chase());
+
+        else
+            ChangeCoroutine(Motion_Patrol());
+    }
+
+    protected override IEnumerator Motion_Damaged()
+    {
+        agent.isStopped = true;
+
+        aniController.UpdateAnimatorParameter(MONSTER_STATUS.DAMAGED);
+
+        yield return new WaitUntil(() => aniController.IsAnimationEnd());
+
+        if (status.Hp <= 0)
+            ChangeCoroutine(Motion_Dead());
+
+        if (IsPlayerInAttackRange())
+            ChangeCoroutine(Motion_Attack());
+
+        else if (FindPlayer())
             ChangeCoroutine(Motion_Chase());
 
         else

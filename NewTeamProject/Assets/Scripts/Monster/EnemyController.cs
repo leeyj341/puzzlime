@@ -27,12 +27,22 @@ public class EnemyController : MonoBehaviour
         agent.speed = status.Speed;
         agent.acceleration = status.Speed;
 
+        ResetStatus();
+
         aniController = GetComponent<EnemyAniController>();
         aniController.SetAnimatorType(status.Type);
-        aniController.UpdateAnimatorParameter(MONSTER_STATUS.PATROL);
 
         prevPos = transform.position;     
     }  
+
+    public void ResetStatus()
+    {
+        status.Hp = status.OrigHp;
+        status.Atk = status.OrigAtk;
+
+        status.Hp += status.AdditionalHp;
+        status.Atk += status.AdditionalAtk;
+    }
 
     protected bool InDistance(Vector3 myPos, Vector3 targetPos, float dis)                          // 지정된 거리 안에 타겟이 들어오면 true 리턴
     {
@@ -67,25 +77,27 @@ public class EnemyController : MonoBehaviour
         StartCoroutine(coroutine);
     }
 
-    protected bool FindPlayer(Vector3 myPos)
+    protected bool FindPlayer()
     {
-        // 플레이어 쫒아가는 경우
-        // - 범위에 있을 때
-        // - 원거리 타격을 받았을 때
-
-        // Idle, Patrol, Damaged
-        if (InDistance(myPos, GameManager.Instance.PlayerTransfrom.position, status.RecognizedRange))
+        if (InDistance(transform.position, GameManager.Instance.PlayerTransfrom.position, status.RecognizedRange))
             return true;
         else return false;
     }
 
-    protected bool IsPlayerInAttackRange(Vector3 myPos)
+    protected bool IsPlayerInAttackRange()
     {
-        if (InDistance(myPos, GameManager.Instance.PlayerTransfrom.position, status.AttackRange))
+        if (InDistance(transform.position, GameManager.Instance.PlayerTransfrom.position, status.AttackRange))
             return true;
         else return false;
     }
 
+    protected void SetRotation()
+    {
+        Vector3 dir = (GameManager.Instance.PlayerTransfrom.position - transform.position).normalized;
+        dir.y = 0;
+
+        transform.rotation = Quaternion.LookRotation(dir);
+    }
 
     // -------------------------------------------------------------------------------------------------------------------
     // 재정의 coroutine 함수
@@ -108,5 +120,24 @@ public class EnemyController : MonoBehaviour
     protected virtual IEnumerator Motion_Attack()
     {
         yield return null;
+    }
+
+    protected virtual IEnumerator Motion_Damaged()
+    {
+        yield return null;
+    }
+
+    protected IEnumerator Motion_Dead()
+    {
+        agent.isStopped = true;
+
+        aniController.UpdateAnimatorParameter(MONSTER_STATUS.DEAD);
+
+        yield return new WaitUntil(() => aniController.IsAnimationEnd());
+
+        yield return new WaitForSeconds(2.0f);
+
+        ResetStatus();
+        gameObject.SetActive(false);
     }
 }

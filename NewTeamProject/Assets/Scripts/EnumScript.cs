@@ -5,7 +5,8 @@ using UnityEngine;
 public enum BULLET_TYPE
 {
     TYPE_41,
-    TYPE_42
+    TYPE_42,
+    TYPE_ARROW
 }
 
 public enum CURRUNT_SCENE

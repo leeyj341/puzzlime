@@ -35,16 +35,13 @@ public class PlayerController : MonoBehaviour
         h = Input.GetAxis("Horizontal");
         v = Input.GetAxis("Vertical");
 
-        if (v != 0)
+        if (v != 0 || h != 0)
         {
-            state.Speed = 10.0f;
-            animController.UpdateSpeed(state.Speed);
+            transform.forward = (Vector3.forward * v) + (Vector3.right * h);
+            state.Speed = 10.0f;          
         }
-        else
-        {
+        else if(v == 0 && h == 0)
             state.Speed = 0;
-            animController.UpdateSpeed(state.Speed);
-        }
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -68,8 +65,8 @@ public class PlayerController : MonoBehaviour
 
     private void Move()
     {
-        transform.Rotate(transform.up * state.RotSpeed * h * Time.deltaTime);
-        controller.Move(transform.forward * state.Speed * v * Time.deltaTime);    
+        controller.Move(transform.forward * state.Speed * Time.deltaTime);
+        animController.UpdateSpeed(state.Speed);
     }
 
     private void Die()

@@ -11,11 +11,7 @@ public class Bullet : MonoBehaviour
     Vector3 m_vStart;
 
     public BULLET_TYPE Type { get => m_eType; set => m_eType = value; }
-    // Start is called before the first frame update
-    void Start()
-    {
-        m_fRange = 50;
-    }
+    public float Range { get => m_fRange; set => m_fRange = value; }
 
     private void Update()
     {
@@ -32,7 +28,15 @@ public class Bullet : MonoBehaviour
         m_fDamage = damage;
         Vector3 temp = (transform.position - GameManager.Instance.Inven.transform.position);
         temp.y = 0;
-        transform.GetComponent<Rigidbody>().AddForce(transform.forward * 3, ForceMode.Impulse);
+        GetComponent<Rigidbody>().AddForce(transform.forward * 3, ForceMode.Impulse);
+    }
+
+    public void FireArrow(float damage, Transform monsterTransform)
+    {
+        m_vStart = transform.position = monsterTransform.position + Vector3.up;
+        transform.rotation = monsterTransform.rotation;
+        m_fDamage = damage;
+        GetComponent<Rigidbody>().AddForce(transform.forward * 6, ForceMode.Impulse);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -47,6 +51,6 @@ public class Bullet : MonoBehaviour
     public void BulletOff()
     {
         gameObject.SetActive(false);
-        transform.GetComponent<Rigidbody>().Sleep();
+        GetComponent<Rigidbody>().Sleep();
     }
 }

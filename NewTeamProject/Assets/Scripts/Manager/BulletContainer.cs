@@ -8,6 +8,8 @@ public class BulletContainer : MonoBehaviour
 
     List<GameObject> m_listBullet_41 = new List<GameObject>();
     List<GameObject> m_listBullet_42 = new List<GameObject>();
+    List<Bullet> m_ListArrow = new List<Bullet>();
+
     private void Awake()
     {
         if (!Instance) Instance = this;
@@ -16,6 +18,7 @@ public class BulletContainer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        LoadArrow();
         MakeBullet();   
     }
 
@@ -37,10 +40,16 @@ public class BulletContainer : MonoBehaviour
         }
     }
 
+    public void LoadArrow()
+    {
+        m_ListArrow.AddRange(GetComponentsInChildren<Bullet>(true));
+    }
+
     GameObject MakeBullet_41()
     {
         GameObject temp = (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Bullet"), transform);
         temp.GetComponent<Bullet>().Type = BULLET_TYPE.TYPE_41;
+        temp.GetComponent<Bullet>().Range = 50.0f;
         temp.GetComponent<Bullet>().GetComponent<Rigidbody>().useGravity = false;
         temp.GetComponent<Bullet>().GetComponent<Rigidbody>().mass = 0.1f;
         return temp;
@@ -50,6 +59,7 @@ public class BulletContainer : MonoBehaviour
     {
         GameObject temp = (GameObject)Instantiate(Resources.Load("WeaponPrefabs/Bullet"), transform);
         temp.GetComponent<Bullet>().Type = BULLET_TYPE.TYPE_42;
+        temp.GetComponent<Bullet>().Range = 50.0f;
         temp.GetComponent<Bullet>().GetComponent<Rigidbody>().useGravity = true;
         temp.GetComponent<Bullet>().GetComponent<Rigidbody>().mass = 0.5f;
         return temp;
@@ -62,6 +72,20 @@ public class BulletContainer : MonoBehaviour
         Bullet CurBullet = CurBulletObj.GetComponent<Bullet>();
         CurBulletObj.SetActive(true);
         CurBulletObj.GetComponent<Bullet>().Fire(GameManager.Instance.Inven.SubWeapon.Data.ItemPower);
+    }
+
+    public void FireArrow(Transform monsterTransform)
+    {
+        for(int i = 0; i < m_ListArrow.Count; i++)
+        {
+            if(!m_ListArrow[i].gameObject.activeInHierarchy)
+            {
+                m_ListArrow[i].gameObject.SetActive(true);
+                m_ListArrow[i].Range = 50.0f;
+                m_ListArrow[i].FireArrow(10.0f, monsterTransform);
+                return;
+            }
+        }
     }
 
     GameObject FindBullet(int SubNum)
