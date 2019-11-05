@@ -27,13 +27,13 @@ public class MonsterSpawner : MonoBehaviour
 
     void Spawn()
     {
-        for(int i = 0; i < 1; i++)
+        for(int i = 0; i < 80; i++)
         {
-            if(i < 25)
-                SpawnMonster("Area1", "고블린남자궁수");
-            else if(i < 50)
+            if(i < 20)
+                SpawnMonster("Area1", GetRandomMonster());
+            else if(i < 40)
                 SpawnMonster("Area2", GetRandomMonster());
-            else if(i < 75)
+            else if(i < 60)
                 SpawnMonster("Area3", GetRandomMonster());
             else
                 SpawnMonster("Area4", GetRandomMonster());

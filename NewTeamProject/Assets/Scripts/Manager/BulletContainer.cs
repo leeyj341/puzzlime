@@ -8,7 +8,7 @@ public class BulletContainer : MonoBehaviour
 
     List<GameObject> m_listBullet_41 = new List<GameObject>();
     List<GameObject> m_listBullet_42 = new List<GameObject>();
-    List<Bullet> m_ListArrow = new List<Bullet>();
+    List<Arrow> m_ListArrow = new List<Arrow>();
 
     private void Awake()
     {
@@ -42,7 +42,7 @@ public class BulletContainer : MonoBehaviour
 
     public void LoadArrow()
     {
-        m_ListArrow.AddRange(GetComponentsInChildren<Bullet>(true));
+        m_ListArrow.AddRange(GetComponentsInChildren<Arrow>(true));
     }
 
     GameObject MakeBullet_41()

@@ -133,7 +133,7 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.0477707
+      - time: 0.38535032
         functionName: SetRotation
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: bb2f1c898e4859b4e96aec52e263a416,
@@ -141,7 +141,7 @@ ModelImporter:
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
-      - time: 0.42910928
+      - time: 0.56923664
         functionName: Fire
         data: 
         objectReferenceParameter: {fileID: 11500000, guid: bb2f1c898e4859b4e96aec52e263a416,

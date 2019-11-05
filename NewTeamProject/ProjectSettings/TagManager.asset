@@ -12,6 +12,7 @@ TagManager:
   - UsingSpriteAtlas
   - Obstacle
   - Monster
+  - Ground
   layers:
   - Default
   - TransparentFX

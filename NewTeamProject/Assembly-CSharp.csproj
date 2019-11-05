@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Scripts\AirPlaneMovement.cs" />
+    <Compile Include="Assets\Scripts\Arrow.cs" />
     <Compile Include="Assets\Scripts\Buff\BuffManager.cs" />
     <Compile Include="Assets\Scripts\Buff\BuffUI.cs" />
     <Compile Include="Assets\Scripts\Bullet.cs" />

@@ -66,8 +66,6 @@ public class Controller_Ranged : EnemyController
        
         aniController.UpdateAnimatorParameter(MONSTER_STATUS.ATTACK);
 
-        // 화살 발사..
-
         yield return new WaitUntil(() => aniController.IsAnimationEnd());
 
         if (FindPlayer())

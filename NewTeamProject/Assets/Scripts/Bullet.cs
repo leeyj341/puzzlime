@@ -31,14 +31,6 @@ public class Bullet : MonoBehaviour
         GetComponent<Rigidbody>().AddForce(transform.forward * 3, ForceMode.Impulse);
     }
 
-    public void FireArrow(float damage, Transform monsterTransform)
-    {
-        m_vStart = transform.position = monsterTransform.position + Vector3.up;
-        transform.rotation = monsterTransform.rotation;
-        m_fDamage = damage;
-        GetComponent<Rigidbody>().AddForce(transform.forward * 6, ForceMode.Impulse);
-    }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (!collision.transform.name.Equals("CowBoy") &&
